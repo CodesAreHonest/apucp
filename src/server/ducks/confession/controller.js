@@ -6,10 +6,10 @@ import Confession from './store';
 
 export const postInsert = async (req, res) => {
 
-    let validation_response = await validationHandler(req, res);
+    let validation = await validationHandler(req, res);
 
-    if (validation_response.response_code === 422) {
-        return res.status(422).send(validation_response);
+    if (validation.response_code === 422) {
+        return res.status(422).send(validation);
     }
 
     const { content } = req.body;
