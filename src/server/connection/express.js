@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
-import route from '../routes/Route';
+import router from '../ducks/index.js';
 
 class Express {
     constructor() {
@@ -18,7 +18,7 @@ class Express {
         this.app.use(cors());
         this.app.use(morgan('dev'));
         this.app.use(expressValidator());
-        this.app.use('/', route);
+        this.app.use('/', router);
 
         return this.app;
     }

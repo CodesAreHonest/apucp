@@ -10,7 +10,7 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "respository": "",
+  "respository": "https://github.com/CodesAreHonest/apucp.git",
   "author": "Chai Ying Hua",
   "license": "ISC",
   "dependencies": {
@@ -18,6 +18,9 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
+    "ip": "^1.1.5",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.1",
     "morgan": "^1.9.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
@@ -25,6 +28,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/polyfill": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",

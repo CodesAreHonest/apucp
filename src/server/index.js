@@ -1,9 +1,8 @@
 
-// Transpile all code following this line with babel and use 'env' (aka ES6) preset.
 require('@babel/register')({
     presets: [ '@babel/preset-env' ]
 });
 
-const server = require('./connection/server.js');
+require('@babel/polyfill');
 
-module.exports = server;
+module.exports = require('./connection/server.js');
