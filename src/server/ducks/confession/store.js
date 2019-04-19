@@ -28,8 +28,9 @@ class Store {
                     'response_code': 200,
                     'response_msg': 'success'
                 });
+
             })
-        })
+        });
     }
 }
 
