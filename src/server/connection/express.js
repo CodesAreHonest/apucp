@@ -22,6 +22,7 @@ class Express {
         this.app.use('/api', router);
 
         this.app.get('/*', (req, res) => {
+            res.set('content-type', 'text/html');
             res.sendFile(path.resolve() + '/public/index.html');
         });
 
