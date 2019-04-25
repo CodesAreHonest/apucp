@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 import FacebookLogin from '../../../components/Facebook';
 
@@ -15,8 +15,6 @@ class Login extends Component {
                 <div className="row text-center">
                     <div className="col-md-6">
                         <div className="layout">
-
-                            123
                             <FacebookLogin />
                         </div>
                     </div>

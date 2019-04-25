@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import FacebookLogin from 'react-facebook-login';
 
 class Facebook extends Component {
@@ -17,16 +17,13 @@ class Facebook extends Component {
             return this.isLoggedIn
         }
         else {
-            console.log (response);
             this.setState({
                 isLoggedIn: true,
                 userID: response.userID,
                 name: response.name,
                 email: response.email,
                 picture: response.picture.data.url
-            }, () => {
-                console.log (this.state);
-            })
+            });
         }
     }
 
