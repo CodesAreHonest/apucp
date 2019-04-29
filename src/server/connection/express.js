@@ -21,6 +21,10 @@ class Express {
         this.app.use(expressValidator());
         this.app.use('/api', router);
 
+        this.app.get('/hi', (req, res) => {
+            res.status(200).send({'outcomes': 'hi'});
+        });
+
         this.app.get('/*', (req, res) => {
             res.set('content-type', 'text/html');
             res.sendFile(path.resolve() + '/public/index.html');
@@ -29,6 +33,9 @@ class Express {
         return this.app;
     }
 
+    close() {
+        this.app.close();
+    }
 }
 
 export default Express;

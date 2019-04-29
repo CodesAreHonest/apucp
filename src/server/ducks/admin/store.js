@@ -1,21 +1,20 @@
-import Confession from './model';
-import ip from "ip";
+import Admin from './model';
 
-class ConfessionStore {
+class AdminStore {
 
-    static insert(content) {
+    static insert_or_update (user_id, name, email, picture, access_token) {
 
-        let params = {
-            tags: '#1',
-            content: content,
-            ip_address: ip.address(),
+        const params = {
+            user_id,
+            name,
+            email,
+            picture,
+            access_token
         };
 
-        let confession = new Confession(params);
-
         return new Promise ((resolve, reject) => {
-            confession.save(err => {
 
+            Admin.update({'user_id': user_id}, params, {upsert: true}, (err) => {
                 if (err) {
                     return reject({
                         'response_code': 500,
@@ -28,10 +27,10 @@ class ConfessionStore {
                     'response_code': 200,
                     'response_msg': 'success'
                 });
-
             })
-        });
+        })
+
     }
 }
 
-export default ConfessionStore;
+export default AdminStore;
