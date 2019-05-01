@@ -30,6 +30,6 @@ const documentSchema = schema ({
     }
 });
 
-const Document = mongoConnection.model('document', documentSchema);
+const Document = mongoConnection.model('documents', documentSchema);
 
 export default Document;

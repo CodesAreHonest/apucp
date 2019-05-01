@@ -1,12 +1,15 @@
 import Confession from './model';
+import DocumentStore from '../documents/store';
 import ip from "ip";
 
 class ConfessionStore {
 
-    static insert(content) {
+    static async insert(content) {
+
+        let tag = await DocumentStore.getHashTag('confession');
 
         let params = {
-            tags: '#1',
+            tags: tag,
             content: content,
             ip_address: ip.address(),
         };

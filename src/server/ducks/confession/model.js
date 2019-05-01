@@ -20,6 +20,17 @@ const confessionSchema = schema ({
         type: String,
         required: true
     },
+    status: {
+        type: String,
+        default: 'pending',
+        enum: ['pending', 'reject', 'approved'],
+        required: false,
+    },
+    action_by: {
+        type: String,
+        default: null,
+        required: false
+    },
     created_at: {
         type: Date,
         default: dateMalaysia,
@@ -32,6 +43,6 @@ const confessionSchema = schema ({
     }
 });
 
-const Model = mongo_connection.model('confession', confessionSchema);
+const Model = mongo_connection.model('confessions', confessionSchema);
 
 export default Model;
