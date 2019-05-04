@@ -12,15 +12,25 @@ class DocumentStore {
 
         const { number, prefix, document_length } = document;
 
-        const numberString = number.toString();
-        const documentPrefix = prefix.toUpperCase();
-        const documentNumber = numberString.padStart(document_length, '0');
-        const tag            = `#${documentPrefix}${documentNumber}`;
+        const numberString      = number.toString();
+        const documentPrefix    = prefix.toUpperCase();
+        const documentNumber    = numberString.padStart(document_length, '0');
+        const tag               = `#${documentPrefix}${documentNumber}`;
 
         return tag;
 
     }
 
+    static updateTag (document_type) {
+
+        const params = {
+            document_type
+        };
+
+        Document.findOneAndUpdate(params, { $inc: {
+            number: 1
+        }}, { new: true })
+    }
 
 }
 
