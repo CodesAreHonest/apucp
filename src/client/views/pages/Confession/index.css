@@ -1,0 +1,40 @@
+.form {
+    background-color: white;
+    border-radius: 20px;
+    height: auto;
+    padding: 20px;
+    margin: auto;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.66), 0 15px 12px rgba(22, 22, 22, 0.3)
+}
+
+.form .form-header {
+    font-size: 30px;
+}
+
+.text-area {
+    margin: 5px 0 20px 0;
+    font-size: 13px !important;
+    box-sizing: border-box !important;
+    min-height: 40vh !important;
+    resize: none !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+@media only screen and (max-width: 570px) {
+    .form {
+        margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+
+    .form .form-header {
+        font-size: 20px;
+    }
+
+    small {
+        font-size: 65% !important;
+    }
+
+}

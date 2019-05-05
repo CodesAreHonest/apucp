@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import "./App.css";
 
-import Login from '../pages/Admin/Login/Login';
+import Index from '../pages/Admin/Login';
+import Confession from '../pages/Confession';
 
 class App extends Component {
 
@@ -15,7 +16,8 @@ class App extends Component {
     return (
       <div className="body">
         <Switch>
-          <Route exact path="/admin" component={Login}/>
+          <Route exact path="/admin" component={Index}/>
+          <Route exact path="/" component={Confession}/>
         </Switch>
       </div>
     );

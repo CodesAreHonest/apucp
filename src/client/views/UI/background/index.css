@@ -1,0 +1,11 @@
+.background {
+    position: absolute;
+    background: white url("./background.jpg") no-repeat center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: 100vh;
+    width: 100%;
+    opacity: 0.75
+}
