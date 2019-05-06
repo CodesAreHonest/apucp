@@ -1,3 +1,7 @@
+small {
+    color: #545454;
+}
+
 .form {
     background-color: white;
     border-radius: 20px;
@@ -12,7 +16,10 @@
 }
 
 .text-area {
-    margin: 5px 0 20px 0;
+    color: black !important;
+    font-weight: 500;
+    border: 2px solid lightblue !important;
+    margin: 10px 0 20px 0;
     font-size: 13px !important;
     box-sizing: border-box !important;
     min-height: 40vh !important;
@@ -25,16 +32,15 @@
     .form {
         margin: 10px;
     }
-}
-
-@media only screen and (max-width: 370px) {
 
     .form .form-header {
         font-size: 20px;
     }
+}
+
+@media only screen and (max-width: 370px) {
 
     small {
         font-size: 65% !important;
     }
-
 }

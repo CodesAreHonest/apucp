@@ -6,7 +6,7 @@ export const validationHandler = (req, res, next) => {
     const errorFormatter = ({
                                 location, msg, param
     }) => {
-        return `[${location}]: ${param} ${msg}`;
+        return `${param} ${msg}`;
     };
 
     const result = validationResult(req).formatWith(errorFormatter);

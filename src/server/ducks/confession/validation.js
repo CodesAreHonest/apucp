@@ -2,9 +2,10 @@ import {body} from 'express-validator/check';
 
 export const insertValidation = [
 
-    body ('content')
+    body ('confession')
         .exists().withMessage('is required')
         .isString().withMessage('must be a string')
+        .isLength({ min: 10 }).withMessage('must be at least 10 characters.')
 
 ];
 

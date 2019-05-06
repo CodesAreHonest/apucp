@@ -12,9 +12,9 @@ export const postInsert = async (req, res) => {
         return res.status(422).send(validation);
     }
 
-    const { content } = req.body;
+    const { confession } = req.body;
 
-    let outcomes = await ConfessionStore.insert(content);
+    let outcomes = await ConfessionStore.insert(confession);
 
     if (outcomes.response_code !== 200) {
         const {response_code} = outcomes;

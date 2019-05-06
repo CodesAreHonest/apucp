@@ -1,0 +1,22 @@
+.button {
+    background-image: linear-gradient(deepskyblue, dodgerblue);
+    border: none !important;
+}
+
+.button:active:focus,
+.button:focus:hover,
+.button:focus {
+    outline: medium none !important;
+    background-color: #4274D7;
+}
+
+.button:disabled {
+    pointer-events: none;
+    background-color: darkgrey !important;
+    background-image: none;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-image: linear-gradient(dodgerblue, rgba(25, 64, 255, 0.71));
+}
