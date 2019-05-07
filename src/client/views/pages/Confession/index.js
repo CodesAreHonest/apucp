@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Background from "../../UI/background";
-import { loading, success, error } from '../../components/SweetAlert2';
+import { loading, success, error, confirmation } from '../../components/SweetAlert2';
 
 import { postSubmitConfession } from "../../../state/ducks/confession/actions";
 
@@ -25,7 +25,7 @@ class Confession extends Component {
         this.setState({confession: e.target.value});
     }
 
-    onSubmit(e) {
+    async onSubmit(e) {
         e.preventDefault();
 
         let form = document.getElementById('confession-form');
@@ -36,9 +36,12 @@ class Confession extends Component {
 
         e.target.blur();
 
-        let { confession } = this.state;
+        let confirmSubmit = await confirmation('Are you sure?', 'Confession submitted cannot be reverted');
 
-        this.props.postSubmitConfession(confession);
+        if (!confirmSubmit) { return false; }
+
+        const { confession } = this.state;
+        this.props.postSubmitConfession (confession);
 
         let confessionDOM = document.getElementById("confession");
         confessionDOM.focus();
@@ -55,12 +58,13 @@ class Confession extends Component {
             if (response_code !== 200) {
                 const { response_detail } = nextProps.response;
                 error ('Your confession submitted unsuccessful', response_detail[0]);
-                this.setState({confession: ''});
             }
             else {
                 success('Success', 'Your confession submitted successfully.');
-                this.setState({confession: ''});
             }
+
+            this.setState({confession: ''});
+
         }
     }
 

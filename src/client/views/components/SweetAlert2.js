@@ -42,3 +42,36 @@ export const error = (title = '', text = '') => {
     });
 
 };
+
+export const confirmation = (title = '', text = '') => {
+
+    return new Promise ((resolve) => {
+
+        Swal.fire({
+            type: 'warning',
+            title,
+            text,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: true,
+            showConfirmButton: true,
+            showCancelButton: true,
+            showCloseButton: true,
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5cb85c',
+            reverseButtons: true
+        }).then(response => {
+
+            if (response.value) {
+                return resolve(true);
+            }
+            else if (response.dismiss === Swal.DismissReason.cancel) {
+                return resolve(false);
+            }
+
+        }).catch ()
+
+    });
+
+};
