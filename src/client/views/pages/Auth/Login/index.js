@@ -4,7 +4,7 @@ import FacebookLogin from '../../../components/Facebook';
 
 import "./index.css";
 
-class Index extends Component {
+class AdminLogin extends Component {
     constructor(props) {
         super(props);
     }
@@ -24,4 +24,4 @@ class Index extends Component {
     }
 }
 
-export default Index;
+export default AdminLogin;
