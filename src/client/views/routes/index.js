@@ -1,33 +1,33 @@
 import React, { Component, Fragment } from 'react';
 import { Route } from 'react-router-dom';
 
-import AdminRoutes from './admin/routes';
+import AdminRoutes from './admin/routeWithSubRoutes';
 import AuthenticationRoutes from './authentication/routes';
 import ConfessorRoutes from './confessor/routes';
-
-let rootRoutes = Array.prototype.concat(
-    AdminRoutes,
-    AuthenticationRoutes,
-    ConfessorRoutes
-);
 
 class Routes extends Component {
     constructor (props) {
         super (props);
 
         this.state = {
-            reactRoutes: ''
+            reactRoutes: '',
+            adminRoutes: AdminRoutes()
         }
     }
 
     componentDidMount() {
-        this.renderRoutes();
+        this.renderStaticRoutes();
     }
 
-    renderRoutes() {
+    renderStaticRoutes() {
+        let rootRoutes = Array.prototype.concat(
+            AuthenticationRoutes,
+            ConfessorRoutes
+        );
+
         let reactRoutes = rootRoutes.map((route, index) => (
             <Route
-                exact={true}
+                exact={route.exact}
                 key={index}
                 path={route.path}
                 component={route.component}
@@ -39,11 +39,12 @@ class Routes extends Component {
 
     render() {
 
-        const { reactRoutes } = this.state;
+        const { reactRoutes, adminRoutes } = this.state;
 
         return (
             <Fragment>
                 { reactRoutes }
+                { adminRoutes }
             </Fragment>
         )
     }
