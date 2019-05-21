@@ -1,0 +1,30 @@
+
+#page-content-wrapper {
+    min-width: 100vw;
+    background-color: #F5F6FA;
+    font-size: 14px;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+.content {
+    padding: 20px;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -12rem;
+    }
+}

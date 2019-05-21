@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Link, Route} from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+
+import Sidebar from "../../components/common/sidebar";
+import Header from "../../components/common/header";
+
+import "./index.css";
+
 
 class Admin extends Component {
     constructor(props) {
@@ -40,21 +46,22 @@ class Admin extends Component {
         const { adminRoutes } = this.state;
 
         return (
-            <div>
-                <h2>Tacos</h2>
-                <ul>
-                    <li>
-                        <Link to="/admin/bus">Bus</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/cart">Cart</Link>
-                    </li>
-                </ul>
+            <div className="d-flex" id="wrapper">
 
-                { adminRoutes }
+                <Sidebar />
 
+                <div id="page-content-wrapper">
+
+                    <Header />
+
+                    <div className="container-fluid content">
+                        <Switch>
+                            { adminRoutes }
+                            <Redirect from="/admin" exact to="/admin/dashboard" />
+                        </Switch>
+                    </div>
+                </div>
             </div>
-
         )
     }
 }

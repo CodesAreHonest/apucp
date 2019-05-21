@@ -1,23 +1,23 @@
 import Admin from "../../pages/Admin";
 import React from "react";
 
-const Bus = () => (
-    <h3>Bus</h3>
+const Dashboard = () => (
+    <h3>Dashboard</h3>
 );
 
-const Cart = () => (
-    <h3>Cart</h3>
+const PendingConfession = () => (
+    <h3>Pending Confession</h3>
 );
 
 const routes = [{
     path: "/admin",
     component: Admin,
     routes: [{
-        path: '/admin/bus',
-        component: Bus
+        path: '/admin/dashboard',
+        component: Dashboard
     }, {
         path: '/admin/cart',
-        component: Cart
+        component: PendingConfession
     }]
 }];
 
