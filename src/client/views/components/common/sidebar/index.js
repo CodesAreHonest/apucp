@@ -15,10 +15,10 @@ class Sidebar extends Component {
                     APUCP
                 </div>
                 <div className="list-group list-group-flush">
-                    <Link to="/admin" className="list-group-item list-group-item-action bg-light">
+                    <Link to="/admin/dashboard" className="list-group-item list-group-item-action bg-light">
                         Dashboard
                     </Link>
-                    <Link to="/admin/cart" className="list-group-item list-group-item-action bg-light">
+                    <Link to="/admin/pending/confessions" className="list-group-item list-group-item-action bg-light">
                         Pending Confession
                     </Link>
                 </div>

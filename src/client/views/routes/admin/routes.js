@@ -1,12 +1,10 @@
-import Admin from "../../pages/Admin";
 import React from "react";
+
+import Admin from "../../pages/Admin";
+import Pending from "../../pages/Admin/Pending";
 
 const Dashboard = () => (
     <h3>Dashboard</h3>
-);
-
-const PendingConfession = () => (
-    <h3>Pending Confession</h3>
 );
 
 const routes = [{
@@ -16,8 +14,8 @@ const routes = [{
         path: '/admin/dashboard',
         component: Dashboard
     }, {
-        path: '/admin/cart',
-        component: PendingConfession
+        path: '/admin/pending/confessions',
+        component: Pending
     }]
 }];
 

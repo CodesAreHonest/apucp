@@ -7,6 +7,7 @@ import store from './state/store';
 import App from './views/routes';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
     <Provider store={store}>
