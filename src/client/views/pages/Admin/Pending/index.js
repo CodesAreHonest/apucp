@@ -1,12 +1,39 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import "./pending.css";
+
+import {getPendingConfession} from "../../../../state/ducks/confession/actions";
+import ListGroup from "../../../components/ListGroup";
 
 class Pending extends Component {
     constructor(props){
-        super(props)
+        super(props);
+
+        this.state = {
+            data: []
+        };
+    }
+
+    componentDidMount() {
+        this.props.getPendingConfession(1, 10);
+    }
+
+    static getDerivedStateFromProps (nextProps, prevState) {
+
+        if (nextProps.pending_data !== prevState.data) {
+            return {
+                data: nextProps.pending_data,
+            }
+        }
+
+        return null;
     }
 
     render() {
+        const { data } = this.state;
+
         return (
             <div>
                 <div className="card">
@@ -42,15 +69,25 @@ class Pending extends Component {
                             </div>
                         </div>
                     </div>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">Cras justo odio</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Vestibulum at eros</li>
-                    </ul>
+
+                    <ListGroup data={data}/>
                 </div>
             </div>
         )
     }
 }
 
-export default Pending;
+const mapStateToProps = ({ confession }) => ({
+    pending_data: confession.pending_data
+});
+
+const mapDispatchToProps = {
+    getPendingConfession
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pending);
+
+Pending.propTypes = {
+    getPendingConfession: PropTypes.func.isRequired,
+    pending_data: PropTypes.array.isRequired
+};

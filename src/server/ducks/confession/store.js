@@ -40,7 +40,7 @@ class ConfessionStore {
 
     static pendingList (page, limit) {
 
-        const fields = "tags content ip_address created_at";
+        const fields = "-_id tags content ip_address created_at";
 
         const params = {
             skip: parseInt(page),

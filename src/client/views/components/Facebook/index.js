@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import FacebookLogin from 'react-facebook-login';
 
-class Facebook extends Component {
+class Index extends Component {
     constructor(props) {
         super(props);
 
@@ -48,4 +48,4 @@ class Facebook extends Component {
     }
 }
 
-export default Facebook;
+export default Index;

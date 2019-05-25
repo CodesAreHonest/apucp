@@ -1,4 +1,4 @@
-import {body} from 'express-validator/check';
+import {body, query} from 'express-validator/check';
 
 export const insertValidation = [
 
@@ -11,11 +11,11 @@ export const insertValidation = [
 
 export const getPendingListValidation = [
 
-    body ('page')
+    query ('page')
         .exists().withMessage('is required')
         .isInt({ min: 1 }).withMessage('must be an integer with minimum one'),
 
-    body ('limit')
+    query ('limit')
         .exists().withMessage('is required')
         .isInt({ min: 1 }).withMessage('must be an integer with minimum one')
 ];

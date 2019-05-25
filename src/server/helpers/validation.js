@@ -3,9 +3,7 @@ import {validationResult} from 'express-validator/check';
 
 export const validationHandler = (req, res, next) => {
 
-    const errorFormatter = ({
-                                location, msg, param
-    }) => {
+    const errorFormatter = ({msg, param}) => {
         return `${param} ${msg}`;
     };
 
@@ -22,7 +20,8 @@ export const validationHandler = (req, res, next) => {
         return {
             response_code: 422,
             response_msg: 'Unprocessable Entity',
-            response_detail: result.array()
+            response_detail: result.array(),
+            data: []
         };
     }
 };

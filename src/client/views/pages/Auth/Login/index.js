@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import FacebookLogin from '../../../components/Facebook';
+import FacebookLogin from '../../../components/facebook';
 
 import "./index.css";
 

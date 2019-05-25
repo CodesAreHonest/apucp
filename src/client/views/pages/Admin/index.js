@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import Sidebar from "../../components/common/sidebar";
-import Header from "../../components/common/header";
+import Sidebar from "../../components/Common/Sidebar";
+import Header from "../../components/Common/Header";
 
 import "./index.css";
 

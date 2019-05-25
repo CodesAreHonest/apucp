@@ -32,7 +32,7 @@ export const getPendingList = async (req, res) => {
         return res.status(422).send(validation);
     }
 
-    const { page, limit } = req.body;
+    const { page, limit } = req.query;
 
     ConfessionStore.pendingList(page, limit)
         .then(response => {

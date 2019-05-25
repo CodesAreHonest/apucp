@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Background from "../../UI/background";
-import { loading, success, error, confirmation } from '../../components/SweetAlert2';
+import { loading, success, error, confirmation } from '../../UI/sweetalert2';
 
 import { postSubmitConfession } from "../../../state/ducks/confession/actions";
 
@@ -95,6 +95,7 @@ class Confession extends Component {
                                         placeholder="Confess Here ..."
                                         onChange={this.onChange}
                                         value={confession}
+                                        spellCheck
                                         required
                                     />
 
@@ -109,8 +110,6 @@ class Confession extends Component {
                                         </div>
                                     </div>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
