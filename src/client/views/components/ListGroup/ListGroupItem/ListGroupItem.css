@@ -1,0 +1,10 @@
+.confession-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+
+.confession-content:hover {
+    background-color: #8f8f921c;
+}

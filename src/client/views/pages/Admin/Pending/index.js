@@ -17,7 +17,7 @@ class Pending extends Component {
     }
 
     componentDidMount() {
-        this.props.getPendingConfession(1, 10);
+        this.props.getPendingConfession(1, 15);
     }
 
     static getDerivedStateFromProps (nextProps, prevState) {
@@ -39,21 +39,19 @@ class Pending extends Component {
                 <div className="card">
                     <div className="card-header">
                         <div className="row">
-                            <div className="col-md-6 float-md-left">
-                                <button className="btn btn-sm btn-default">
+                            <div className="col-md-6 col-sm-5 float-md-left">
+                                <button className="btn btn-sm btn-default" style={{marginRight: '10px'}}>
                                     <input type="checkbox" style={{zoom: '1.5'}}/>
                                 </button>
                                 <button type="button" className="btn btn-sm btn-danger" style={{marginRight: '5px'}}>
-                                    <i className="fa fa-times" style={{marginRight: '5px'}}/>
-                                    Decline
+                                    <i className="fa fa-times"/>
                                 </button>
                                 <button type="button" className="btn btn-sm btn-success" style={{marginRight: '5px'}}>
-                                    <i className="fa fa-check" style={{marginRight: '5px'}}/>
-                                    Approve
+                                    <i className="fa fa-check"/>
                                 </button>
                             </div>
 
-                            <div className="col-md-6 float-md-right text-md-right">
+                            <div className="col-md-6 col-sm-5 offset-sm-2 offset-md-0 offset-xs-0 col-xs-2 float-md-right text-md-right">
 
                                 <button type="button" className="btn btn-sm btn-light">
                                     Previous

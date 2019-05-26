@@ -40,16 +40,17 @@ class ConfessionStore {
 
     static pendingList (page, limit) {
 
-        const fields = "-_id tags content ip_address created_at";
+        const fields = "status tags content ip_address created_at";
 
         const params = {
-            skip: parseInt(page),
+            skip: parseInt(page - 1),
             limit: parseInt(limit)
         };
 
         return new Promise ((resolve, reject) => {
 
             Confession.find({status: 'pending'}, fields, params, (err, confessions) => {
+
                 if (err) {
                     return reject({
                         'response_code': 500,
