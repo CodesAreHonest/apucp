@@ -44,10 +44,12 @@ class Pending extends Component {
                                     <input type="checkbox" style={{zoom: '1.5'}}/>
                                 </button>
                                 <button type="button" className="btn btn-sm btn-danger" style={{marginRight: '5px'}}>
-                                    <i className="fa fa-times"/>
+                                    <i className="fa fa-times" style={{marginRight: '5px'}}/>
+                                    Reject
                                 </button>
                                 <button type="button" className="btn btn-sm btn-success" style={{marginRight: '5px'}}>
-                                    <i className="fa fa-check"/>
+                                    <i className="fa fa-check" style={{marginRight: '5px'}}/>
+                                    Approve
                                 </button>
                             </div>
 
