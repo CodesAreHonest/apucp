@@ -83,9 +83,9 @@ class ConfessionStore {
                     'response_msg': 'success',
                     'totalRecords': totalRecords,
                     'totalPages':   totalPages,
-                    'recordsFrom': recordsFrom,
-                    'recordsTo': recordsTo,
-                    'data': confessions
+                    'recordsFrom':  recordsFrom,
+                    'recordsTo':    recordsTo,
+                    'data':         confessions
                 });
             })
 

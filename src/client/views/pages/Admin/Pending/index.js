@@ -6,6 +6,7 @@ import "./pending.css";
 
 import {getPendingConfession} from "../../../../state/ducks/confession/actions";
 import ListGroup from "../../../components/ListGroup";
+import Pagination from "../../../components/Pagination";
 
 class Pending extends Component {
     constructor(props){
@@ -17,7 +18,8 @@ class Pending extends Component {
     }
 
     componentDidMount() {
-        this.props.getPendingConfession(1, 15);
+        const { activePage, recordsPerPage } = this.props;
+        this.props.getPendingConfession(activePage , recordsPerPage);
     }
 
     static getDerivedStateFromProps (nextProps, prevState) {
@@ -54,18 +56,7 @@ class Pending extends Component {
                             </div>
 
                             <div className="col-md-6 col-sm-5 offset-sm-2 offset-md-0 offset-xs-0 col-xs-2 float-md-right text-md-right">
-
-                                <button type="button" className="btn btn-sm btn-light">
-                                    Previous
-                                </button>
-
-                                <button type="button" className="btn btn-sm" disabled>
-                                    1 - 9 of 9
-                                </button>
-
-                                <button type="button" className="btn btn-sm btn-light">
-                                    Next
-                                </button>
+                                <Pagination />
                             </div>
                         </div>
                     </div>
@@ -78,7 +69,10 @@ class Pending extends Component {
 }
 
 const mapStateToProps = ({ confession }) => ({
-    pending_data: confession.pending_data
+    pending_data: confession.data,
+
+    activePage: confession.activePage,
+    recordsPerPage: confession.recordsPerPage
 });
 
 const mapDispatchToProps = {

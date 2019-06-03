@@ -30,9 +30,10 @@ export const getPendingConfession = (page, limit) => dispatch => {
     fetch (`/api/confession/getPendingList?${queryString}`)
         .then (response => response.json())
         .then(response => {
+
             dispatch({
                 type: type.GET_PENDING_CONFESSIONS,
-                payload: response.data
+                payload: response
             })
         })
         .catch (err => {
@@ -41,6 +42,27 @@ export const getPendingConfession = (page, limit) => dispatch => {
                 payload: err.response.data
             })
         })
+};
+
+export const incrementActivePage = activePage => dispatch => {
+
+    const INCREMENTED_ACTIVE_PAGE = activePage + 1;
+
+    dispatch ({
+        type: type.INCREMENT_ACTIVE_PAGE,
+        payload: INCREMENTED_ACTIVE_PAGE
+    })
+
+};
+
+export const decrementActivePage = activePage => dispatch => {
+
+    const DECREMENTED_ACTIVE_PAGE = activePage - 1;
+
+    dispatch ({
+        type: type.DECREMENT_ACTIVE_PAGE,
+        payload: DECREMENTED_ACTIVE_PAGE
+    })
 };
 
 
