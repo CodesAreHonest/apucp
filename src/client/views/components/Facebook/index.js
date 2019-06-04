@@ -1,51 +1,72 @@
-import React, {Component} from "react";
-import FacebookLogin from 'react-facebook-login';
+import React, { Component } from 'react';
 
-class Index extends Component {
+export default class Facebook extends Component {
     constructor(props) {
         super(props);
 
-        this.responseFacebook = this.responseFacebook.bind(this);
+        this.state = {
+            sdk: false,
+        };
 
-        this.isLoggedIn = false;
+        this.setFbAsyncInit = this.setFbAsyncInit.bind(this);
+        this.loadSDKAsync = this.loadSDKAsync.bind(this);
+        this.getFBLoginStatus = this.getFBLoginStatus.bind(this);
     }
 
-    responseFacebook(response) {
+    componentDidMount() {
+        this.setFbAsyncInit();
+        this.loadSDKAsync();
+    }
 
-        if (response.status === 'undefined') {
-            this.isLoggedIn = false;
-            return this.isLoggedIn
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.sdk !== this.state.sdk) {
+            this.getFBLoginStatus();
         }
-        else {
-            this.setState({
-                isLoggedIn: true,
-                userID: response.userID,
-                name: response.name,
-                email: response.email,
-                picture: response.picture.data.url
+    }
+
+    loadSDKAsync() {
+        ((d, s, id) => {
+            const element = d.getElementsByTagName(s)[0];
+            const fjs = element;
+            let js = element;
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = `https://connect.facebook.net/en/sdk.js`;
+            fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+    }
+
+    setFbAsyncInit() {
+        window.fbAsyncInit = () => {
+            window.FB.init({
+                version: 'v3.3',
+                xfbml: false,
+                appId: '295582987871326',
+                autoLogAppEvents: true,
+                cookie: true
             });
+
+            this.setState({sdk: true});
+        };
+
+    }
+
+    getFBLoginStatus() {
+        if (this.state.sdk) {
+            window.FB.getLoginStatus((response) => {
+                console.log(response);
+            })
         }
     }
 
     render() {
-
         return (
             <div>
-                {!this.isLoggedIn &&
-                <FacebookLogin
-                    appId="295582987871326"
-                    size="small"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    scope="manage_pages,publish_pages"
-                    callback={this.responseFacebook}
-                    icon="fa-facebook"
-                    version="3.2"
-                />}
-
+                Facebook Playground
             </div>
         )
     }
 }
-
-export default Index;

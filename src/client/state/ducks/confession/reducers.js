@@ -10,7 +10,7 @@ const initialState = {
     totalRecords: 0,
 
     activePage: 1,
-    recordsPerPage: 2,
+    recordsPerPage: 10,
 };
 
 const homeReducer = createReducer(initialState) ({

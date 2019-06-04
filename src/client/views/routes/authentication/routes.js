@@ -1,7 +1,7 @@
 import AdminLogin from "../../pages/Auth/Login";
 
 const routes = [{
-    path: '/admin/login',
+    path: '/auth/admin/login',
     exact: true,
     component: AdminLogin
 }];
