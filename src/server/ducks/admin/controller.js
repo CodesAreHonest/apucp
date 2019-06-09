@@ -11,14 +11,18 @@ export const postRegister = async (req, res) => {
         return res.status(422).send(validation);
     }
 
-    const { user_id, name, email, picture, access_token } = req.body;
+    const { access_token } = req.body;
 
-    AdminStore.insert_or_update (
-        user_id, name, email, picture, access_token
-    ).then (response => {
-        return res.status(200).send(response);
-    }).catch (err => {
-        return res.status(500).send(err);
-    });
+    // TODO Obtain access token from client side
+    // TODO Validate facebook user possess admin role in confession page
+    // TODO Ensure admins possess permission to create content
+
+    // AdminStore.insert_or_update (
+    //     user_id, name, email, picture, access_token
+    // ).then (response => {
+    //     return res.status(200).send(response);
+    // }).catch (err => {
+    //     return res.status(500).send(err);
+    // });
 
 };

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {paramEncoding} from "../../../util/encoding";
 
 export default class Facebook extends Component {
     constructor(props) {
@@ -8,64 +9,33 @@ export default class Facebook extends Component {
             sdk: false,
         };
 
-        this.setFbAsyncInit = this.setFbAsyncInit.bind(this);
-        this.loadSDKAsync = this.loadSDKAsync.bind(this);
-        this.getFBLoginStatus = this.getFBLoginStatus.bind(this);
+        this.loginFacebook = this.loginFacebook.bind(this);
     }
 
-    componentDidMount() {
-        this.setFbAsyncInit();
-        this.loadSDKAsync();
-    }
+    loginFacebook() {
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.sdk !== this.state.sdk) {
-            this.getFBLoginStatus();
-        }
-    }
-
-    loadSDKAsync() {
-        ((d, s, id) => {
-            const element = d.getElementsByTagName(s)[0];
-            const fjs = element;
-            let js = element;
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = `https://connect.facebook.net/en/sdk.js`;
-            fjs.parentNode.insertBefore(js, fjs);
-        })(document, 'script', 'facebook-jssdk');
-    }
-
-    setFbAsyncInit() {
-        window.fbAsyncInit = () => {
-            window.FB.init({
-                version: 'v3.3',
-                xfbml: false,
-                appId: '295582987871326',
-                autoLogAppEvents: true,
-                cookie: true
-            });
-
-            this.setState({sdk: true});
+        const params = {
+            auth_type: 'rerequest',
+            response_type: 'token',
+            display: 'popup',
+            client_id: '295582987871326',
+            redirect_uri: 'http://localhost:3000/admin',
+            version: 'v3.3',
+            scope: 'manage_pages,publish_pages',
         };
 
-    }
+        const queryString = paramEncoding(params);
 
-    getFBLoginStatus() {
-        if (this.state.sdk) {
-            window.FB.getLoginStatus((response) => {
-                console.log(response);
-            })
-        }
+        window.location.href = `https://www.facebook.com/v3.3/dialog/oauth?${queryString}`;
+
     }
 
     render() {
         return (
             <div>
-                Facebook Playground
+                <button className="btn btn-primary" onClick={this.loginFacebook}>
+                    Connect to Facebook
+                </button>
             </div>
         )
     }
