@@ -23,11 +23,11 @@ const adminSchema = schema ({
         type: String,
         required: true
     },
-    picture: {
+    access_token: {
         type: String,
         required: true
     },
-    access_token: {
+    page_access_token: {
         type: String,
         required: true
     },

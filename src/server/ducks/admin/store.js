@@ -3,47 +3,34 @@ import Facebook from "./facebook";
 
 class AdminStore {
 
-    async obtain_facebook_information (personal_access_token) {
+    async register (personal_access_token, page_access_token) {
 
         const facebook = new Facebook();
 
         try {
-            return await facebook.information (personal_access_token);
-        }
-        catch (err) {
-            return err;
-        }
+            const information = await facebook.information (personal_access_token);
+            const { id: user_id, name, email } = information;
 
-        // const params = {
-        //     user_id,
-        // }
+            const params = {
+                user_id, name, email, access_token: personal_access_token, page_access_token
+            };
 
-        // return new Promise ((resolve, reject) => {
-        //
-        //     Admin.update({'user_id': user_id}, params, {upsert: true}, (err) => {
-        //         if (err) {
-        //             return reject({
-        //                 'response_code': 500,
-        //                 'response_msg': 'error on mongoose',
-        //                 'data': err
-        //             });
-        //         }
-        //
-        //         return resolve({
-        //             'response_code': 200,
-        //             'response_msg': 'success'
-        //         });
-        //     })
-        // })
+            return new Promise ((resolve, reject) => {
+                Admin.updateOne({user_id}, params, {upsert: true}, err => {
+                    if (err) {
+                        return reject({
+                            'response_code': 500,
+                            'response_msg': 'error on mongoose',
+                            'data': err
+                        });
+                    }
 
-    }
-
-    async insert_or_update (personal_access_token) {
-
-        try {
-            let facebook_information = await this.obtain_facebook_information(personal_access_token);
-            console.log (facebook_information);
-
+                    return resolve({
+                        'response_code': 200,
+                        'response_msg': 'success'
+                    });
+                })
+            });
         }
         catch (err) {
             return err;

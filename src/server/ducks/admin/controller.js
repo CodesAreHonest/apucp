@@ -19,9 +19,9 @@ export const postRegister = async (req, res) => {
         let fb_page_permission = await adminStore.verify_facebook_page_permission(access_token);
         const { fb_page_access_token } = fb_page_permission;
 
-        let authorise_admin = await adminStore.insert_or_update(access_token);
+        let authorise_admin = await adminStore.register(access_token, fb_page_access_token);
 
-
+        return res.status(200).send(authorise_admin);
     }
     catch (err) {
         return res.status(500).send(err);
