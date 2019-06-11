@@ -3,16 +3,17 @@ import * as type from './types';
 
 export const getPersonalAccount = access_token => dispatch => {
 
-    axios.get('https://graph.facebook.com/v3.3/me/accounts', {
-        params: {
-            access_token
-        }
+    axios.post('/api/admin/register', {
+        access_token
     }).then (response => {
         dispatch ({
             type: type.POST_GRAPH_ME_ACCOUNTS,
-            payload: response.data.data
+            payload: response.data
         });
     }).catch (err => {
-        console.log (err);
+        dispatch ({
+            type: type.POST_GRAPH_ME_ACCOUNTS,
+            payload: err.response.data
+        });
     })
 };

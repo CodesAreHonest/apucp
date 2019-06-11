@@ -37,19 +37,9 @@ class Admin extends Component {
     componentDidUpdate (prevProps) {
         if (prevProps.accounts !== this.props.accounts) {
 
-            // verify whether the facebook user possess permission on APU Confession Page
-            let pageAccess = this.props.accounts.find (account => account.id === '121412055027319');
+            const { response_code } = this.props.accounts;
 
-            if (!pageAccess) {
-                window.location.href = '/auth/admin/login';
-            }
-
-            let { tasks } = pageAccess;
-
-            // verify the facebook user possess responsibility to create content
-            let requiredTask = tasks.find(account => account === 'CREATE_CONTENT');
-
-            if (!requiredTask) {
+            if (response_code !== 200) {
                 window.location.href = '/auth/admin/login';
             }
 
@@ -116,5 +106,7 @@ const mapStateToProps = ({facebook}) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);
 
 Admin.propTypes = {
-    routes: PropTypes.array.isRequired
+    routes: PropTypes.array.isRequired,
+    accounts: PropTypes.object.isRequired,
+    getPersonalAccount: PropTypes.func.isRequired
 };
