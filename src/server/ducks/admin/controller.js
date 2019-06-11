@@ -2,6 +2,7 @@
 import {validationHandler} from "../../helpers/validation";
 
 import AdminStore from './store';
+import Facebook from "./facebook";
 
 export const postRegister = async (req, res) => {
 
@@ -12,10 +13,35 @@ export const postRegister = async (req, res) => {
     }
 
     const { access_token } = req.body;
+    const adminStore = new AdminStore();
 
-    // TODO Obtain access token from client side
-    // TODO Validate facebook user possess admin role in confession page
-    // TODO Ensure admins possess permission to create content
+    try {
+        let fb_page_permission = await adminStore.verify_facebook_page_permission(access_token);
+        const { fb_page_access_token } = fb_page_permission;
+
+        let authorise_admin = await adminStore.insert_or_update(access_token);
+
+
+    }
+    catch (err) {
+        return res.status(500).send(err);
+    }
+
+    // AdminStore.verify_facebook_account(access_token)
+    //     .then (page_access_token => {
+    //         AdminStore.insert_or_update(access_token, page_access_token);
+    //     })
+    //     .catch (err => {
+    //         return res.status(500).send(err);
+    //     });
+    //
+    // console.log (fbPageAccessToken);
+
+    // AdminStore.verify_facebook_account(access_token).then (response => {
+    //     return res.status(200).send(response)
+    // }).catch (err => {
+    //     return res.status(500).send(err);
+    // });
 
     // AdminStore.insert_or_update (
     //     user_id, name, email, picture, access_token
