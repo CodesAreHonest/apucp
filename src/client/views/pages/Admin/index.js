@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { compose } from 'redux';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
 import Sidebar from "../../components/Common/Sidebar";
 import Header from "../../components/Common/Header";
@@ -32,6 +33,14 @@ class Admin extends Component {
             let access_token = objects.get('access_token');
             this.props.getPersonalAccount(access_token);
         }
+
+        let search = window.location.search;
+        let query = new URLSearchParams(search);
+
+        if (query.has('error')) {
+            this.props.history.push ('/auth/admin/login');
+            // window.location.href = '/auth/admin/login';
+        }
     }
 
     componentDidUpdate (prevProps) {
@@ -40,7 +49,7 @@ class Admin extends Component {
             const { response_code } = this.props.accounts;
 
             if (response_code !== 200) {
-                window.location.href = '/auth/admin/login';
+                this.props.history.push ('/auth/admin/login');
             }
 
             this.setState({authenticated: true});
@@ -103,7 +112,12 @@ const mapStateToProps = ({facebook}) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Admin);
+const enhance = compose (
+    withRouter,
+    connect (mapStateToProps, mapDispatchToProps)
+);
+
+export default enhance(Admin);
 
 Admin.propTypes = {
     routes: PropTypes.array.isRequired,
