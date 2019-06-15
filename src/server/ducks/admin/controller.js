@@ -2,6 +2,7 @@
 import {validationHandler} from "../../helpers/validation";
 
 import AdminStore from './store';
+import ConfessionStore from '../confession/store';
 
 export const postRegister = async (req, res) => {
 
@@ -18,11 +19,45 @@ export const postRegister = async (req, res) => {
         let fb_page_permission = await adminStore.verify_facebook_page_permission(access_token);
         const { fb_page_access_token } = fb_page_permission;
 
-        let authorise_admin = await adminStore.register(access_token, fb_page_access_token);
+        let authorise_admin = await adminStore.register(access_token, fb_page_access_token, req);
+
+        req.session.page_access_token = fb_page_access_token;
 
         return res.status(200).send(authorise_admin);
     }
     catch (err) {
         return res.status(500).send(err);
     }
+};
+
+export const postApprovePendingConfession = async (req, res) => {
+
+    let validation = await validationHandler(req, res);
+
+    if (validation.response_code === 422) {
+        return res.status(422).send(validation);
+    }
+
+    const { pendingConfession } = req.body;
+    const { page_access_token, name } = req.session;
+
+    let adminStore = new AdminStore();
+
+    try {
+        let pendingConfessions = await ConfessionStore.getSelectedPendingListById(pendingConfession);
+        await adminStore.postConfession(page_access_token, pendingConfessions, name);
+
+    }
+    catch (err) {
+        return res.status(500).send({
+            response_code: 500,
+            response_msg: err
+        });
+    }
+
+    return res.status(200).send({
+        response_code: 200,
+        response_msg: 'success'
+    })
+
 };

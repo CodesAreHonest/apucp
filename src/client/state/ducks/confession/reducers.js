@@ -4,6 +4,7 @@ import { removeAnItemFromArray } from "./selector";
 
 const initialState = {
     submit_confession_response: {},
+    approve_confession_response: {},
 
     data: [],
     recordsFrom: 0,
@@ -49,6 +50,11 @@ const homeReducer = createReducer(initialState) ({
     [type.DESELECT_PENDING_CONFESSION]: (state, action) => ({
         ...state,
         pendingList: removeAnItemFromArray(state.pendingList, action.confessionId)
+    }),
+
+    [type.POST_APPROVE_CONFESSIONS]: (state, action) => ({
+        ...state,
+        approve_confession_response: action.payload
     }),
 
 });

@@ -83,4 +83,21 @@ export const deselectPendingConfession = (confessionId) => dispatch => {
 
 };
 
+export const postApproveConfessions = pendingConfession => dispatch => {
+
+    axios.post ('/api/admin/confessions/approve', {
+        pendingConfession
+    }).then (response => {
+        dispatch ({
+            type: type.POST_APPROVE_CONFESSIONS,
+            payload: response.data
+        })
+    }).catch (err => {
+        dispatch ({
+            type:type.POST_APPROVE_CONFESSIONS,
+            payload: err.response.data
+        })
+    })
+};
+
 

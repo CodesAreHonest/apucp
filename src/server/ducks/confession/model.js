@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import moment from 'moment-timezone';
 import MongoConnection from '../../connection/mongoose';
 
+delete mongoose.connection.models['confessions'];
+
 let schema = mongoose.Schema;
 const mongo_connection = MongoConnection.connect();
 
@@ -29,6 +31,10 @@ const confessionSchema = schema ({
     action_by: {
         type: String,
         default: null,
+        required: false
+    },
+    facebook_post_id: {
+        type: String,
         required: false
     },
     created_at: {

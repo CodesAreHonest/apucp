@@ -34,6 +34,21 @@ class Facebook {
         })
 
     }
+
+    submitConfession (page_access_token, content) {
+
+        return new Promise ((resolve, reject) => {
+            axios.post('https://graph.facebook.com/v3.3/121412055027319/feed', {
+                message: content,
+                access_token: page_access_token
+            }).then (response => {
+                return resolve (response.data.id);
+            }).catch (err => {
+                return reject (err.response.data);
+            })
+        });
+    }
+
 }
 
 export default Facebook;

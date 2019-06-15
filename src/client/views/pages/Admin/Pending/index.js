@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 
 import "./pending.css";
 
-import {getPendingConfession} from "../../../../state/ducks/confession/actions";
+import {
+    getPendingConfession, postApproveConfessions
+} from "../../../../state/ducks/confession/actions";
 import ListGroup from "../../../components/ListGroup";
 import Pagination from "../../../components/Pagination";
 
@@ -15,6 +17,12 @@ class Pending extends Component {
         this.state = {
             data: []
         };
+
+        this._approveConfession = this._approveConfession.bind(this);
+    }
+
+    _approveConfession() {
+        this.props.postApproveConfessions(this.props.pendingConfession);
     }
 
     componentDidMount() {
@@ -35,6 +43,9 @@ class Pending extends Component {
 
     render() {
         const { data } = this.state;
+        const { pendingConfession } = this.props;
+
+        const disabled = pendingConfession.length === 0;
 
         return (
             <div>
@@ -45,11 +56,22 @@ class Pending extends Component {
                                 <button className="btn btn-sm btn-default" style={{marginRight: '10px'}}>
                                     <input type="checkbox" style={{zoom: '1.5'}}/>
                                 </button>
-                                <button type="button" className="btn btn-sm btn-danger" style={{marginRight: '5px'}}>
+                                <button
+                                    type="button"
+                                    className="btn btn-sm btn-danger"
+                                    style={{marginRight: '5px'}}
+                                    disabled={disabled}
+                                >
                                     <i className="fa fa-times" style={{marginRight: '5px'}}/>
                                     Reject
                                 </button>
-                                <button type="button" className="btn btn-sm btn-success" style={{marginRight: '5px'}}>
+                                <button
+                                    type="button"
+                                    className="btn btn-sm btn-success"
+                                    style={{marginRight: '5px'}}
+                                    disabled={disabled}
+                                    onClick={this._approveConfession}
+                                >
                                     <i className="fa fa-check" style={{marginRight: '5px'}}/>
                                     Approve
                                 </button>
@@ -72,16 +94,23 @@ const mapStateToProps = ({ confession }) => ({
     pending_data: confession.data,
 
     activePage: confession.activePage,
-    recordsPerPage: confession.recordsPerPage
+    recordsPerPage: confession.recordsPerPage,
+    pendingConfession: confession.pendingList
 });
 
 const mapDispatchToProps = {
-    getPendingConfession
+    getPendingConfession, postApproveConfessions
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pending);
 
 Pending.propTypes = {
     getPendingConfession: PropTypes.func.isRequired,
-    pending_data: PropTypes.array.isRequired
+    postApproveConfessions: PropTypes.func.isRequired,
+
+    pending_data: PropTypes.array.isRequired,
+    pendingConfession: PropTypes.array.isRequired,
+    activePage: PropTypes.number.isRequired,
+    recordsPerPage: PropTypes.number.isRequired
+
 };

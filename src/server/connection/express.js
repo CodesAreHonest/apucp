@@ -5,6 +5,8 @@ import morgan from 'morgan';
 import router from '../ducks/index.js';
 import bodyParser from 'body-parser';
 import path from 'path';
+import session from 'express-session';
+import uuid from 'uuid';
 
 class Express {
     constructor() {
@@ -19,6 +21,14 @@ class Express {
         this.app.use(cors());
         this.app.use(morgan('dev'));
         this.app.use(expressValidator());
+        this.app.use(session({
+            genid: () => {
+                return uuid();
+            },
+            secret: 'thisisasecret',
+            resave: true,
+            saveUninitialized: true
+        }));
         this.app.use('/api', router);
 
         this.app.get('/*', (req, res) => {

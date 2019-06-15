@@ -9,9 +9,10 @@ class MongoConnection {
         try {
             const connectionString = `mongodb://${dbHost}:${dbPort}/${dbName}`;
 
-            mongoose.set('useCreateIndex', true);
             mongoose.connect(connectionString, {
-                useNewUrlParser : true
+                useNewUrlParser : true,
+                useFindAndModify: false,
+                useCreateIndex: true
             });
         }
         catch (err) {

@@ -91,6 +91,29 @@ class ConfessionStore {
 
         })
     }
+
+    static getSelectedPendingListById (batchIds) {
+
+        let query = Confession.find({
+            '_id': { $in: batchIds }
+        });
+
+        return query.exec();
+    }
+
+    static approveConfession (id, postId, name) {
+
+        const params = {
+            status: 'approved',
+            facebook_post_id: postId,
+            updated_at: Date.now(),
+            action_by: name
+        };
+
+        let query = Confession.findOneAndUpdate({'_id': id}, params);
+
+        return query.exec();
+    }
 }
 
 export default ConfessionStore;
