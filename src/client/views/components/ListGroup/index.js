@@ -13,9 +13,9 @@ class ListGroup extends Component {
 
         if (prevProps.data !== this.props.data) {
             let listGroupItem = this.props.data.map ((value, index) => {
-                const {content, created_at} = value;
+                const {content, created_at, _id} = value;
                 return (
-                    <ListGroupItem text={content} time={created_at} key={index} />
+                    <ListGroupItem text={content} time={created_at} key={index} id={_id}/>
                 )
             });
 

@@ -65,4 +65,22 @@ export const decrementActivePage = activePage => dispatch => {
     })
 };
 
+export const selectPendingConfession = (confessionId) => dispatch => {
+
+    dispatch ({
+        type: type.SELECT_PENDING_CONFESSION,
+        confessionId: confessionId
+    });
+
+};
+
+export const deselectPendingConfession = (confessionId) => dispatch => {
+
+    dispatch ({
+        type: type.DESELECT_PENDING_CONFESSION,
+        confessionId: confessionId
+    });
+
+};
+
 
