@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toastLoading, toastSuccess, toastError } from "../../../UI/sweetalert2";
 
 import "./pending.css";
 
@@ -22,6 +23,7 @@ class Pending extends Component {
     }
 
     _approveConfession() {
+        toastLoading();
         this.props.postApproveConfessions(this.props.pendingConfession);
     }
 
@@ -39,6 +41,21 @@ class Pending extends Component {
         }
 
         return null;
+    }
+
+    componentDidUpdate (prevProps) {
+        if (prevProps.approveConfessionResponse !== this.props.approveConfessionResponse) {
+
+            const { response_code } = this.props.approveConfessionResponse;
+
+            if (response_code === 200) {
+                const { activePage, recordsPerPage } = this.props;
+                this.props.getPendingConfession(activePage , recordsPerPage);
+                return toastSuccess()
+            }
+
+            return toastError();
+        }
     }
 
     render() {
@@ -95,7 +112,9 @@ const mapStateToProps = ({ confession }) => ({
 
     activePage: confession.activePage,
     recordsPerPage: confession.recordsPerPage,
-    pendingConfession: confession.pendingList
+    pendingConfession: confession.pendingList,
+
+    approveConfessionResponse: confession.approve_confession_response,
 });
 
 const mapDispatchToProps = {
@@ -111,6 +130,8 @@ Pending.propTypes = {
     pending_data: PropTypes.array.isRequired,
     pendingConfession: PropTypes.array.isRequired,
     activePage: PropTypes.number.isRequired,
-    recordsPerPage: PropTypes.number.isRequired
+    recordsPerPage: PropTypes.number.isRequired,
+
+    approveConfessionResponse: PropTypes.object.isRequired
 
 };

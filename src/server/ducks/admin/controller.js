@@ -43,21 +43,19 @@ export const postApprovePendingConfession = async (req, res) => {
 
     let adminStore = new AdminStore();
 
-    try {
-        let pendingConfessions = await ConfessionStore.getSelectedPendingListById(pendingConfession);
-        await adminStore.postConfession(page_access_token, pendingConfessions, name);
+    let pendingConfessions = await ConfessionStore.getSelectedPendingListById(pendingConfession);
 
-    }
-    catch (err) {
+    adminStore.postConfession(page_access_token, pendingConfessions, name)
+        .then (() => {
+            return res.status(200).send ({
+                response_code: 200,
+                response_msg: 'success'
+            });
+        }).catch (err => {
         return res.status(500).send({
             response_code: 500,
             response_msg: err
         });
-    }
-
-    return res.status(200).send({
-        response_code: 200,
-        response_msg: 'success'
-    })
+    });
 
 };

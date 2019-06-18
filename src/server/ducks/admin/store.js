@@ -90,7 +90,7 @@ class AdminStore {
 
     }
 
-     async postConfession (page_access_token, pending_confessions, name) {
+    async postConfession (page_access_token, pending_confessions, name) {
 
         if (!page_access_token) {
             throw 'Session Expired';
@@ -102,17 +102,23 @@ class AdminStore {
 
         const facebook = new Facebook();
 
-        try {
-            await pending_confessions.forEach(async confession => {
-                const { _id, tags, content } = confession;
-                const message = formatMessage(tags, content);
-                let postId = await facebook.submitConfession(page_access_token, message);
-                await ConfessionStore.approveConfession(_id, postId, name)
-            });
-        }
-        catch (err) {
-            return err;
-        }
+        let asyncActions = [];
+
+        pending_confessions.forEach( confession => {
+            const { _id, tags, content } = confession;
+            const message = formatMessage(tags, content);
+
+            asyncActions.push(facebook.submitConfession(page_access_token, message)
+                .then (postId => ConfessionStore.approveConfession(_id, postId, name))
+                .catch (err => {
+                    return {
+                        response_code: 500,
+                        response_msg: err
+                    }
+                }));
+        });
+
+        return await Promise.all(asyncActions);
 
     }}
 

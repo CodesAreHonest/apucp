@@ -17,6 +17,23 @@ export const loading = (title) => {
 
 };
 
+export const toastLoading = () => {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+    });
+
+    Toast.fire({
+        title: 'Submitting',
+        onBeforeOpen: () => {
+            Swal.showLoading();
+        }
+    })
+};
+
 export const success = (title = '', text = '') => {
 
     Swal.fire({
@@ -30,6 +47,22 @@ export const success = (title = '', text = '') => {
 
 };
 
+export const toastSuccess = () => {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+    });
+
+    Toast.fire({
+        title: 'Success',
+        type: 'success',
+    })
+};
+
+
 export const error = (title = '', text = '') => {
 
     Swal.fire({
@@ -41,6 +74,21 @@ export const error = (title = '', text = '') => {
         text
     });
 
+};
+
+export const toastError = () => {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+    });
+
+    Toast.fire({
+        title: 'Error Occurs',
+        type: 'error',
+    })
 };
 
 export const confirmation = (title = '', text = '') => {
