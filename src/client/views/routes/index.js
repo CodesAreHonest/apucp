@@ -1,23 +1,18 @@
 import React, { Component, Fragment } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
-import AdminRoutes from './admin/routeWithSubRoutes';
+import AdminRoutesSetup from './admin/routeWithSubRoutes';
 import AuthenticationRoutes from './authentication/routes';
 import ConfessorRoutes from './confessor/routes';
-
-const NoMatch = ({ location }) => (
-    <div>
-        <h3>No match for <code>{location.pathname}</code></h3>
-    </div>
-);
+import NotFound from './NotFound';
 
 class Routes extends Component {
     constructor (props) {
         super (props);
 
         this.state = {
-            reactRoutes: '',
-            adminRoutes: AdminRoutes()
+            reactRoutes: [],
+            adminRoutes: AdminRoutesSetup()
         }
     }
 
@@ -26,9 +21,10 @@ class Routes extends Component {
     }
 
     renderStaticRoutes() {
+
         let rootRoutes = Array.prototype.concat(
             AuthenticationRoutes,
-            ConfessorRoutes
+            ConfessorRoutes,
         );
 
         let reactRoutes = rootRoutes.map((route, index) => (
@@ -49,9 +45,13 @@ class Routes extends Component {
 
         return (
             <Fragment>
-                { reactRoutes }
-                { adminRoutes }
-                {/*<Route component={NoMatch} />*/}
+                <Switch>
+                    { reactRoutes }
+                    { adminRoutes }
+                    { reactRoutes.length !== 0 &&
+                        adminRoutes.length !== 0 &&
+                    <Route component={NotFound} /> }
+                </Switch>
             </Fragment>
         )
     }
