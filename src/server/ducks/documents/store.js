@@ -21,13 +21,13 @@ class DocumentStore {
 
     }
 
-    static updateTag (document_type) {
+    static async updateTag (document_type) {
 
         const params = {
             document_type
         };
 
-        Document.findOneAndUpdate(params, { $inc: {
+        return await Document.findOneAndUpdate(params, { $inc: {
             number: 1
         }}, { new: true })
     }

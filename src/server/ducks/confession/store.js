@@ -27,12 +27,24 @@ class ConfessionStore {
                     });
                 }
 
-                DocumentStore.updateTag('confession');
+                DocumentStore.updateTag('confession').
+                    then (() => {
+                        return resolve({
+                            response_code: 200,
+                            response_msg: 'success'
+                        })
 
-                return resolve({
-                    'response_code': 200,
-                    'response_msg': 'success'
+                }).catch (err => {
+                    return reject({
+                        response_code: 500,
+                        response_msg: err
+                    })
                 });
+
+                // return resolve({
+                //     'response_code': 200,
+                //     'response_msg': 'success'
+                // });
 
             })
         });
