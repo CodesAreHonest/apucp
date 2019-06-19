@@ -94,9 +94,12 @@ class Pending extends Component {
                                 </button>
                             </div>
 
+                            { data.length !== 0 &&
                             <div className="col-md-6 col-sm-5 offset-sm-2 offset-md-0 offset-xs-0 col-xs-2 float-md-right text-md-right">
                                 <Pagination />
                             </div>
+                            }
+
                         </div>
                     </div>
 

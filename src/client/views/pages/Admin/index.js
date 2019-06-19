@@ -29,17 +29,18 @@ class Admin extends Component {
         let hash = window.location.hash.substring(1);
         let objects = new URLSearchParams(hash);
 
-        if (objects.has('access_token')) {
-            let access_token = objects.get('access_token');
-            this.props.getPersonalAccount(access_token);
-        }
-
         let search = window.location.search;
         let query = new URLSearchParams(search);
 
+
+        if (objects.has('access_token')) {
+            let access_token = objects.get('access_token');
+            let expires_in = objects.get('expires_in');
+            this.props.getPersonalAccount(access_token, expires_in);
+        }
+
         if (query.has('error')) {
             this.props.history.push ('/auth/admin/login');
-            // window.location.href = '/auth/admin/login';
         }
     }
 
@@ -48,7 +49,7 @@ class Admin extends Component {
 
             const { response_code } = this.props.accounts;
 
-            if (response_code !== 200) {
+            if (response_code != 200) {
                 this.props.history.push ('/auth/admin/login');
             }
 

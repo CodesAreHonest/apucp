@@ -1,9 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import AdminRoutes from './admin/routeWithSubRoutes';
 import AuthenticationRoutes from './authentication/routes';
 import ConfessorRoutes from './confessor/routes';
+
+const NoMatch = ({ location }) => (
+    <div>
+        <h3>No match for <code>{location.pathname}</code></h3>
+    </div>
+);
 
 class Routes extends Component {
     constructor (props) {
@@ -45,6 +51,7 @@ class Routes extends Component {
             <Fragment>
                 { reactRoutes }
                 { adminRoutes }
+                {/*<Route component={NoMatch} />*/}
             </Fragment>
         )
     }

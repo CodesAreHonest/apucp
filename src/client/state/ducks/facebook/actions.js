@@ -1,10 +1,10 @@
 import axios from 'axios';
 import * as type from './types';
 
-export const getPersonalAccount = access_token => dispatch => {
+export const getPersonalAccount = (access_token, expires_in) => dispatch => {
 
     axios.post('/api/admin/register', {
-        access_token
+        access_token, expires_in
     }).then (response => {
         dispatch ({
             type: type.POST_GRAPH_ME_ACCOUNTS,

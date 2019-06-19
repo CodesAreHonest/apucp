@@ -52,9 +52,12 @@ const homeReducer = createReducer(initialState) ({
         pendingList: removeAnItemFromArray(state.pendingList, action.confessionId)
     }),
 
+
+    // TODO empty pendinglist after approve confessions
     [type.POST_APPROVE_CONFESSIONS]: (state, action) => ({
         ...state,
-        approve_confession_response: action.payload
+        approve_confession_response: action.payload,
+        pendingList: []
     }),
 
 });

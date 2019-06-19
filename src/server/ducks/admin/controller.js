@@ -23,6 +23,12 @@ export const postRegister = async (req, res) => {
 
         req.session.page_access_token = fb_page_access_token;
 
+        let minutes = 30;
+        let seconds = minutes * 60;
+        let milliseconds = seconds * 1000;
+
+        req.session.cookie.maxAge = milliseconds;
+
         return res.status(200).send(authorise_admin);
     }
     catch (err) {

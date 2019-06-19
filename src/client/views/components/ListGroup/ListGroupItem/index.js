@@ -36,7 +36,7 @@ class ListGroupItem extends Component {
             const confessionId = this.props.id;
             const selected = this.props.pendingList.find(id => id === confessionId);
 
-            if (!selected) {
+            if (selected === undefined || this.props.pendingList.length === 0) {
                 this.setState({selected: false});
             }
             else {
@@ -76,8 +76,8 @@ class ListGroupItem extends Component {
                     <div className="col-sm-1 ">
                         <input type="checkbox"
                                style={{zoom: '1.5', marginRight: '15px'}}
-                               onClick={this._selectConfession}
-                               value={selected}
+                               onChange={this._selectConfession}
+                               checked={selected}
                         />
                     </div>
                     <div className="col-sm-8" style={{color: '#000000c7'}}

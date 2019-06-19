@@ -14,6 +14,8 @@ export default class Facebook extends Component {
 
     loginFacebook() {
 
+        const { protocol, hostname, port } = window.location.hostname;
+
         const params = {
             auth_type: 'rerequest',
             response_type: 'token',
