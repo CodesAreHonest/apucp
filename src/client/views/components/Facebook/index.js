@@ -21,7 +21,7 @@ export default class Facebook extends Component {
             response_type: 'token',
             display: 'popup',
             client_id: '295582987871326',
-            redirect_uri: 'http://localhost:3000/admin',
+            redirect_uri: 'http://localhost:3000/auth/admin/redirect',
             version: 'v3.3',
             scope: 'manage_pages,publish_pages',
         };

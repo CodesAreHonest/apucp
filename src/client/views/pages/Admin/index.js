@@ -19,42 +19,11 @@ class Admin extends Component {
         this.state = {
             adminRoutes: '',
             accounts: {},
-            authenticated: false,
         }
     }
 
     componentDidMount() {
         this.routeWithSubRoutes();
-
-        let hash = window.location.hash.substring(1);
-        let objects = new URLSearchParams(hash);
-
-        let search = window.location.search;
-        let query = new URLSearchParams(search);
-
-
-        if (objects.has('access_token')) {
-            let access_token = objects.get('access_token');
-            let expires_in = objects.get('expires_in');
-            this.props.getPersonalAccount(access_token, expires_in);
-        }
-
-        if (query.has('error')) {
-            this.props.history.push ('/auth/admin/login');
-        }
-    }
-
-    componentDidUpdate (prevProps) {
-        if (prevProps.accounts !== this.props.accounts) {
-
-            const { response_code } = this.props.accounts;
-
-            if (response_code != 200) {
-                this.props.history.push ('/auth/admin/login');
-            }
-
-            this.setState({authenticated: true});
-        }
     }
 
     routeWithSubRoutes() {
@@ -78,7 +47,7 @@ class Admin extends Component {
 
     render() {
 
-        const { adminRoutes,authenticated } = this.state;
+        const { adminRoutes } = this.state;
 
         return (
             <div className="d-flex" id="wrapper">
@@ -92,8 +61,6 @@ class Admin extends Component {
                     <div className="container-fluid content">
                         <Switch>
                             { adminRoutes }
-                            { authenticated &&
-                                <Redirect from="/admin" exact to="/admin/dashboard" /> }
                         </Switch>
                     </div>
                 </div>
