@@ -8,6 +8,7 @@ class ConfessionStore {
 
         let tag = await DocumentStore.getHashTag('confession');
 
+
         let params = {
             tags: tag,
             content: content,
@@ -18,7 +19,6 @@ class ConfessionStore {
 
         return new Promise ((resolve, reject) => {
             confession.save(err => {
-
                 if (err) {
                     return reject({
                         'response_code': 500,
@@ -40,11 +40,6 @@ class ConfessionStore {
                         response_msg: err
                     })
                 });
-
-                // return resolve({
-                //     'response_code': 200,
-                //     'response_msg': 'success'
-                // });
 
             })
         });
