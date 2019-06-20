@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {
-    getPendingConfession,
     incrementActivePage,
     decrementActivePage
 } from "../../../state/ducks/confession/actions";
@@ -19,8 +18,7 @@ class Pagination extends Component {
 
     componentDidUpdate (prevProps) {
         if (prevProps.activePage !== this.props.activePage) {
-            const { activePage, recordsPerPage } = this.props;
-            this.props.getPendingConfession(activePage, recordsPerPage);
+            this.props.getData();
         }
     }
 
@@ -76,21 +74,20 @@ const mapStateToProps = ({ confession }) => ({
 });
 
 const mapDispatchToProps = {
-    getPendingConfession,
     incrementActivePage, decrementActivePage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination);
 
 Pagination.propTypes = {
-    recordsFrom: PropTypes.number.isRequired,
-    recordsTo: PropTypes.number.isRequired,
-    totalPages: PropTypes.number.isRequired,
-    totalRecords: PropTypes.number.isRequired,
-    activePage: PropTypes.number.isRequired,
-    recordsPerPage: PropTypes.number.isRequired,
+    recordsFrom     : PropTypes.number.isRequired,
+    recordsTo       : PropTypes.number.isRequired,
+    totalPages      : PropTypes.number.isRequired,
+    totalRecords    : PropTypes.number.isRequired,
+    activePage      : PropTypes.number.isRequired,
+    recordsPerPage  : PropTypes.number.isRequired,
 
-    getPendingConfession: PropTypes.func.isRequired,
-    incrementActivePage: PropTypes.func.isRequired,
-    decrementActivePage: PropTypes.func.isRequired,
+    getData             : PropTypes.func.isRequired,
+    incrementActivePage : PropTypes.func.isRequired,
+    decrementActivePage : PropTypes.func.isRequired,
 };

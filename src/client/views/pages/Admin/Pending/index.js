@@ -20,6 +20,7 @@ class Pending extends Component {
         };
 
         this._approveConfession = this._approveConfession.bind(this);
+        this._getPendingConfession = this._getPendingConfession.bind(this);
     }
 
     _approveConfession() {
@@ -27,9 +28,13 @@ class Pending extends Component {
         this.props.postApproveConfessions(this.props.pendingConfession);
     }
 
-    componentDidMount() {
+    _getPendingConfession() {
         const { activePage, recordsPerPage } = this.props;
         this.props.getPendingConfession(activePage , recordsPerPage);
+    }
+
+    componentDidMount() {
+        this._getPendingConfession();
     }
 
     static getDerivedStateFromProps (nextProps, prevState) {
@@ -49,8 +54,7 @@ class Pending extends Component {
             const { response_code } = this.props.approveConfessionResponse;
 
             if (response_code === 200) {
-                const { activePage, recordsPerPage } = this.props;
-                this.props.getPendingConfession(activePage , recordsPerPage);
+                this._getPendingConfession();
                 return toastSuccess()
             }
 
@@ -96,14 +100,14 @@ class Pending extends Component {
 
                             { data.length !== 0 &&
                             <div className="col-md-6 col-sm-5 offset-sm-2 offset-md-0 offset-xs-0 col-xs-2 float-md-right text-md-right">
-                                <Pagination />
+                                <Pagination getData={this._getPendingConfession}/>
                             </div>
                             }
 
                         </div>
                     </div>
 
-                    <ListGroup data={data}/>
+                    <ListGroup data={data} type="Pending"/>
                 </div>
             </div>
         )

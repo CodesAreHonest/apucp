@@ -32,6 +32,15 @@ const homeReducer = createReducer(initialState) ({
         totalRecords: action.payload.totalRecords,
     }),
 
+    [type.GET_APPROVED_CONFESSIONS]: (state,  action) => ({
+        ...state,
+        data: action.payload.data,
+        recordsFrom: action.payload.recordsFrom,
+        recordsTo: action.payload.recordsTo,
+        totalPages: action.payload.totalPages,
+        totalRecords: action.payload.totalRecords,
+    }),
+
     [type.INCREMENT_ACTIVE_PAGE]: (state, action) => ({
         ...state,
         activePage: action.payload
@@ -52,8 +61,6 @@ const homeReducer = createReducer(initialState) ({
         pendingList: removeAnItemFromArray(state.pendingList, action.confessionId)
     }),
 
-
-    // TODO empty pendinglist after approve confessions
     [type.POST_APPROVE_CONFESSIONS]: (state, action) => ({
         ...state,
         approve_confession_response: action.payload,

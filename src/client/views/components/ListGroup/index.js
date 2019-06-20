@@ -13,10 +13,14 @@ class ListGroup extends Component {
 
         if (prevProps.data !== this.props.data) {
             let listGroupItem = this.props.data.map ((value, index) => {
-                const {content, created_at, _id} = value;
-                return (
-                    <ListGroupItem text={content} time={created_at} key={index} id={_id}/>
-                )
+
+                if (this.props.type === 'Pending') {
+                    const {content, created_at, _id} = value;
+                    return (
+                        <ListGroupItem text={content} time={created_at} key={index} id={_id}/>
+                    )
+                }
+
             });
 
             this.setState({listGroupItem});
@@ -35,7 +39,8 @@ class ListGroup extends Component {
 export default ListGroup;
 
 ListGroup.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    type: PropTypes.oneOf(['Pending', 'Approved', 'Reject']).isRequired
 };
 
 ListGroup.defaultProps = {

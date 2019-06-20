@@ -44,6 +44,30 @@ export const getPendingConfession = (page, limit) => dispatch => {
         })
 };
 
+export const getApprovedConfession = (page, limit) => dispatch => {
+
+    const params = { page, limit };
+
+    const queryString = paramEncoding(params);
+
+    fetch (`/api/confession/getApprovedList?${queryString}`)
+        .then (response => response.json())
+        .then(response => {
+
+            dispatch({
+                type: type.GET_APPROVED_CONFESSIONS,
+                payload: response
+            })
+        })
+        .catch (err => {
+            dispatch({
+                type: type.GET_APPROVED_CONFESSIONS,
+                payload: err.response.data
+            })
+        })
+
+};
+
 export const incrementActivePage = activePage => dispatch => {
 
     const INCREMENTED_ACTIVE_PAGE = activePage + 1;
