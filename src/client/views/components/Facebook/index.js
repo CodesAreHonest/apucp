@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import {paramEncoding} from "../../../util/encoding";
 
+import "./facebook.css";
+
 export default class Facebook extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            sdk: false,
-        };
 
         this.loginFacebook = this.loginFacebook.bind(this);
     }
 
     loginFacebook() {
 
-        const { protocol, hostname, port } = window.location.hostname;
+        const { protocol, hostname, port } = window.location;
+
+        const url = `${protocol}//${hostname}:${port}/auth/admin/redirect`;
 
         const params = {
             auth_type: 'rerequest',
             response_type: 'token',
             display: 'popup',
             client_id: '295582987871326',
-            redirect_uri: 'http://localhost:3000/auth/admin/redirect',
+            redirect_uri: url,
             version: 'v3.3',
             scope: 'manage_pages,publish_pages',
         };
@@ -29,14 +29,13 @@ export default class Facebook extends Component {
         const queryString = paramEncoding(params);
 
         window.location.href = `https://www.facebook.com/v3.3/dialog/oauth?${queryString}`;
-
     }
 
     render() {
         return (
             <div>
-                <button className="btn btn-primary" onClick={this.loginFacebook}>
-                    Connect to Facebook
+                <button className="login-with-fb-button" onClick={this.loginFacebook}>
+                    Login with Facebook
                 </button>
             </div>
         )

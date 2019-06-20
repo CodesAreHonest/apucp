@@ -1,0 +1,13 @@
+.login-with-fb-button {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #2f6eb1, #054386);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
+
+.login-with-fb-button:focus {
+    outline: none !important;
+    border: none;
+}

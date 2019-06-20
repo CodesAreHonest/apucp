@@ -11,10 +11,10 @@ class AdminLogin extends Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="row text-center">
-                    <div className="col-md-6">
-                        <div className="layout">
+            <div className="admin-login-background">
+                <div className="container">
+                    <div className="row text-center justify-content-center">
+                        <div className="col-md-6 mt-5">
                             <FacebookLogin />
                         </div>
                     </div>

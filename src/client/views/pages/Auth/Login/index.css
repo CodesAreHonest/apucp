@@ -1,6 +1,4 @@
-.layout {
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    margin-top: 10px;
-
+.admin-login-background {
+    background: linear-gradient(#3DD1F2 45%, #39bef2 70%, #3D8BF2);
+    min-height: 100vh;
 }
