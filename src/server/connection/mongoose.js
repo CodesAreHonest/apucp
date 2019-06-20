@@ -7,9 +7,11 @@ class MongoConnection {
         const {dbHost, dbPort, dbName} = config;
 
         try {
-            const connectionString = `mongodb://${dbHost}:${dbPort}/${dbName}`;
+            const connectionString = `mongodb://${dbHost}:${dbPort}/${dbName}?authSource=admin`;
 
             mongoose.connect(connectionString, {
+                user: 'yinghua',
+                pass: '123',
                 useNewUrlParser : true,
                 useFindAndModify: false,
                 useCreateIndex: true
