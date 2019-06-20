@@ -32,7 +32,7 @@ class Express {
             saveUninitialized: true
         }));
         this.app.use('/api', router);
-        this.app.use('/admin', SessionExpired);
+        // this.app.use('/admin', SessionExpired);
 
         this.app.get('/*', (req, res) => {
             res.set('content-type', 'text/html');
