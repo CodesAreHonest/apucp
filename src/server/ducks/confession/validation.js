@@ -19,3 +19,15 @@ export const getPendingListValidation = [
         .exists().withMessage('is required')
         .isInt({ min: 1 }).withMessage('must be an integer with minimum one')
 ];
+
+export const getApprovedListValidation = [
+
+    query ('page')
+        .exists().withMessage('is required')
+        .isInt({ min: 1 }).withMessage('must be an integer with minimum one'),
+
+    query ('limit')
+        .exists().withMessage('is required')
+        .isInt({ min: 1 }).withMessage('must be an integer with minimum one')
+];
+

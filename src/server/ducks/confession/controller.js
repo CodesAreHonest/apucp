@@ -43,3 +43,24 @@ export const getPendingList = async (req, res) => {
             return res.status(response_code).send(err);
         });
 };
+
+export const getApprovedList = async (req, res) => {
+
+    let validation = await validationHandler(req, res);
+
+    if (validation.response_code === 422) {
+        return res.status(422).send(validation);
+    }
+
+    const { page, limit } = req.query;
+
+    ConfessionStore.approvedList(page, limit)
+        .then (response => {
+            return res.status(200).send(response);
+        })
+        .catch (err => {
+            const { response_code } = err;
+            return res.status(response_code).send(err);
+        });
+
+};
