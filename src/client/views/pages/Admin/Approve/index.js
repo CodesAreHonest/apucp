@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getApprovedConfession } from "../../../../state/ducks/confession/actions";
 import Pagination from "../../../components/Pagination";
+import ListGroup from "../../../components/ListGroup";
 
 class Approve extends Component {
     constructor(props) {
@@ -26,6 +27,8 @@ class Approve extends Component {
                 data: nextProps.approvedData
             }
         }
+
+        return null;
     }
 
     _getApprovedConfession() {
@@ -50,6 +53,9 @@ class Approve extends Component {
                             </div>
                         </div>
                     </div>
+
+                    <ListGroup data={data} type="Approved" />
+
                 </div>
             </div>
         )

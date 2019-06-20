@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ListGroupItem from "./ListGroupItem";
+import PendingListGroupItem from "./PendingListGroupItem";
+import ApprovedListGroupItem from "./ApprovedListGroupItem";
 
 class ListGroup extends Component {
     constructor(props) {
@@ -17,9 +18,17 @@ class ListGroup extends Component {
                 if (this.props.type === 'Pending') {
                     const {content, created_at, _id} = value;
                     return (
-                        <ListGroupItem text={content} time={created_at} key={index} id={_id}/>
+                        <PendingListGroupItem text={content} time={created_at} key={index} id={_id}/>
                     )
                 }
+                else if (this.props.type === 'Approved') {
+                    const {content, updated_at, _id} = value;
+                    return (
+                        <ApprovedListGroupItem text={content} time={updated_at} key={index} id={_id}/>
+                    )
+
+                }
+
 
             });
 

@@ -4,20 +4,18 @@ import { connect } from 'react-redux';
 
 import { isToday, dayMonthFormat, twelveHoursClock } from "../../../../helpers/time";
 import { selectPendingConfession, deselectPendingConfession } from "../../../../state/ducks/confession/actions";
-import "./ListGroupItem.css";
+import "../ListGroupItem.css";
 
-class ListGroupItem extends Component {
+class ApprovedListGroupItem extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             date: '',
             show: false,
-            selected: false,
         };
 
         this._onClick = this._onClick.bind(this);
-        this._selectConfession = this._selectConfession.bind(this);
     }
 
     componentDidMount() {
@@ -31,37 +29,13 @@ class ListGroupItem extends Component {
         this.setState({date});
     }
 
-    componentDidUpdate (prevProps) {
-        if (prevProps.pendingList !== this.props.pendingList) {
-            const confessionId = this.props.id;
-            const selected = this.props.pendingList.find(id => id === confessionId);
-
-            if (selected === undefined || this.props.pendingList.length === 0) {
-                this.setState({selected: false});
-            }
-            else {
-                this.setState({selected: true});
-            }
-        }
-    }
-
     _onClick() {
         this.setState({show: !this.state.show});
     }
 
-    _selectConfession() {
-        const confessionId = this.props.id;
-
-        if (this.state.selected) {
-            return this.props.deselectPendingConfession(confessionId);
-        }
-
-        return this.props.selectPendingConfession(confessionId);
-    }
-
     render() {
         const {text} = this.props;
-        const {date, show, selected} = this.state;
+        const {date, show} = this.state;
 
         const fullMessage = show ? 'show' : '';
         const shortMessage = show ? 'd-none' : '';
@@ -73,14 +47,7 @@ class ListGroupItem extends Component {
                 className={`confession-content ${active}`}
             >
                 <div className="row">
-                    <div className="col-sm-1 ">
-                        <input type="checkbox"
-                               style={{zoom: '1.5', marginRight: '15px'}}
-                               onChange={this._selectConfession}
-                               checked={selected}
-                        />
-                    </div>
-                    <div className="col-sm-8" style={{color: '#000000c7'}}
+                    <div className="col-sm-9" style={{color: '#000000c7'}}
                          onClick={this._onClick}
                     >
                         <div className={`confession-text ${shortMessage}`}>
@@ -108,28 +75,23 @@ class ListGroupItem extends Component {
 const mapStateToProps = ({ confession }) => {
 
     return {
-        pendingList: confession.pendingList
+
     }
 };
 
 const mapDispatchToProps = {
-    selectPendingConfession,
-    deselectPendingConfession
+
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListGroupItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ApprovedListGroupItem);
 
-ListGroupItem.propTypes = {
+ApprovedListGroupItem.propTypes = {
     text: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
     id:   PropTypes.string.isRequired,
-    pendingList: PropTypes.array.isRequired,
-
-    selectPendingConfession: PropTypes.func.isRequired,
-    deselectPendingConfession: PropTypes.func.isRequired
 };
 
-ListGroupItem.defaultProps = {
+ApprovedListGroupItem.defaultProps = {
     text: '',
     time: ''
 };
