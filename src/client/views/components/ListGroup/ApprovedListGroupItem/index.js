@@ -34,7 +34,7 @@ class ApprovedListGroupItem extends Component {
     }
 
     render() {
-        const {text} = this.props;
+        const {text, action_by, tags} = this.props;
         const {date, show} = this.state;
 
         const fullMessage = show ? 'show' : '';
@@ -47,7 +47,14 @@ class ApprovedListGroupItem extends Component {
                 className={`confession-content ${active}`}
             >
                 <div className="row">
-                    <div className="col-sm-9" style={{color: '#000000c7'}}
+                    <div className="col-sm-2">
+                        <div style={{fontWeight: 'bold'}}>{tags}</div>
+
+                        <div className={`collapse ${fullMessage} text-left`}>
+                            { action_by }
+                        </div>
+                    </div>
+                    <div className="col-sm-8" style={{color: '#000000c7'}}
                          onClick={this._onClick}
                     >
                         <div className={`confession-text ${shortMessage}`}>
@@ -59,10 +66,10 @@ class ApprovedListGroupItem extends Component {
                         </div>
                     </div>
 
-                    <div className="col-sm-3 text-right"
+                    <div className="col-sm-2 text-right"
                          onClick={this._onClick}
                     >
-                        {text.length >= 50 && <i className={`fa fa-chevron-${chevronIcon}`} style={{marginRight: '10px'}}/>}
+                        <i className={`fa fa-chevron-${chevronIcon}`} style={{marginRight: '10px'}}/>
                         <span style={{fontWeight: 'bold'}}>{ date }</span>
                     </div>
                 </div>
@@ -72,20 +79,15 @@ class ApprovedListGroupItem extends Component {
     }
 }
 
-const mapStateToProps = ({ confession }) => {
-
-    return {
-
-    }
-};
-
 const mapDispatchToProps = {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApprovedListGroupItem);
+export default connect(null, mapDispatchToProps)(ApprovedListGroupItem);
 
 ApprovedListGroupItem.propTypes = {
+    action_by: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
     id:   PropTypes.string.isRequired,

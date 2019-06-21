@@ -54,6 +54,8 @@ export const getApprovedConfession = (page, limit) => dispatch => {
         .then (response => response.json())
         .then(response => {
 
+            console.log (response);
+
             dispatch({
                 type: type.GET_APPROVED_CONFESSIONS,
                 payload: response

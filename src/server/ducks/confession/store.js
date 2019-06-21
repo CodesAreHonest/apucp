@@ -124,7 +124,7 @@ class ConfessionStore {
 
     static async approvedList (page, pageSize) {
 
-        const fields = "content action_by updated_at";
+        const fields = "content tags action_by updated_at";
 
         // pagination required to start from zero in mongoose
         const limit = parseInt(pageSize);

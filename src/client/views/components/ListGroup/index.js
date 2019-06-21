@@ -22,9 +22,16 @@ class ListGroup extends Component {
                     )
                 }
                 else if (this.props.type === 'Approved') {
-                    const {content, updated_at, _id} = value;
+                    const {action_by, tags, content, updated_at, _id} = value;
                     return (
-                        <ApprovedListGroupItem text={content} time={updated_at} key={index} id={_id}/>
+                        <ApprovedListGroupItem
+                            tags={tags}
+                            action_by={action_by}
+                            text={content}
+                            time={updated_at}
+                            key={index}
+                            id={_id}
+                        />
                     )
 
                 }

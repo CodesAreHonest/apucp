@@ -44,10 +44,23 @@ class Approve extends Component {
             <div>
                 <div className="card">
                     <div className="card-header" style={{padding: '7px !important'}}>
-                        <div className="row justify-content-end">
-                            <div className="col-md-6 col-sm-5 float-md-left">
+                        <div className="row">
+                            <div className="input-group col-md-4">
+                                <input
+                                    type="text"
+                                    className="form-control form-control-sm"
+                                    placeholder="#APUCP000001"
+                                />
+                                <div className="input-group-append">
+                                    <button className="btn btn-sm btn-secondary" type="button">Search</button>
+                                </div>
+                            </div>
+                            <div className="col-md-8 col-sm-5 float-md-left">
                                 { data.length !== 0 &&
-                                <div className="col-md-12 col-sm-5 offset-sm-2 offset-md-0 offset-xs-0 col-xs-2 float-md-right text-md-right">
+                                <div
+                                    style={{paddingRight: 0}}
+                                    className="text-right"
+                                >
                                     <Pagination getData={this._getApprovedConfession}/>
                                 </div> }
                             </div>
