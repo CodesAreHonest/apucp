@@ -73,10 +73,10 @@ class Pending extends Component {
                 <div className="card">
                     <div className="card-header">
                         <div className="row">
-                            <div className="col-md-6 col-sm-5 float-md-left">
-                                <button className="btn btn-sm btn-default" style={{marginRight: '10px'}}>
-                                    <input type="checkbox" style={{zoom: '1.5'}}/>
-                                </button>
+                            <div className="col-md-6 col-sm-5 text-md-left text-sm-left text-center">
+                                {/*<button className="btn btn-sm btn-default" style={{marginRight: '10px'}}>*/}
+                                {/*    <input type="checkbox" style={{zoom: '1.5'}}/>*/}
+                                {/*</button>*/}
                                 <button
                                     type="button"
                                     className="btn btn-sm btn-danger"
@@ -99,7 +99,7 @@ class Pending extends Component {
                             </div>
 
                             { data.length !== 0 &&
-                            <div className="col-md-6 col-sm-5 offset-sm-2 offset-md-0 offset-xs-0 col-xs-2 float-md-right text-md-right">
+                            <div className="col-md-6 col-sm-5 text-md-right text-sm-right text-center">
                                 <Pagination getData={this._getPendingConfession}/>
                             </div>
                             }

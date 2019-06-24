@@ -73,14 +73,14 @@ class ListGroupItem extends Component {
                 className={`confession-content ${active}`}
             >
                 <div className="row">
-                    <div className="col-sm-1 ">
+                    <div className="col-md-1 col-sm-1 col-6 order-md-1 order-sm-1 order-1">
                         <input type="checkbox"
                                style={{zoom: '1.5', marginRight: '15px'}}
                                onChange={this._selectConfession}
                                checked={selected}
                         />
                     </div>
-                    <div className="col-sm-8" style={{color: '#000000c7'}}
+                    <div className="col-sm-8 col-sm-8 col-12 order-md-2 order-sm-2 order-3" style={{color: '#000000c7'}}
                          onClick={this._onClick}
                     >
                         <div className={`confession-text ${shortMessage}`}>
@@ -92,7 +92,7 @@ class ListGroupItem extends Component {
                         </div>
                     </div>
 
-                    <div className="col-sm-3 text-right"
+                    <div className="col-sm-3 col-sm-3 col-6 order-md-3 order-sm-3 order-2 text-right"
                          onClick={this._onClick}
                     >
                         {text.length >= 50 && <i className={`fa fa-chevron-${chevronIcon}`} style={{marginRight: '10px'}}/>}
