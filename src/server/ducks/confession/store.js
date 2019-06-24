@@ -122,7 +122,7 @@ class ConfessionStore {
         return query.exec();
     }
 
-    static async approvedList (page, pageSize) {
+    static async approvedList (page, pageSize, search = '') {
 
         const fields = "content tags action_by updated_at";
 
@@ -134,6 +134,10 @@ class ConfessionStore {
         const params = {
             skip, limit
         };
+
+        if (search !== '') {
+            query.tags = { $regex: `.*${search}.*`}
+        }
 
         let base = Confession.find(query, fields, params);
 

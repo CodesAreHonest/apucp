@@ -10,7 +10,8 @@ class Approve extends Component {
         super(props);
 
         this.state = {
-            data: []
+            data: [],
+            search: ''
         };
 
         this._getApprovedConfession = this._getApprovedConfession.bind(this);
@@ -33,12 +34,13 @@ class Approve extends Component {
 
     _getApprovedConfession() {
         const { activePage, recordsPerPage } = this.props;
-        this.props.getApprovedConfession(activePage , recordsPerPage);
+        const { search } = this.state;
+        this.props.getApprovedConfession(activePage , recordsPerPage, search);
     }
 
     render() {
 
-        const { data } = this.state;
+        const { data, search } = this.state;
 
         return (
             <div>
@@ -50,9 +52,15 @@ class Approve extends Component {
                                     type="text"
                                     className="form-control form-control-sm"
                                     placeholder="#APUCP000001"
+                                    value={search}
+                                    onChange={e => this.setState({search: e.target.value})}
                                 />
                                 <div className="input-group-append">
-                                    <button className="btn btn-sm btn-secondary" type="button">Search</button>
+                                    <button
+                                        className="btn btn-sm btn-secondary"
+                                        type="button"
+                                        onClick={this._getApprovedConfession}
+                                    >Search</button>
                                 </div>
                             </div>
                             <div className="col-md-8 col-sm-5 float-md-left">

@@ -19,7 +19,7 @@ export const postSubmitConfession = confession => dispatch => {
     })
 };
 
-export const getPendingConfession = (page, limit) => dispatch => {
+export const getPendingConfession = (page, limit)  => dispatch => {
 
     const params = {
         page, limit
@@ -44,17 +44,15 @@ export const getPendingConfession = (page, limit) => dispatch => {
         })
 };
 
-export const getApprovedConfession = (page, limit) => dispatch => {
+export const getApprovedConfession = (page, limit, search = '2') => dispatch => {
 
-    const params = { page, limit };
+    const params = { page, limit, search };
 
     const queryString = paramEncoding(params);
 
     fetch (`/api/confession/getApprovedList?${queryString}`)
         .then (response => response.json())
         .then(response => {
-
-            console.log (response);
 
             dispatch({
                 type: type.GET_APPROVED_CONFESSIONS,

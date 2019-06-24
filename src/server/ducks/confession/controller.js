@@ -52,9 +52,9 @@ export const getApprovedList = async (req, res) => {
         return res.status(422).send(validation);
     }
 
-    const { page, limit } = req.query;
+    const { page, limit, search } = req.query;
 
-    ConfessionStore.approvedList(page, limit)
+    ConfessionStore.approvedList(page, limit, search)
         .then (response => {
             return res.status(200).send(response);
         })
