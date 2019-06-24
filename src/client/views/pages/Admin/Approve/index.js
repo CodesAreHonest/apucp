@@ -47,7 +47,7 @@ class Approve extends Component {
                 <div className="card">
                     <div className="card-header" style={{padding: '7px !important'}}>
                         <div className="row">
-                            <div className="input-group col-md-4">
+                            <div className="input-group col-md-4 col-sm-6 col-12">
                                 <input
                                     type="text"
                                     className="form-control form-control-sm"
@@ -63,11 +63,11 @@ class Approve extends Component {
                                     >Search</button>
                                 </div>
                             </div>
-                            <div className="col-md-8 col-sm-5 float-md-left">
+                            <div className="col-md-8 col-sm-6 col-12 float-md-left">
                                 { data.length !== 0 &&
                                 <div
                                     style={{paddingRight: 0}}
-                                    className="text-right"
+                                    className="text-center text-md-right text-sm-right"
                                 >
                                     <Pagination getData={this._getApprovedConfession}/>
                                 </div> }

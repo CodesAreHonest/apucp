@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { isToday, dayMonthFormat, twelveHoursClock } from "../../../../helpers/time";
-import { selectPendingConfession, deselectPendingConfession } from "../../../../state/ducks/confession/actions";
 import "../ListGroupItem.css";
 
 class ApprovedListGroupItem extends Component {
@@ -47,14 +46,14 @@ class ApprovedListGroupItem extends Component {
                 className={`confession-content ${active}`}
             >
                 <div className="row">
-                    <div className="col-sm-2">
+                    <div className="col-md-2 col-sm-6 col-6 order-md-1 order-sm-1 order-1">
                         <div style={{fontWeight: 'bold'}}>{tags}</div>
 
                         <div className={`collapse ${fullMessage} text-left`}>
                             { action_by }
                         </div>
                     </div>
-                    <div className="col-sm-8" style={{color: '#000000c7'}}
+                    <div className="col-md-8 col-sm-12 col-12 order-md-2 order-sm-3 order-3" style={{color: '#000000c7'}}
                          onClick={this._onClick}
                     >
                         <div className={`confession-text ${shortMessage}`}>
@@ -66,7 +65,7 @@ class ApprovedListGroupItem extends Component {
                         </div>
                     </div>
 
-                    <div className="col-sm-2 text-right"
+                    <div className="col-md-2 col-sm-6 col-6 order-md-3 order-sm-2 order-2 text-right"
                          onClick={this._onClick}
                     >
                         <i className={`fa fa-chevron-${chevronIcon}`} style={{marginRight: '10px'}}/>
