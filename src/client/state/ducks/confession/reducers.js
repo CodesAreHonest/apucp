@@ -5,6 +5,7 @@ import { removeAnItemFromArray } from "./selector";
 const initialState = {
     submit_confession_response: {},
     approve_confession_response: {},
+    reject_confession_response: {},
 
     data: [],
     recordsFrom: 0,
@@ -64,6 +65,12 @@ const homeReducer = createReducer(initialState) ({
     [type.POST_APPROVE_CONFESSIONS]: (state, action) => ({
         ...state,
         approve_confession_response: action.payload,
+        pendingList: []
+    }),
+
+    [type.POST_REJECT_CONFESSIONS]: (state, action) => ({
+        ...state,
+        reject_confession_response: action.payload,
         pendingList: []
     }),
 

@@ -6,7 +6,7 @@ import { toastLoading, toastSuccess, toastError } from "../../../UI/sweetalert2"
 import "./pending.css";
 
 import {
-    getPendingConfession, postApproveConfessions
+    getPendingConfession, postApproveConfessions, postRejectConfessions
 } from "../../../../state/ducks/confession/actions";
 import ListGroup from "../../../components/ListGroup";
 import Pagination from "../../../components/Pagination";
@@ -20,12 +20,18 @@ class Pending extends Component {
         };
 
         this._approveConfession = this._approveConfession.bind(this);
+        this._rejectConfession     = this._rejectConfession.bind(this);
         this._getPendingConfession = this._getPendingConfession.bind(this);
     }
 
     _approveConfession() {
         toastLoading();
         this.props.postApproveConfessions(this.props.pendingConfession);
+    }
+
+    _rejectConfession() {
+        toastLoading();
+        this.props.postRejectConfessions(this.props.pendingConfession);
     }
 
     _getPendingConfession() {
@@ -60,6 +66,18 @@ class Pending extends Component {
 
             return toastError();
         }
+
+        if (prevProps.rejectConfessionResponse !== this.props.rejectConfessionResponse) {
+
+            const { response_code } = this.props.rejectConfessionResponse;
+
+            if (parseInt(response_code) === 200) {
+                this._getPendingConfession();
+                return toastSuccess()
+            }
+
+            return toastError();
+        }
     }
 
     render() {
@@ -82,6 +100,7 @@ class Pending extends Component {
                                     className="btn btn-sm btn-danger"
                                     style={{marginRight: '5px'}}
                                     disabled={disabled}
+                                    onClick={this._rejectConfession}
                                 >
                                     <i className="fa fa-times" style={{marginRight: '5px'}}/>
                                     Reject
@@ -122,10 +141,11 @@ const mapStateToProps = ({ confession }) => ({
     pendingConfession: confession.pendingList,
 
     approveConfessionResponse: confession.approve_confession_response,
+    rejectConfessionResponse: confession.reject_confession_response,
 });
 
 const mapDispatchToProps = {
-    getPendingConfession, postApproveConfessions
+    getPendingConfession, postApproveConfessions, postRejectConfessions
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pending);
@@ -133,12 +153,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(Pending);
 Pending.propTypes = {
     getPendingConfession: PropTypes.func.isRequired,
     postApproveConfessions: PropTypes.func.isRequired,
+    postRejectConfessions: PropTypes.func.isRequired,
 
     pending_data: PropTypes.array.isRequired,
     pendingConfession: PropTypes.array.isRequired,
     activePage: PropTypes.number.isRequired,
     recordsPerPage: PropTypes.number.isRequired,
 
-    approveConfessionResponse: PropTypes.object.isRequired
+    approveConfessionResponse: PropTypes.object.isRequired,
+    rejectConfessionResponse: PropTypes.object.isRequired
 
 };

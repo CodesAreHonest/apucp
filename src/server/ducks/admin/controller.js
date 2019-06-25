@@ -74,14 +74,10 @@ export const postRejectPendingConfession = async (req, res) => {
         return res.status(422).send(validation);
     }
 
-    const { pendingConfession } = req.body;
+    const { rejectConfession } = req.body;
     const { name } = req.session;
 
-    let adminStore = new AdminStore();
-
-    let pendingConfessions = await ConfessionStore.getSelectedPendingListById(pendingConfession);
-
-    adminStore.rejectConfession (pendingConfessions, name)
+    ConfessionStore.rejectConfession (rejectConfession, name)
         .then (() => {
             return res.status(200).send({
                 response_code: 200,

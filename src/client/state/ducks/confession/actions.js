@@ -124,4 +124,23 @@ export const postApproveConfessions = pendingConfession => dispatch => {
     })
 };
 
+export const postRejectConfessions = pendingConfession => dispatch => {
+
+    axios.post ('/api/admin/confessions/reject', {
+        'rejectConfession': pendingConfession
+    }).then (response => {
+        dispatch ({
+            type: type.POST_REJECT_CONFESSIONS,
+            payload: response.data
+        })
+    }).catch (err => {
+        dispatch ({
+            type:type.POST_REJECT_CONFESSIONS,
+            payload: err.response.data
+        })
+    })
+};
+
+
+
 

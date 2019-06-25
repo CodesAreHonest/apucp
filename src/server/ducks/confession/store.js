@@ -125,7 +125,7 @@ class ConfessionStore {
     static rejectConfession (pendingConfessions, name) {
 
         const conditions = {
-            'tags': { $in: pendingConfessions }
+            '_id': { $in: pendingConfessions }
         };
 
         const update = {
