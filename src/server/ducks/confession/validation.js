@@ -45,6 +45,7 @@ export const getRejectedListValidation = [
         .isInt({ min: 1 }).withMessage('must be an integer with minimum one'),
 
     query ('search')
+        .optional({nullable: true})
         .isString().withMessage('must be a string')
 ];
 

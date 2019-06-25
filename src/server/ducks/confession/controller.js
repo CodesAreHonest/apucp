@@ -74,4 +74,13 @@ export const getRejectedList = async (req, res) => {
     }
 
     const { page, limit, search } = req.query;
+
+    ConfessionStore.rejectList(page, limit, search)
+        .then (response => {
+            return res.status(200).send(response);
+        })
+        .catch (err => {
+            const { response_code } = err;
+            return res.status(response_code).send(err);
+        })
 };

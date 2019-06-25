@@ -199,7 +199,7 @@ class ConfessionStore {
         // pagination required to start from zero in mongoose
         const limit = parseInt(pageSize);
         const skip = (parseInt(page) - 1) * limit;
-        const query = {status: ''};
+        const query = {status: 'reject'};
 
         const params = {
             skip, limit
@@ -210,6 +210,37 @@ class ConfessionStore {
         }
 
         let base = Confession.find(query, fields, params);
+
+        let totalRecords = await this.getTotalRecords(query);
+
+        return new Promise ((resolve, reject) => {
+
+            base.exec((err, confessions) => {
+                if (err) {
+                    return reject ({
+                        response_code: 500,
+                        response_msg: 'error on mongoose',
+                        data: err
+                    })
+                }
+
+                const totalPages = Math.ceil(totalRecords / pageSize );
+
+                const recordsFrom = skip + 1;
+                const recordsEnd = skip + limit;
+                const recordsTo = recordsEnd >= totalRecords ? totalRecords : recordsEnd;
+
+                return resolve({
+                    'response_code': 200,
+                    'response_msg': 'success',
+                    'totalRecords': totalRecords,
+                    'totalPages':   totalPages,
+                    'recordsFrom':  recordsFrom,
+                    'recordsTo':    recordsTo,
+                    'data':         confessions
+                });
+            })
+        })
 
     }
 }
