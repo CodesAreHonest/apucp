@@ -64,3 +64,14 @@ export const getApprovedList = async (req, res) => {
         });
 
 };
+
+export const getRejectedList = async (req, res) => {
+
+    let validation = await validationHandler(req, res);
+
+    if (validation.response_code === 422) {
+        return res.status(422).send(validation);
+    }
+
+    const { page, limit, search } = req.query;
+};

@@ -65,3 +65,34 @@ export const postApprovePendingConfession = async (req, res) => {
     });
 
 };
+
+export const postRejectPendingConfession = async (req, res) => {
+
+    let validation = await validationHandler(req, res);
+
+    if (validation.response_code === 422) {
+        return res.status(422).send(validation);
+    }
+
+    const { pendingConfession } = req.body;
+    const { name } = req.session;
+
+    let adminStore = new AdminStore();
+
+    let pendingConfessions = await ConfessionStore.getSelectedPendingListById(pendingConfession);
+
+    adminStore.rejectConfession (pendingConfessions, name)
+        .then (() => {
+            return res.status(200).send({
+                response_code: 200,
+                response_msg: 'success'
+            })
+        })
+        .catch (err => {
+            return res.status(500).send({
+                response_code: 500,
+                response_msg: err
+            })
+        })
+
+};

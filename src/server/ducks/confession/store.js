@@ -122,6 +122,23 @@ class ConfessionStore {
         return query.exec();
     }
 
+    static rejectConfession (pendingConfessions, name) {
+
+        const conditions = {
+            'tags': { $in: pendingConfessions }
+        };
+
+        const update = {
+            status: 'reject',
+            updated_at: Date.now(),
+            action_by: name
+        };
+
+        let query = Confession.updateMany(conditions, update);
+
+        return query.exec();
+    }
+
     static async approvedList (page, pageSize, search = '') {
 
         const fields = "content tags action_by updated_at";
@@ -172,6 +189,27 @@ class ConfessionStore {
                 });
             })
         })
+
+    }
+
+    static async rejectList (page, pageSize, search = '') {
+
+        const fields = "content tags action_by updated_at";
+
+        // pagination required to start from zero in mongoose
+        const limit = parseInt(pageSize);
+        const skip = (parseInt(page) - 1) * limit;
+        const query = {status: ''};
+
+        const params = {
+            skip, limit
+        };
+
+        if (search !== '') {
+            query.tags = { $regex: `.*${search}.*`}
+        }
+
+        let base = Confession.find(query, fields, params);
 
     }
 }

@@ -19,3 +19,11 @@ export const approveConfessionValidation = [
         .isArray().withMessage('must be an array')
 
 ];
+
+export const rejectConfessionValidation = [
+
+    body('rejectConfession')
+        .exists().withMessage('is required')
+        .isArray().withMessage('must be an array')
+
+];

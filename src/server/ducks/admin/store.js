@@ -120,6 +120,9 @@ class AdminStore {
 
         return await Promise.all(asyncActions);
 
-    }}
+    }
+}
+
+
 
 export default AdminStore;
