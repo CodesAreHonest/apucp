@@ -44,7 +44,7 @@ export const getPendingConfession = (page, limit)  => dispatch => {
         })
 };
 
-export const getApprovedConfession = (page, limit, search = '2') => dispatch => {
+export const getApprovedConfession = (page, limit, search = '') => dispatch => {
 
     const params = { page, limit, search };
 
@@ -62,6 +62,30 @@ export const getApprovedConfession = (page, limit, search = '2') => dispatch => 
         .catch (err => {
             dispatch({
                 type: type.GET_APPROVED_CONFESSIONS,
+                payload: err.response.data
+            })
+        })
+
+};
+
+export const getRejectedConfession = (page, limit, search = '') => dispatch => {
+
+    const params = { page, limit, search };
+
+    const queryString = paramEncoding(params);
+
+    fetch (`/api/confession/getRejectedList?${queryString}`)
+        .then (response => response.json())
+        .then(response => {
+
+            dispatch({
+                type: type.GET_REJECTED_CONFESSIONS,
+                payload: response
+            })
+        })
+        .catch (err => {
+            dispatch({
+                type: type.GET_REJECTED_CONFESSIONS,
                 payload: err.response.data
             })
         })

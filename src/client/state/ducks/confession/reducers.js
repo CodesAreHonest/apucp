@@ -42,6 +42,15 @@ const homeReducer = createReducer(initialState) ({
         totalRecords: action.payload.totalRecords,
     }),
 
+    [type.GET_REJECTED_CONFESSIONS]: (state,  action) => ({
+        ...state,
+        data: action.payload.data,
+        recordsFrom: action.payload.recordsFrom,
+        recordsTo: action.payload.recordsTo,
+        totalPages: action.payload.totalPages,
+        totalRecords: action.payload.totalRecords,
+    }),
+
     [type.INCREMENT_ACTIVE_PAGE]: (state, action) => ({
         ...state,
         activePage: action.payload

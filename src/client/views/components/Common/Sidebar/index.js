@@ -24,6 +24,9 @@ class Sidebar extends Component {
                     <Link to="/admin/approved/confessions" className="list-group-item list-group-item-action bg-light">
                         Approved Confession
                     </Link>
+                    <Link to="/admin/rejected/confessions" className="list-group-item list-group-item-action bg-light">
+                        Rejected Confession
+                    </Link>
                 </div>
             </div>
         )

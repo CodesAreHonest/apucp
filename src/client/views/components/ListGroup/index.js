@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PendingListGroupItem from "./PendingListGroupItem";
 import ApprovedListGroupItem from "./ApprovedListGroupItem";
+import RejectedListGroupItem from "./RejectedListGroupItem";
 
 class ListGroup extends Component {
     constructor(props) {
@@ -33,7 +34,19 @@ class ListGroup extends Component {
                             id={_id}
                         />
                     )
-
+                }
+                else if (this.props.type === 'Rejected') {
+                    const {action_by, tags, content, updated_at, _id} = value;
+                    return (
+                        <RejectedListGroupItem
+                            tags={tags}
+                            action_by={action_by}
+                            text={content}
+                            time={updated_at}
+                            key={index}
+                            id={_id}
+                        />
+                    )
                 }
 
 
@@ -56,7 +69,7 @@ export default ListGroup;
 
 ListGroup.propTypes = {
     data: PropTypes.array.isRequired,
-    type: PropTypes.oneOf(['Pending', 'Approved', 'Reject']).isRequired
+    type: PropTypes.oneOf(['Pending', 'Approved', 'Rejected']).isRequired
 };
 
 ListGroup.defaultProps = {
