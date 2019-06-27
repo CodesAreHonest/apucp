@@ -3,7 +3,8 @@ import {Router} from 'express';
 import {
     postRegister,
     postApprovePendingConfession,
-    postRejectPendingConfession
+    postRejectPendingConfession,
+    postLogout
 } from './Controller';
 
 import {
@@ -17,5 +18,6 @@ const router = Router();
 router.post('/admin/register', registerValidation, postRegister);
 router.post('/admin/confessions/approve', approveConfessionValidation, postApprovePendingConfession);
 router.post('/admin/confessions/reject', rejectConfessionValidation, postRejectPendingConfession);
+router.post('/admin/logout', postLogout);
 
 export default router;

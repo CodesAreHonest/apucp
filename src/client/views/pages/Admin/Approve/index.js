@@ -15,6 +15,10 @@ class Approve extends Component {
         };
 
         this._getApprovedConfession = this._getApprovedConfession.bind(this);
+
+        document.title = "Approved Confessions";
+        document.getElementById('navbar-brand').innerText = document.title;
+
     }
 
     componentDidMount() {

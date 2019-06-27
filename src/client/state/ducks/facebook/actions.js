@@ -17,3 +17,20 @@ export const getPersonalAccount = (access_token, expires_in) => dispatch => {
         });
     })
 };
+
+export const postLogout = () => dispatch => {
+
+    axios.post('/api/admin/logout')
+        .then (response => {
+            dispatch ({
+                type: type.POST_LOGOUT,
+                payload: response.data
+            })
+        })
+        .catch (err => {
+            dispatch ({
+                type: type.POST_LOGOUT,
+                payload: err.response.data
+            })
+        });
+};

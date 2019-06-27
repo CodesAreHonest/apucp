@@ -14,15 +14,19 @@ const routes = [{
     component: Admin,
     routes: [{
         path: '/admin/dashboard',
+        label: 'Dashboard',
         component: Dashboard
     }, {
         path: '/admin/pending/confessions',
+        label: 'Pending Confessions',
         component: Pending
     }, {
         path: '/admin/approved/confessions',
+        label: 'Approved Confessions',
         component: Approve
     }, {
         path: '/admin/rejected/confessions',
+        label: 'Rejected Confessions',
         component: RejectedConfessions
     }]
 }];

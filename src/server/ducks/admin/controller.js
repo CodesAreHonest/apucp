@@ -92,3 +92,13 @@ export const postRejectPendingConfession = async (req, res) => {
         })
 
 };
+
+export const postLogout = (req, res) => {
+   delete req.session['page_access_token'];
+
+   return res.status(200).send({
+       response_code: 200,
+       response_msg: 'success',
+       response_uri: '/auth/admin/login'
+   })
+};

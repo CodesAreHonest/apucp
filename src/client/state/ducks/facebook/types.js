@@ -1,1 +1,2 @@
 export const POST_GRAPH_ME_ACCOUNTS = 'POST_GRAPH_ME_ACCOUNTS';
+export const POST_LOGOUT = 'POST_LOGOUT';

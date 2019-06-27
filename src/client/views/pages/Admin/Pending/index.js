@@ -22,6 +22,10 @@ class Pending extends Component {
         this._approveConfession = this._approveConfession.bind(this);
         this._rejectConfession     = this._rejectConfession.bind(this);
         this._getPendingConfession = this._getPendingConfession.bind(this);
+
+        document.title = "Pending Confessions";
+        document.getElementById('navbar-brand').innerText = document.title;
+
     }
 
     _approveConfession() {

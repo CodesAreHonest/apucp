@@ -16,6 +16,9 @@ class RejectedConfessions extends Component {
         };
 
         this._getRejectedConfession = this._getRejectedConfession.bind(this);
+
+        document.title = "Rejected Confessions";
+        document.getElementById('navbar-brand').innerText = document.title;
     }
 
     componentDidMount() {
