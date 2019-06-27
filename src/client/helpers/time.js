@@ -17,3 +17,14 @@ export const twelveHoursClock = (datetime) => {
     let date = new Date(datetime);
     return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true});
 };
+
+export const standardDateTimeFormat = (datetime) => {
+    let date = new Date(datetime);
+    return date.toLocaleString('he-IL', {
+        hour: 'numeric',
+        minute: 'numeric',
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+    });
+};

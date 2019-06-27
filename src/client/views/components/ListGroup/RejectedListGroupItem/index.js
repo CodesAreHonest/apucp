@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { isToday, dayMonthFormat, twelveHoursClock } from "../../../../helpers/time";
+import {isToday, twelveHoursClock, standardDateTimeFormat} from "../../../../helpers/time";
 import "../ListGroupItem.css";
 
 class RejectedListGroupItem extends Component {
@@ -18,7 +18,7 @@ class RejectedListGroupItem extends Component {
 
     componentDidMount() {
 
-        let date = dayMonthFormat(this.props.time);
+        let date = standardDateTimeFormat(this.props.time);
 
         if (isToday(this.props.time)) {
             date = twelveHoursClock(this.props.time);
@@ -49,10 +49,10 @@ class RejectedListGroupItem extends Component {
                         <div style={{fontWeight: 'bold'}}>{tags}</div>
 
                         <div className={`collapse ${fullMessage} text-left`}>
-                            { action_by }
+                            <small><b>{ action_by }</b></small>
                         </div>
                     </div>
-                    <div className="col-md-8 col-sm-12 col-12 order-md-2 order-sm-3 order-3" style={{color: '#000000c7'}}
+                    <div className="col-md-7 col-sm-12 col-12 order-md-2 order-sm-3 order-3" style={{color: '#000000c7'}}
                          onClick={this._onClick}
                     >
                         <div className={`confession-text ${shortMessage}`}>
@@ -64,7 +64,7 @@ class RejectedListGroupItem extends Component {
                         </div>
                     </div>
 
-                    <div className="col-md-2 col-sm-6 col-6 order-md-3 order-sm-2 order-2 text-right"
+                    <div className="col-md-3 col-sm-6 col-6 order-md-3 order-sm-2 order-2 text-right"
                          onClick={this._onClick}
                     >
                         <i className={`fa fa-chevron-${chevronIcon}`} style={{marginRight: '10px'}}/>
