@@ -7,7 +7,8 @@ class MongoConnection {
         const {dbHost, dbPort, dbName} = config;
 
         try {
-            const connectionString = `mongodb://${dbHost}:${dbPort}/${dbName}?authSource=admin`;
+            // const connectionString = `mongodb://${dbHost}:${dbPort}/${dbName}?authSource=admin`;
+            const connectionString = `mongodb+srv://cluster0-j9hhr.gcp.mongodb.net/${dbName}?authSource=admin;`;
 
             mongoose.connect(connectionString, {
                 user: 'yinghua',
