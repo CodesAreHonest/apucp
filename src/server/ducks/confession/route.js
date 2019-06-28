@@ -5,13 +5,13 @@ import {
     getPendingList,
     getApprovedList,
     getRejectedList
-} from './Controller';
+} from './controller';
 import {
     insertValidation,
     getPendingListValidation,
     getApprovedListValidation,
     getRejectedListValidation
-} from "./Validation"
+} from "./validation"
 
 const router = Router();
 

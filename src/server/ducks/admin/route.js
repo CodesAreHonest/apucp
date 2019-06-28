@@ -5,13 +5,13 @@ import {
     postApprovePendingConfession,
     postRejectPendingConfession,
     postLogout
-} from './Controller';
+} from './controller';
 
 import {
     registerValidation,
     approveConfessionValidation,
     rejectConfessionValidation
-} from "./Validation"
+} from "./validation"
 
 const router = Router();
 
