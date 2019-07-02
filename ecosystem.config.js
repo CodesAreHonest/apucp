@@ -1,6 +1,6 @@
 module.exports = {
   "apps": [{
-    "name" : "Asia Pacific University Confession Page",
+    "name" : "APUCP",
     "watch": ["src"],
     "script" : "npm run start",
     "env": {
