@@ -14,21 +14,28 @@ class RejectedListGroupItem extends Component {
         };
 
         this._onClick = this._onClick.bind(this);
+        this._updateTime = this._updateTime.bind(this);
+
     }
 
     componentDidMount() {
+        this._updateTime();
+    }
 
-        let date = standardDateTimeFormat(this.props.time);
-
-        if (isToday(this.props.time)) {
-            date = twelveHoursClock(this.props.time);
+    componentDidUpdate(prevProps) {
+        if (prevProps.time !== this.props.time) {
+            this._updateTime();
         }
-
-        this.setState({date});
     }
 
     _onClick() {
         this.setState({show: !this.state.show});
+    }
+
+    _updateTime() {
+
+        let date = standardDateTimeFormat(this.props.time);
+        this.setState({date});
     }
 
     render() {
