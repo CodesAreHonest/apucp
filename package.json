@@ -17,7 +17,7 @@
       "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
     }
   },
-  "respository": "https://github.com/CodesAreHonest/apucp.git",
+  "repository": "https://github.com/CodesAreHonest/apucp.git",
   "author": "Chai Ying Hua",
   "license": "ISC",
   "dependencies": {

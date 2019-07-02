@@ -1,4 +1,4 @@
-{
+module.exports = {
   "apps": [{
     "name" : "Asia Pacific University Confession Page",
     "watch": ["src"],
@@ -12,4 +12,4 @@
       "PORT": "8080"
     }
   }]
-}
+};
