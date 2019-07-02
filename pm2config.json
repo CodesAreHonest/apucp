@@ -1,0 +1,12 @@
+{
+  "apps": [{
+    "name" : "Asia Pacific University Confession Page",
+    "watch": ["src"],
+    "cwd": "/var/www/html/apucp/",
+    "script" : "node src/server/index.js",
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": "8080"
+    }
+  }]
+}
