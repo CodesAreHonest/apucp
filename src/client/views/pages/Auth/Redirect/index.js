@@ -36,11 +36,11 @@ class AdminRedirect extends Component {
 
             const { response_code } = this.props.accounts;
 
-            if (response_code != 200) {
-                this.props.history.push ('/auth/admin/login');
+            if (response_code !== 200) {
+                return this.props.history.push ('/auth/admin/login');
             }
 
-            this.props.history.push('/admin/dashboard');
+            return this.props.history.push('/admin/dashboard');
         }
     }
 
