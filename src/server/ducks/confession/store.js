@@ -156,7 +156,7 @@ class ConfessionStore {
             query.tags = { $regex: `.*${search}.*`}
         }
 
-        let base = Confession.find(query, fields, params).sort({created_at: -1});
+        let base = Confession.find(query, fields, params).sort({updated_at: -1});
 
         let totalRecords = await this.getTotalRecords(query);
 
@@ -209,7 +209,7 @@ class ConfessionStore {
             query.tags = { $regex: `.*${search}.*`}
         }
 
-        let base = Confession.find(query, fields, params).sort({created_at: -1});
+        let base = Confession.find(query, fields, params).sort({updated_at: -1});
 
         let totalRecords = await this.getTotalRecords(query);
 
