@@ -5,7 +5,7 @@ export const insertValidation = [
     body ('confession')
         .exists().withMessage('is required')
         .isString().withMessage('must be a string')
-        .isLength({ min: 10 }).withMessage('must be at least 10 characters.')
+        .isLength({ min: 10 }).withMessage('must be at least 10 characters.'),
 
 ];
 

@@ -8,7 +8,6 @@ class ConfessionStore {
 
         let tag = await DocumentStore.getHashTag('confession');
 
-
         let params = {
             tags: tag,
             content: content,

@@ -49,6 +49,38 @@ class Facebook {
         });
     }
 
+    uploadPhotoToAlbum (page_access_token, content) {
+
+        if (!content.isObject()) {
+            throw new Error ('Content params is not object');
+        }
+
+        const album = 121432288358629;
+
+        const params = {
+            access_token: page_access_token,
+            published: false
+        };
+
+        if (content.hasOwnProperty('file')) {
+            params.file = content.file;
+        }
+
+        if (content.hasOwnProperty('url')) {
+            params.url = content.url;
+        }
+
+        return new Promise ((resolve, reject) => {
+            axios.post (`https://graph.facebook.com/v3.3/${album}/photos`, params)
+                .then (response => {
+                    return resolve(response.data.id);
+                })
+                .catch (err => {
+                    return reject (err.response.data);
+                })
+        })
+    }
+
 }
 
 export default Facebook;

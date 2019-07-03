@@ -14,14 +14,17 @@ export const postInsert = async (req, res) => {
 
     const { confession } = req.body;
 
-    let outcomes = await ConfessionStore.insert(confession);
+    console.log (req.file);
+    console.log (confession);
 
-    if (outcomes.response_code !== 200) {
-        const {response_code} = outcomes;
-        return res.status(response_code).send(outcomes);
-    }
+    // let outcomes = await ConfessionStore.insert(confession);
+    //
+    // if (outcomes.response_code !== 200) {
+    //     const {response_code} = outcomes;
+    //     return res.status(response_code).send(outcomes);
+    // }
 
-    return res.status(200).send(outcomes);
+    // return res.status(200).send(outcomes);
 };
 
 export const getPendingList = async (req, res) => {

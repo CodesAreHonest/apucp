@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import multer from 'multer';
 
 import {
     postInsert,
@@ -14,8 +15,9 @@ import {
 } from "./validation"
 
 const router = Router();
+const upload = multer();
 
-router.post('/confession/postInsert', insertValidation, postInsert);
+router.post('/confession/postInsert',upload.single('images'), insertValidation,  postInsert);
 router.get('/confession/getPendingList', getPendingListValidation, getPendingList);
 router.get('/confession/getApprovedList', getApprovedListValidation, getApprovedList);
 router.get('/confession/getRejectedList', getRejectedListValidation, getRejectedList);
