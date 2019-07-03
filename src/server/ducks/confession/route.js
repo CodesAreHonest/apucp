@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import multer from 'multer';
 
 import {
     postInsert,
@@ -12,12 +11,15 @@ import {
     getPendingListValidation,
     getApprovedListValidation,
     getRejectedListValidation
-} from "./validation"
+} from "./validation";
+
+import {
+    confessorImageUploadValidation
+} from "./middleware";
 
 const router = Router();
-const upload = multer();
 
-router.post('/confession/postInsert',upload.single('images'), insertValidation,  postInsert);
+router.post('/confession/postInsert', confessorImageUploadValidation, insertValidation, postInsert);
 router.get('/confession/getPendingList', getPendingListValidation, getPendingList);
 router.get('/confession/getApprovedList', getApprovedListValidation, getApprovedList);
 router.get('/confession/getRejectedList', getRejectedListValidation, getRejectedList);
