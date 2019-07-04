@@ -1,17 +1,20 @@
 import mongoose from 'mongoose';
-import config from '../core/config';
+import Configuration from '../core/config';
 
 class MongoConnection {
 
     static connect() {
-        const {dbHost, dbPort, dbName} = config;
+
+        const configuration = new Configuration();
+        const config = configuration.loadConfiguration();
+        const { mongoConnectionString } = config;
         let connection = '';
 
         try {
-            // const connectionString = `mongodb://${dbHost}:${dbPort}/${dbName}?authSource=admin`;
-            const connectionString = `mongodb+srv://yinghua:123@cluster0-j9hhr.gcp.mongodb.net/${dbName}?authSource=admin;`;
+            // const connectionString = `mongodb://yinghua:123@${dbHost}:${dbPort}/${dbName}?authSource=admin`;
+            // const connectionString = `mongodb+srv://yinghua:123@cluster0-j9hhr.gcp.mongodb.net/${dbName}?authSource=admin;`;
 
-            connection = mongoose.createConnection(connectionString, {
+            connection = mongoose.createConnection(mongoConnectionString, {
                 useNewUrlParser : true,
                 useFindAndModify: false,
                 useCreateIndex: true

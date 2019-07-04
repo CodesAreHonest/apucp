@@ -13,11 +13,9 @@ export const postInsert = async (req, res) => {
     }
 
     const { confession } = req.body;
-    const { file: imageFiles } = req;
+    const { files: imageFiles } = req;
 
-    console.log (imageFiles);
-
-    let outcomes = await ConfessionStore.insert(confession);
+    let outcomes = await ConfessionStore.insert(confession, imageFiles);
 
     if (outcomes.response_code !== 200) {
         const {response_code} = outcomes;

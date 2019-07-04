@@ -37,6 +37,19 @@ const confessionSchema = schema ({
         type: String,
         required: false
     },
+    images: {
+        type: [{
+            fieldname: String,
+            originalname: String,
+            encoding: String,
+            mimetype: String,
+            destination: String,
+            filename: String,
+            path: String,
+            size: Number
+        }],
+        required: false
+    },
     created_at: {
         type: Date,
         default: dateMalaysia,

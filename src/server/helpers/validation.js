@@ -3,6 +3,9 @@ import {validationResult} from 'express-validator/check';
 import multer from 'multer';
 import uuid from "uuid/v1";
 
+const maxFileSize = 1000 * 1000; // b * 1000000 = mb
+
+
 export const validationHandler = (req, res, next) => {
 
     const errorFormatter = ({msg, param}) => {
@@ -27,8 +30,6 @@ export const validationHandler = (req, res, next) => {
         };
     }
 };
-
-const maxFileSize = 1000 * 1000; // b * 1000000 = mb
 
 export const confessionImageUploadSettings = multer({
     storage: multer.diskStorage({
