@@ -1,13 +1,17 @@
 import http from 'http';
 
-import config from '../core/config';
+import Configuration from '../core/config';
 import Express from './express';
 
 class Server {
 
     init() {
 
-        const port = config.serverPort;
+        const config = new Configuration();
+        const configuration = config.loadConfiguration();
+        const { serverPort } = configuration;
+
+        const port = serverPort;
         const app = new Express();
         const express = app.init();
         const server = http.createServer(express);

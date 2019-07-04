@@ -18,7 +18,7 @@ export default class Configuration {
         this.dbName = process.env.LOCAL_DBNAME || 'apucp';
         this.dbUsername = process.env.LOCAL_DBUSERNANE;
         this.dbPassword = process.env.LOCAL_DBPASSWORD;
-        this.mongoConnectionString = `mongodb://${this.dbUsername}:${this.dbPassword}@${this.dbHost}:${this.dbPort}?authSource=admin`;
+        this.mongoConnectionString = `mongodb://${this.dbUsername}:${this.dbPassword}@${this.dbHost}:${this.dbPort}/${this.dbName}?authSource=admin`;
 
         return {
             serverPort              : this.serverPort,
@@ -33,7 +33,7 @@ export default class Configuration {
 
     productionConfiguration() {
 
-        this.dbHost = process.env.PRODUCTION_DBHOST || 'cluster-j9hhr.gcp.mongodb.net';
+        this.dbHost = process.env.PRODUCTION_DBHOST || 'cluster0-j9hhr.gcp.mongodb.net';
         this.dbPort = process.env.PRODUCTION_DBPORT || 27017;
         this.dbName = process.env.PRODUCTION_DBNAME || 'apucp';
         this.dbUsername = process.env.PRODUCTION_DBUSERNAME;

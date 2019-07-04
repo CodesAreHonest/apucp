@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 import MongoConnection from '../../connection/mongoose';
 
 let schema = mongoose.Schema;
-const mongo_connection = MongoConnection.connect();
+const mongo_connection = MongoConnection.createConnection();
 
 const dateMalaysia = moment.tz(Date.now(), "Asia/Kuala_Lumpur");
 

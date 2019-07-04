@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import MongoConnection from '../../connection/mongoose';
 
 let schema = mongoose.Schema;
-const mongoConnection = MongoConnection.connect();
+const mongoConnection = MongoConnection.createConnection();
 
 const documentSchema = schema ({
     document_type: {

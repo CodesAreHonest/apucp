@@ -3,7 +3,7 @@ import Configuration from '../core/config';
 
 class MongoConnection {
 
-    static connect() {
+    static createConnection() {
 
         const configuration = new Configuration();
         const config = configuration.loadConfiguration();

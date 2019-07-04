@@ -5,7 +5,7 @@ import MongoConnection from '../../connection/mongoose';
 delete mongoose.connection.models['confessions'];
 
 let schema = mongoose.Schema;
-const mongo_connection = MongoConnection.connect();
+const mongo_connection = MongoConnection.createConnection();
 
 const dateMalaysia = moment.tz(Date.now(), "Asia/Kuala_Lumpur");
 

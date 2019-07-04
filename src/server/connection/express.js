@@ -7,8 +7,12 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import session from 'express-session';
 import uuid from 'uuid';
+import Configuration from '../core/config';
 
 import { SessionExpired } from "./session";
+
+const MongoStore = require('connect-mongo')(session);
+
 
 class Express {
     constructor() {
@@ -16,6 +20,9 @@ class Express {
     }
 
     init() {
+
+        const configuration = new Configuration();
+        const { mongoConnectionString } = configuration.loadConfiguration();
 
         this.app.use(express.static('dist'));
         this.app.use(bodyParser.urlencoded({extended: true}));
@@ -28,8 +35,11 @@ class Express {
             },
             secret: 'thisisasecret',
             resave: true,
-            saveUninitialized: true
-        }));
+            saveUninitialized: true,
+            store: new MongoStore({
+                url: mongoConnectionString
+            })
+    }));
         this.app.use('/api', router);
         this.app.use('/admin', SessionExpired);
 
