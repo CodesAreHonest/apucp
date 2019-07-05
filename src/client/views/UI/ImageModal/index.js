@@ -30,7 +30,7 @@ class ImageModal extends Component {
                  width={200}
                  height={200}
                  alt="confession images"
-                 style={{margin: '10px', border: '1px solid black'}}
+                 style={{margin: '10px', border: '1px solid white', borderRadius: '30px', boxShadow: '5px 7px 5px #ccc'}}
             />
         ));
 
@@ -41,11 +41,11 @@ class ImageModal extends Component {
                         <div className="modal-content">
                             <div className="modal-header" style={{padding: '5px 18px'}}>
                                 <h5 className="modal-title text-center">Confession Images</h5>
-                                <button type="button" className="close" onClick={this._closeModal}>
-                                    <span>&times;</span>
+                                <button type="button" className="btn btn-outline-secondary btn-sm" onClick={this._closeModal}>
+                                    <i className="fa fa-times" />
                                 </button>
                             </div>
-                            <div className="modal-body text-center" style={{padding: 'none', backgroundColor: '#8080801f'}}>
+                            <div className="modal-body text-center" style={{padding: 'none'}}>
                                 { images }
                             </div>
                         </div>
