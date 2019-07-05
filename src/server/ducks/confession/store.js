@@ -55,7 +55,7 @@ class ConfessionStore {
 
     static async pendingList (page, pageSize) {
 
-        const fields = "status tags content ip_address created_at";
+        const fields = "status tags content ip_address images created_at";
 
         // pagination required to start from zero in mongoose
         const limit = parseInt(pageSize);
@@ -72,7 +72,8 @@ class ConfessionStore {
 
         return new Promise ((resolve, reject) => {
 
-            base.exec((err, confessions) => {
+            // change from mongoose document to normal javascript array.
+            base.lean().exec((err, confessions) => {
 
                 if (err) {
                     return reject({
@@ -87,6 +88,12 @@ class ConfessionStore {
                 const recordsFrom = skip + 1;
                 const recordsEnd = skip + limit;
                 const recordsTo = recordsEnd >= totalRecords ? totalRecords : recordsEnd;
+
+                confessions.forEach ((confession, index) => {
+                    confessions[index].images = confession.images.map (
+                        image => image.filename
+                    );
+                });
 
                 return resolve({
                     'response_code': 200,

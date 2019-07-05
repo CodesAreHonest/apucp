@@ -32,7 +32,10 @@ export const postRegister = async (req, res) => {
         return res.status(200).send(authorise_admin);
     }
     catch (err) {
-        return res.status(500).send(err);
+        return res.status(500).send({
+            response_code: 500,
+            response_msg: err
+        });
     }
 };
 

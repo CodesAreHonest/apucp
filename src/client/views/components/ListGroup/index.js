@@ -17,9 +17,15 @@ class ListGroup extends Component {
             let listGroupItem = this.props.data.map ((value, index) => {
 
                 if (this.props.type === 'Pending') {
-                    const {content, created_at, _id} = value;
+                    const {content, created_at, _id, images} = value;
                     return (
-                        <PendingListGroupItem text={content} time={created_at} key={index} id={_id}/>
+                        <PendingListGroupItem
+                            text={content}
+                            time={created_at}
+                            key={index}
+                            id={_id}
+                            images={images}
+                        />
                     )
                 }
                 else if (this.props.type === 'Approved') {

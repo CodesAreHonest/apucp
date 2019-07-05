@@ -21,6 +21,7 @@ class AdminStore {
 
             return new Promise ((resolve, reject) => {
                 Admin.findOneAndUpdate({user_id}, params, {upsert: true, setDefaultsOnInsert: true}, err => {
+
                     if (err) {
                         return reject({
                             'response_code': 500,

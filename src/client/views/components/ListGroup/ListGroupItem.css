@@ -8,3 +8,7 @@
 .confession-content:hover {
     background-color: #8f8f921c;
 }
+
+.fa-image:hover {
+    color: dodgerblue;
+}

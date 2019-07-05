@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { isToday, dayMonthFormat, twelveHoursClock } from "../../../../helpers/time";
 import { selectPendingConfession, deselectPendingConfession } from "../../../../state/ducks/confession/actions";
+import { openModal } from "../../../../state/ducks/modal/actions";
 import "../ListGroupItem.css";
 
 class ListGroupItem extends Component {
@@ -18,6 +19,7 @@ class ListGroupItem extends Component {
 
         this._onClick = this._onClick.bind(this);
         this._selectConfession = this._selectConfession.bind(this);
+        this._openModal = this._openModal.bind(this);
     }
 
     componentDidMount() {
@@ -59,8 +61,12 @@ class ListGroupItem extends Component {
         return this.props.selectPendingConfession(confessionId);
     }
 
+     _openModal() {
+        this.props.openModal();
+     }
+
     render() {
-        const {text} = this.props;
+        const {text, images} = this.props;
         const {date, show, selected} = this.state;
 
         const fullMessage = show ? 'show' : '';
@@ -93,10 +99,16 @@ class ListGroupItem extends Component {
                     </div>
 
                     <div className="col-sm-3 col-sm-3 col-6 order-md-3 order-sm-3 order-2 text-right"
-                         onClick={this._onClick}
                     >
                         {text.length >= 50 && <i className={`fa fa-chevron-${chevronIcon}`} style={{marginRight: '10px'}}/>}
                         <span style={{fontWeight: 'bold'}}>{ date }</span>
+
+                        {images.length !== 0 &&
+                        <i className="fa fa-image"
+                           style={{marginLeft: '10px'}}
+                           onClick={this._openModal}
+                        />
+                        }
                     </div>
                 </div>
 
@@ -114,7 +126,8 @@ const mapStateToProps = ({ confession }) => {
 
 const mapDispatchToProps = {
     selectPendingConfession,
-    deselectPendingConfession
+    deselectPendingConfession,
+    openModal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListGroupItem);
@@ -124,9 +137,12 @@ ListGroupItem.propTypes = {
     time: PropTypes.string.isRequired,
     id:   PropTypes.string.isRequired,
     pendingList: PropTypes.array.isRequired,
+    images: PropTypes.array.isRequired,
 
     selectPendingConfession: PropTypes.func.isRequired,
-    deselectPendingConfession: PropTypes.func.isRequired
+    deselectPendingConfession: PropTypes.func.isRequired,
+
+    openModal: PropTypes.func.isRequired
 };
 
 ListGroupItem.defaultProps = {

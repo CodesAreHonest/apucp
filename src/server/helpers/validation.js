@@ -40,7 +40,7 @@ export const confessionImageUploadSettings = multer({
             let extensionArray = file.mimetype.split("/");
             let extension = extensionArray[1];
             callback(null, `${uuid()}.${extension}`)
-        }
+        },
     }),
     fileFilter: (request, file, callback) => {
         if (file.mimetype === 'image/png') {
@@ -56,7 +56,6 @@ export const confessionImageUploadSettings = multer({
         }
 
         return callback (new Error('The file type must be JPG, PNG or JPEG.'))
-
     },
     limits: {fileSize: maxFileSize}
 }).array('images', 5);

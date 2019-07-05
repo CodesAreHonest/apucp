@@ -21,12 +21,11 @@ class AdminRedirect extends Component {
 
         if (objects.has('access_token')) {
             let access_token = objects.get('access_token');
-            let expires_in = objects.get('expires_in');
-            this.props.getPersonalAccount(access_token, expires_in);
+            this.props.getPersonalAccount(access_token);
         }
 
         if (query.has('error')) {
-            this.props.history.push ('/auth/admin/login');
+            // this.props.history.push ('/auth/admin/login');
         }
 
     }
