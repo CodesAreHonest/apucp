@@ -15,7 +15,11 @@ const initialState = {
     activePage: 1,
     recordsPerPage: 10,
 
-    pendingList: []
+    // store the primary id of confessions records
+    pendingList: [],
+
+    // for modal display image
+    imageList: [],
 };
 
 const homeReducer = createReducer(initialState) ({
@@ -81,6 +85,16 @@ const homeReducer = createReducer(initialState) ({
         ...state,
         reject_confession_response: action.payload,
         pendingList: []
+    }),
+
+    [type.SET_DISPLAY_IMAGES]: (state, action) => ({
+        ...state,
+        imageList: action.payload,
+    }),
+
+    [type.REMOVE_DISPLAY_IMAGES]: (state) => ({
+        ...state,
+        imageList: []
     }),
 
 });

@@ -10,6 +10,7 @@ import {
 } from "../../../../state/ducks/confession/actions";
 import ListGroup from "../../../components/ListGroup";
 import Pagination from "../../../components/Pagination";
+import ImageModal from "../../../UI/ImageModal";
 
 class Pending extends Component {
     constructor(props){
@@ -132,6 +133,9 @@ class Pending extends Component {
 
                     <ListGroup data={data} type="Pending"/>
                 </div>
+
+                <ImageModal />
+
             </div>
         )
     }

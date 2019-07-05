@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { isToday, dayMonthFormat, twelveHoursClock } from "../../../../helpers/time";
-import { selectPendingConfession, deselectPendingConfession } from "../../../../state/ducks/confession/actions";
+import {
+    selectPendingConfession,
+    deselectPendingConfession,
+    setDisplayImage
+} from "../../../../state/ducks/confession/actions";
 import { openModal } from "../../../../state/ducks/modal/actions";
 import "../ListGroupItem.css";
 
@@ -20,17 +24,11 @@ class ListGroupItem extends Component {
         this._onClick = this._onClick.bind(this);
         this._selectConfession = this._selectConfession.bind(this);
         this._openModal = this._openModal.bind(this);
+        this._updateTime = this._updateTime.bind(this);
     }
 
     componentDidMount() {
-
-        let date = dayMonthFormat(this.props.time);
-
-        if (isToday(this.props.time)) {
-            date = twelveHoursClock(this.props.time);
-        }
-
-        this.setState({date});
+        this._updateTime();
     }
 
     componentDidUpdate (prevProps) {
@@ -44,6 +42,10 @@ class ListGroupItem extends Component {
             else {
                 this.setState({selected: true});
             }
+        }
+
+        if (prevProps.time !== this.props.time) {
+            this._updateTime();
         }
     }
 
@@ -62,7 +64,18 @@ class ListGroupItem extends Component {
     }
 
      _openModal() {
+        this.props.setDisplayImage(this.props.images);
         this.props.openModal();
+     }
+
+     _updateTime() {
+         let date = dayMonthFormat(this.props.time);
+
+         if (isToday(this.props.time)) {
+             date = twelveHoursClock(this.props.time);
+         }
+
+         this.setState({date});
      }
 
     render() {
@@ -117,17 +130,14 @@ class ListGroupItem extends Component {
     }
 }
 
-const mapStateToProps = ({ confession }) => {
-
-    return {
-        pendingList: confession.pendingList
-    }
-};
+const mapStateToProps = ({ confession }) => ({
+    pendingList: confession.pendingList
+});
 
 const mapDispatchToProps = {
     selectPendingConfession,
     deselectPendingConfession,
-    openModal
+    openModal, setDisplayImage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListGroupItem);
@@ -141,6 +151,7 @@ ListGroupItem.propTypes = {
 
     selectPendingConfession: PropTypes.func.isRequired,
     deselectPendingConfession: PropTypes.func.isRequired,
+    setDisplayImage: PropTypes.func.isRequired,
 
     openModal: PropTypes.func.isRequired
 };

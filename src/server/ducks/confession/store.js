@@ -66,7 +66,7 @@ class ConfessionStore {
             skip, limit
         };
 
-        let base = Confession.find(query, fields, params);
+        let base = Confession.find(query, fields, params).sort({created_at: -1});
 
         let totalRecords = await this.getTotalRecords(query);
 

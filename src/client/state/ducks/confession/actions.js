@@ -165,6 +165,19 @@ export const postRejectConfessions = pendingConfession => dispatch => {
     })
 };
 
+export const setDisplayImage = images => dispatch => {
+    dispatch({
+        type: type.SET_DISPLAY_IMAGES,
+        payload: images
+    })
+};
+
+export const clearDisplayImage = () => dispatch => {
+    dispatch ({
+        type: type.REMOVE_DISPLAY_IMAGES
+    })
+};
+
 
 
 

@@ -63,9 +63,10 @@ class ListGroup extends Component {
     }
 
     render() {
+        const { listGroupItem } = this.state;
         return (
             <ul className="list-group list-group-flush">
-                { this.state.listGroupItem }
+                { listGroupItem }
             </ul>
         )
     }

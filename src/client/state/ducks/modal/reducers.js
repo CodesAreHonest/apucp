@@ -5,16 +5,16 @@ const initialState = {
     openStatus: false
 };
 
-const homeReducer = createReducer(initialState) ({
+const modalReducer = createReducer(initialState) ({
     [type.OPEN_MODAL]: (state) => ({
         ...state,
         openStatus: true,
     }),
 
-    [type.OPEN_MODAL]: (state) => ({
+    [type.CLOSE_MODAL]: (state) => ({
         ...state,
         openStatus: false,
     }),
 });
 
-export default homeReducer;
+export default modalReducer;
