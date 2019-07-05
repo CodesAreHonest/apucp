@@ -2,6 +2,7 @@ import Admin from './model';
 import Facebook from "./facebook";
 import { formatMessage } from "../../helpers/confession";
 import ConfessionStore from "../confession/store";
+import { readImageFileInArray } from "../../util/image";
 
 class AdminStore {
 
@@ -105,11 +106,22 @@ class AdminStore {
 
         let asyncActions = [];
 
-        pending_confessions.forEach( confession => {
-            const { _id, tags, content } = confession;
+        await pending_confessions.forEach( async confession => {
+            const { _id, tags, content, images } = confession;
             const message = formatMessage(tags, content);
 
-            asyncActions.push(facebook.submitConfession(page_access_token, message)
+            let imageBase64Array = readImageFileInArray(images);
+            let uploadImageActions = [];
+
+            // TODO asynchronous image upload should execute together with post confessions
+            imageBase64Array.forEach( image => {
+                uploadImageActions.push(facebook.uploadPhotoToAlbum(page_access_token, {file: image}));
+            });
+
+            let fbImageIdArray = await Promise.all(uploadImageActions);
+            let fbImageId = fbImageIdArray.map(imageId => ({ media_fbid: imageId}));
+
+            asyncActions.push(facebook.submitConfession(page_access_token, message, fbImageId)
                 .then (postId => ConfessionStore.approveConfession(_id, postId, name))
                 .catch (err => {
                     return {
