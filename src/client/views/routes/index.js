@@ -48,9 +48,9 @@ class Routes extends Component {
                 <Switch>
                     { reactRoutes }
                     { adminRoutes }
-                    {/*{ reactRoutes.length !== 0 &&*/}
-                    {/*    adminRoutes.length !== 0 &&*/}
-                    {/*<Route component={NotFound} /> }*/}
+                    { reactRoutes.length !== 0 &&
+                        adminRoutes.length !== 0 &&
+                    <Route component={NotFound} /> }
                 </Switch>
             </Fragment>
         )

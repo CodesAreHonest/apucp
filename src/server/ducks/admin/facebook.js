@@ -39,8 +39,6 @@ class Facebook {
 
     submitConfession (page_access_token, content, attached_media) {
 
-        console.log (attached_media);
-
         return new Promise ((resolve, reject) => {
             axios.post('https://graph.facebook.com/v3.3/121412055027319/feed', {
                 message: content,

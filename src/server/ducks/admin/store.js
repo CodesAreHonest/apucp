@@ -106,14 +106,13 @@ class AdminStore {
 
         let asyncActions = [];
 
-        await pending_confessions.forEach( async confession => {
+        await pending_confessions.forEach(  async confession => {
             const { _id, tags, content, images } = confession;
             const message = formatMessage(tags, content);
 
             let imageBase64Array = readImageFileInArray(images);
             let uploadImageActions = [];
 
-            // TODO asynchronous image upload should execute together with post confessions
             imageBase64Array.forEach( image => {
                 uploadImageActions.push(facebook.uploadPhotoToAlbum(page_access_token, {file: image}));
             });
