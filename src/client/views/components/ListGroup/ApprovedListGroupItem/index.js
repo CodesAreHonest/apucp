@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { isToday, standardDateTimeFormat, twelveHoursClock } from "../../../../helpers/time";
+import { standardDateTimeFormat } from "../../../../helpers/time";
 import "../ListGroupItem.css";
+import { setDisplayImage } from "../../../../state/ducks/confession/actions";
+import { openModal } from "../../../../state/ducks/modal/actions";
 
 class ApprovedListGroupItem extends Component {
     constructor(props) {
@@ -16,6 +18,7 @@ class ApprovedListGroupItem extends Component {
 
         this._onClick = this._onClick.bind(this);
         this._updateTime = this._updateTime.bind(this);
+        this._openModal = this._openModal.bind(this);
     }
 
     componentDidMount() {
@@ -39,8 +42,13 @@ class ApprovedListGroupItem extends Component {
         this.setState({date});
     }
 
+    _openModal() {
+        this.props.setDisplayImage(this.props.images);
+        this.props.openModal();
+    }
+
     render() {
-        const {text, action_by, tags} = this.props;
+        const {text, action_by, tags, images} = this.props;
         const {date, show} = this.state;
 
         const fullMessage = show ? 'show' : '';
@@ -73,10 +81,16 @@ class ApprovedListGroupItem extends Component {
                     </div>
 
                     <div className="col-md-3 col-sm-6 col-6 order-md-3 order-sm-2 order-2 text-right"
-                         onClick={this._onClick}
                     >
                         <i className={`fa fa-chevron-${chevronIcon}`} style={{marginRight: '10px'}}/>
                         <span style={{fontWeight: 'bold'}}>{ date }</span>
+
+                        {images.length !== 0 &&
+                        <i className="fa fa-image"
+                           style={{marginLeft: '10px'}}
+                           onClick={this._openModal}
+                        />
+                        }
                     </div>
                 </div>
 
@@ -86,7 +100,7 @@ class ApprovedListGroupItem extends Component {
 }
 
 const mapDispatchToProps = {
-
+    setDisplayImage, openModal
 };
 
 export default connect(null, mapDispatchToProps)(ApprovedListGroupItem);
@@ -97,6 +111,10 @@ ApprovedListGroupItem.propTypes = {
     text: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
     id:   PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+
+    setDisplayImage: PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired
 };
 
 ApprovedListGroupItem.defaultProps = {

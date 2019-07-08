@@ -29,7 +29,7 @@ class ListGroup extends Component {
                     )
                 }
                 else if (this.props.type === 'Approved') {
-                    const {action_by, tags, content, updated_at, _id} = value;
+                    const {action_by, tags, content, updated_at, images, _id} = value;
                     return (
                         <ApprovedListGroupItem
                             tags={tags}
@@ -37,12 +37,13 @@ class ListGroup extends Component {
                             text={content}
                             time={updated_at}
                             key={index}
+                            images={images}
                             id={_id}
                         />
                     )
                 }
                 else if (this.props.type === 'Rejected') {
-                    const {action_by, tags, content, updated_at, _id} = value;
+                    const {action_by, tags, content, updated_at, images, _id} = value;
                     return (
                         <RejectedListGroupItem
                             tags={tags}
@@ -50,6 +51,7 @@ class ListGroup extends Component {
                             text={content}
                             time={updated_at}
                             key={index}
+                            images={images}
                             id={_id}
                         />
                     )

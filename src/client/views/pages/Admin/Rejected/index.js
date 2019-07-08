@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getRejectedConfession } from "../../../../state/ducks/confession/actions";
 import Pagination from "../../../components/Pagination";
 import ListGroup from "../../../components/ListGroup";
+import ImageModal from "../../../UI/ImageModal";
 
 class RejectedConfessions extends Component {
     constructor(props) {
@@ -80,8 +81,9 @@ class RejectedConfessions extends Component {
                     </div>
 
                     <ListGroup data={data} type="Rejected" />
-
                 </div>
+
+                <ImageModal />
             </div>
         )
     }
