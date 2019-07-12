@@ -20,3 +20,20 @@
     cursor: pointer;
     background-image: linear-gradient(dodgerblue, rgba(25, 64, 255, 0.71));
 }
+
+.button-upload {
+    border-top: 1px solid lightblue;
+    border-right: 1px solid lightblue;
+    border-left: 1px solid lightblue;
+    border-radius: unset !important;
+}
+
+.button-utility {
+    color: grey !important;
+}
+
+.button-utility:hover {
+    color: #676565 !important;
+    background-color: #add8e638;
+    border-radius: unset !important;
+}

@@ -8,13 +8,16 @@ import { postSubmitConfession } from "../../../state/ducks/confession/actions";
 
 import "./confessor.css";
 import "./button.css";
+import URLInput from "../../UI/input/URLInput";
 
 class Confession extends Component {
     constructor(props) {
         super (props);
 
         this.state = {
-            confession: ''
+            confession: '',
+            displayURLInput: false,
+            url: ''
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -70,7 +73,7 @@ class Confession extends Component {
 
     render() {
 
-        const { confession } = this.state;
+        const { confession, displayURLInput, url } = this.state;
 
         return (
             <div>
@@ -88,7 +91,37 @@ class Confession extends Component {
 
                                 <form id="confession-form" onSubmit={this.onSubmit}>
 
-                                    <small>Your confession will be posted anonymously.</small>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="text-md-left text-sm-center text-center mb-2 mb-sm-2">
+                                                <small>Your confession will be posted anonymously.</small>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <div className="text-right">
+
+                                                <div className="button-upload" style={{
+                                                    minWidth: 'auto', display: 'inline-block'
+                                                }}>
+                                                    <button type="button" className="btn btn-sm button-utility"
+                                                            style={{
+                                                                borderRight: '1px solid lightblue',
+                                                            }}>
+                                                        <i className="fa fa-image" />
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-sm button-utility"
+                                                        onClick={() => this.setState({displayURLInput: !this.state.displayURLInput})}
+                                                    >
+                                                        <i className="fa fa-link" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <textarea
                                         id="confession"
                                         className="form-control text-area"
@@ -99,8 +132,19 @@ class Confession extends Component {
                                         required
                                     />
 
+                                    { displayURLInput &&
+                                    <div className="mt-1">
+                                        <URLInput
+                                            placeholder="https://sample.image.com"
+                                            className="button-upload"
+                                            value={url}
+                                            onChange={e => this.setState({url: e.target.value})}
+                                        />
+                                    </div>
+                                    }
+
                                     <div className="row">
-                                        <div className="col-md-4 offset-md-4 text-left">
+                                        <div className="col-md-4 offset-md-4 text-left mt-2">
                                             <button className="btn button btn-primary btn-block pointer-cursor"
                                                     type="submit"
                                                     disabled={confession.length <= 10}
@@ -114,7 +158,6 @@ class Confession extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
 
         )

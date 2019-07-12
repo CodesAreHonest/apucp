@@ -18,14 +18,14 @@ small {
 .text-area {
     color: black !important;
     font-weight: 500;
-    border: 2px solid lightblue !important;
-    margin: 10px 0 20px 0;
+    border: 1px solid lightblue !important;
     font-size: 13px !important;
     box-sizing: border-box !important;
     min-height: 40vh !important;
     resize: none !important;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    border-radius: unset !important;
 }
 
 @media only screen and (max-width: 570px) {
