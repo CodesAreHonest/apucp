@@ -1,0 +1,49 @@
+.imagePreview {
+    width: 100%;
+    height: 180px;
+    background-position: center center;
+    background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+    background-color:#fff;
+    background-size: cover;
+    background-repeat:no-repeat;
+    display: inline-block;
+}
+.btn-primary
+{
+    display:block;
+    border-radius:0;
+    box-shadow:0 4px 6px 2px rgba(0,0,0,0.2);
+    margin-top:-5px;
+}
+.imgUp
+{
+    margin-bottom:15px;
+}
+.del
+{
+    position:absolute;
+    top: -5px;
+    right: -10px;
+    padding: 5px 7px;
+    text-align:center;
+    line-height:30px;
+    background-color: red;
+    border-radius: 30px;
+    cursor:pointer;
+    color: white;
+}
+
+.imgAdd
+{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background-color:#4bd7ef;
+    color:#fff;
+    box-shadow:0 0 2px 1px rgba(0,0,0,0.2);
+    text-align:center;
+    line-height:30px;
+    margin-top:0;
+    cursor:pointer;
+    font-size:15px;
+}

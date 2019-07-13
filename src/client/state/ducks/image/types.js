@@ -1,0 +1,1 @@
+export const SET_IMAGE_UPLOADED = 'SET_IMAGE_UPLOADED';

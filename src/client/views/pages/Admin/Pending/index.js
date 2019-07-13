@@ -63,7 +63,6 @@ class Pending extends Component {
         if (prevProps.approveConfessionResponse !== this.props.approveConfessionResponse) {
 
             const { response_code } = this.props.approveConfessionResponse;
-            console.log (this.props.approveConfessionResponse);
 
             if (response_code === 200) {
                 this._getPendingConfession();
