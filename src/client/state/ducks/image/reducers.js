@@ -33,6 +33,18 @@ const imageReducer = createReducer(initialState) ({
             uploadedImages,
         }
     },
+
+    [type.RESET_IMAGE_UPLOADED]: (state) => {
+
+        return {
+            ...state,
+            uploadedImages: {
+                'first-image': false,
+                'second-image': false,
+                'third-image': false
+            }
+        };
+    }
 });
 
 export default imageReducer;

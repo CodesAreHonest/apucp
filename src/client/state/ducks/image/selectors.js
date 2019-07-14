@@ -1,11 +1,19 @@
 import { createSelector} from 'reselect';
-import { findKeyByValue } from "./util";
+import { findKeyByValue, displayImageDivision } from "./util";
 
 const inUploadedSelector = state => findKeyByValue(state.image.uploadedImages, false);
+const imageDivisionStatusSelector = (state) =>
+    displayImageDivision(state.image.uploadedImages);
+
 
 const availableImageUploadSelector = createSelector (
     inUploadedSelector,
     (uploadedImages) => uploadedImages
 );
 
-export { availableImageUploadSelector }
+const displayImageDivisionSelector = createSelector(
+    imageDivisionStatusSelector,
+    (uploadedImages) => uploadedImages
+);
+
+export { availableImageUploadSelector, displayImageDivisionSelector }

@@ -10,4 +10,17 @@ const findKeyByValue = (objects, value) => {
 
 };
 
-export { findKeyByValue }
+const displayImageDivision = (object) => {
+
+    const dontDisplay =
+        Object.keys(object).every((k) => !object[k]);
+
+    // all images are not uploaded don't display
+    if (dontDisplay) { return false; }
+
+    return true;
+
+};
+
+
+export { findKeyByValue, displayImageDivision }

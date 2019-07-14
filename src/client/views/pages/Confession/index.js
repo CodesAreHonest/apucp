@@ -2,81 +2,37 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Background from "../../UI/background";
-import { loading, success, error, confirmation } from '../../UI/sweetalert2';
 
-import { postSubmitConfession } from "../../../state/ducks/confession/actions";
-import { availableImageUploadSelector } from "../../../state/ducks/image/selectors";
+import { resetImageUploaded } from "../../../state/ducks/image/actions";
+
+import {
+    availableImageUploadSelector, displayImageDivisionSelector
+} from "../../../state/ducks/image/selectors";
 
 import "./confessor.css";
 import "./button.css";
-import URLInput from "../../UI/input/URLInput";
-import BatchImageUpload from "../../UI/BatchImageUpload";
+
+import ConfessionForm from "./Form";
 
 class Confession extends Component {
     constructor(props) {
         super (props);
 
         this.state = {
-            confession: '',
             displayURLInput: false,
-            enableImageUpload: false,
-            imageUploaded: {},
-            url: '',
+            displayImageDiv: false
         };
 
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
         this._uploadImage = this._uploadImage.bind(this);
-    }
-
-    onChange(e) {
-        this.setState({confession: e.target.value});
-    }
-
-    async onSubmit(e) {
-        e.preventDefault();
-
-        let form = document.getElementById('confession-form');
-
-        if (!form.checkValidity()) {
-            return false;
-        }
-
-        e.target.blur();
-
-        let confirmSubmit = await confirmation('Are you sure?', 'Confession submitted cannot be reverted');
-
-        if (!confirmSubmit) { return false; }
-
-        const { confession } = this.state;
-        this.props.postSubmitConfession (confession);
-
-        let confessionDOM = document.getElementById("confession");
-        confessionDOM.focus();
-
-        loading('Submitting ... ')
-
-    }
-
-    componentWillReceiveProps (nextProps) {
-
-        if (this.props.response !== nextProps.response) {
-            const { response_code } = nextProps.response;
-
-            if (response_code !== 200) {
-                const { response_detail } = nextProps.response;
-                error ('Your confession submitted unsuccessful', response_detail[0]);
-            }
-            else {
-                success('Success', 'Your confession submitted successfully.');
-            }
-
-            this.setState({confession: ''});
-
-        }
+        this._displayURLInput = this._displayURLInput.bind(this);
     }
 
     _uploadImage() {
+
+        this.setState({
+            displayURLInput: false,
+        });
+
         const { uploadedImages } = this.props;
 
         if (!uploadedImages) {
@@ -86,9 +42,26 @@ class Confession extends Component {
         document.getElementById(uploadedImages).click();
     }
 
+    _displayURLInput() {
+
+        this.props.resetImageUploaded();
+
+        this.setState({
+            displayURLInput: !this.state.displayURLInput,
+            displayImageDiv: false
+        })
+
+    }
+
+    componentDidUpdate (prevProps) {
+        if (prevProps.displayImageDiv !== this.props.displayImageDiv) {
+            this.setState({displayImageDiv: this.props.displayImageDiv})
+        }
+    }
+
     render() {
 
-        const { confession, displayURLInput, url } = this.state;
+        const { displayURLInput, displayImageDiv} = this.state;
 
         return (
             <div>
@@ -129,7 +102,7 @@ class Confession extends Component {
                                                 <button
                                                     type="button"
                                                     className="btn btn-sm button-utility"
-                                                    onClick={() => this.setState({displayURLInput: !displayURLInput})}
+                                                    onClick={this._displayURLInput}
                                                 >
                                                     <i className="fa fa-link" />
                                                 </button>
@@ -138,50 +111,10 @@ class Confession extends Component {
                                     </div>
                                 </div>
 
-                                <form id="confession-form" onSubmit={this.onSubmit}>
-
-                                    <div className="row">
-                                        <div className="col-md-9">
-                                            <textarea
-                                                id="confession"
-                                                className="form-control text-area"
-                                                placeholder="Confess Here ..."
-                                                onChange={this.onChange}
-                                                value={confession}
-                                                spellCheck
-                                                required
-                                            />
-                                        </div>
-
-                                        <div className="col-md-3">
-                                            <div className="image-area">
-                                                <BatchImageUpload />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-1">
-                                        {displayURLInput &&
-                                        <URLInput
-                                            placeholder="https://sample.image.com"
-                                            className="button-upload"
-                                            value={url}
-                                            onChange={e => this.setState({url: e.target.value})}
-                                        />
-                                        }
-                                    </div>
-
-                                    <div className="row">
-                                        <div className="col-md-4 offset-md-4 text-left mt-3">
-                                            <button className="btn button btn-primary btn-block pointer-cursor"
-                                                    type="submit"
-                                                    disabled={confession.length <= 10}
-                                            >
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <ConfessionForm
+                                    displayURLInput={displayURLInput}
+                                    displayImageDiv={displayImageDiv}
+                                />
 
                             </div>
                         </div>
@@ -196,23 +129,24 @@ class Confession extends Component {
 const mapStateToProps = state => {
 
     const uploadedImages = availableImageUploadSelector(state);
+    const displayImageDiv = displayImageDivisionSelector(state);
 
     return {
-        response: state.confession.submit_confession_response,
-        uploadedImages: uploadedImages
+        uploadedImages, displayImageDiv
     }
 };
 
 const mapDispatchToProps = {
-    postSubmitConfession
+    resetImageUploaded
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Confession);
 
 Confession.propTypes = {
-    postSubmitConfession: PropTypes.func.isRequired,
-    response            : PropTypes.object.isRequired,
     uploadedImages      : PropTypes.oneOfType([
         PropTypes.string, PropTypes.bool
-    ])
+    ]),
+    displayImageDiv     : PropTypes.bool.isRequired,
+    resetImageUploaded  : PropTypes.func.isRequired
+
 };

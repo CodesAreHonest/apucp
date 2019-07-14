@@ -14,3 +14,9 @@ export const unsetImageUploaded = (uploadImageId) => dispatch => {
         payload: uploadImageId
     })
 };
+
+export const resetImageUploaded = () => dispatch => {
+    dispatch ({
+        type: type.RESET_IMAGE_UPLOADED
+    })
+};
