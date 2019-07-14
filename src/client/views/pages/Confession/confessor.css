@@ -30,8 +30,10 @@ small {
 
 .image-area {
     border: 1px solid lightblue;
-    max-height: 20vh !important;
-    overflow-x: scroll;
+    max-height: 35vh;
+    min-height: 35vh;
+    overflow: auto;
+    padding: 0 15px;
 }
 
 @media only screen and (max-width: 570px) {

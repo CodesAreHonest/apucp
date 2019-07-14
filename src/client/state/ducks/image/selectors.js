@@ -1,12 +1,11 @@
 import { createSelector} from 'reselect';
 import { findKeyByValue } from "./util";
 
-const imageSelector = state =>
-    state.image.uploadedImages;
+const inUploadedSelector = state => findKeyByValue(state.image.uploadedImages, false);
 
 const availableImageUploadSelector = createSelector (
-    imageSelector,
-    (uploadedImages) => findKeyByValue(uploadedImages, false)
+    inUploadedSelector,
+    (uploadedImages) => uploadedImages
 );
 
 export { availableImageUploadSelector }

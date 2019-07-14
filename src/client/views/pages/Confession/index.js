@@ -20,6 +20,7 @@ class Confession extends Component {
             confession: '',
             displayURLInput: false,
             enableImageUpload: false,
+            imageUploaded: {},
             url: '',
         };
 
@@ -77,6 +78,11 @@ class Confession extends Component {
 
     _uploadImage() {
         const { uploadedImages } = this.props;
+
+        if (!uploadedImages) {
+            return false;
+        }
+
         document.getElementById(uploadedImages).click();
     }
 
@@ -133,19 +139,24 @@ class Confession extends Component {
                                 </div>
 
                                 <form id="confession-form" onSubmit={this.onSubmit}>
-                                    <textarea
-                                        id="confession"
-                                        className="form-control text-area"
-                                        placeholder="Confess Here ..."
-                                        onChange={this.onChange}
-                                        value={confession}
-                                        spellCheck
-                                        required
-                                    />
 
-                                    <div className="mt-1">
-                                        <div className="image-area">
-                                            <BatchImageUpload />
+                                    <div className="row">
+                                        <div className="col-md-9">
+                                            <textarea
+                                                id="confession"
+                                                className="form-control text-area"
+                                                placeholder="Confess Here ..."
+                                                onChange={this.onChange}
+                                                value={confession}
+                                                spellCheck
+                                                required
+                                            />
+                                        </div>
+
+                                        <div className="col-md-3">
+                                            <div className="image-area">
+                                                <BatchImageUpload />
+                                            </div>
                                         </div>
                                     </div>
 
@@ -159,7 +170,6 @@ class Confession extends Component {
                                         />
                                         }
                                     </div>
-
 
                                     <div className="row">
                                         <div className="col-md-4 offset-md-4 text-left mt-3">
@@ -202,5 +212,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Confession);
 Confession.propTypes = {
     postSubmitConfession: PropTypes.func.isRequired,
     response            : PropTypes.object.isRequired,
-    uploadedImages      : PropTypes.string.isRequired
+    uploadedImages      : PropTypes.oneOfType([
+        PropTypes.string, PropTypes.bool
+    ])
 };

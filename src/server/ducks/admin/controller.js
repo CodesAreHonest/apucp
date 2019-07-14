@@ -61,7 +61,6 @@ export const postApprovePendingConfession = async (req, res) => {
                 response_msg: 'success'
             });
         }).catch (err => {
-            console.log (err);
         return res.status(500).send({
             response_code: 500,
             response_msg: err

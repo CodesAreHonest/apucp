@@ -21,6 +21,18 @@ const imageReducer = createReducer(initialState) ({
             uploadedImages,
         }
     },
+
+    [type.UNSET_IMAGE_UPLOADED]: (state, action) => {
+
+        const { uploadedImages } = state;
+
+        uploadedImages[action.payload] = false;
+
+        return {
+            ...state,
+            uploadedImages,
+        }
+    },
 });
 
 export default imageReducer;

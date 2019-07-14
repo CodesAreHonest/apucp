@@ -7,3 +7,10 @@ export const setImageUploaded = (uploadImageId) => dispatch => {
         payload: uploadImageId
     })
 };
+
+export const unsetImageUploaded = (uploadImageId) => dispatch => {
+    dispatch ({
+        type: type.UNSET_IMAGE_UPLOADED,
+        payload: uploadImageId
+    })
+};
