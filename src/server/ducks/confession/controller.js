@@ -17,11 +17,13 @@ export const postInsert = async (req, res) => {
     const { confession, url } = req.body;
     const { files: imageFiles } = req;
 
-    try {
-        await verifyImageValidity(url);
-    }
-    catch (err) {
-        return res.status(500).send(err);
+    if (url) {
+        try {
+            await verifyImageValidity(url);
+        }
+        catch (err) {
+            return res.status(500).send(err);
+        }
     }
 
 
