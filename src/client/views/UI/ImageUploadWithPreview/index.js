@@ -3,6 +3,7 @@ import "./style.css";
 import { connect } from 'react-redux';
 import { setImageUploaded, unsetImageUploaded } from "../../../state/ducks/image/actions";
 import PropTypes from 'prop-types';
+import { displayImageDivisionSelector } from "../../../state/ducks/image/selectors";
 
 class ImageUploadWithPreview extends Component {
     constructor(props) {
@@ -27,6 +28,14 @@ class ImageUploadWithPreview extends Component {
         this.setState(this.defaultState);
         document.getElementById(this.props.id).value = "";
         this.props.unsetImageUploaded(this.props.id);
+    }
+
+    componentDidUpdate (prevProps) {
+        if (prevProps.imageDisplayDivision !== this.props.imageDisplayDivision) {
+            if (!this.props.imageDisplayDivision) {
+                this._removeImage();
+            }
+        }
     }
 
     render() {
@@ -65,14 +74,24 @@ class ImageUploadWithPreview extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+
+    const imageDisplayDivision = displayImageDivisionSelector(state);
+
+    return {
+        imageDisplayDivision: imageDisplayDivision
+    }
+};
+
 const mapDispatchToProps = {
     setImageUploaded, unsetImageUploaded
 };
 
-export default connect(null, mapDispatchToProps)(ImageUploadWithPreview);
+export default connect(mapStateToProps, mapDispatchToProps)(ImageUploadWithPreview);
 
 ImageUploadWithPreview.propTypes = {
     id: PropTypes.string.isRequired,
     setImageUploaded: PropTypes.func.isRequired,
-    unsetImageUploaded: PropTypes.func.isRequired
+    unsetImageUploaded: PropTypes.func.isRequired,
+    imageDisplayDivision: PropTypes.bool.isRequired
 };

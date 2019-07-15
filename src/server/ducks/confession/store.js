@@ -4,7 +4,7 @@ import ip from "ip";
 
 class ConfessionStore {
 
-    static async insert(content, imageFiles = null) {
+    static async insert(content, mediaContent) {
 
         let tag = await DocumentStore.getHashTag('confession');
 
@@ -14,8 +14,12 @@ class ConfessionStore {
             ip_address: ip.address(),
         };
 
-        if (imageFiles) {
-            params['images'] = imageFiles;
+        if (mediaContent.images) {
+            params['images'] = mediaContent.images;
+        }
+
+        if (mediaContent.url) {
+            params['url'] = mediaContent.url
         }
 
         let confession = new Confession(params);

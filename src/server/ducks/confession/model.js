@@ -50,6 +50,10 @@ const confessionSchema = schema ({
         }],
         required: false
     },
+    url: {
+        type: String,
+        required: false
+    },
     created_at: {
         type: Date,
         default: dateMalaysia,

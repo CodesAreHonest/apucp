@@ -7,6 +7,10 @@ export const insertValidation = [
         .isString().withMessage('must be a string')
         .isLength({ min: 10 }).withMessage('must be at least 10 characters.'),
 
+    body ('url')
+        .optional({nullable: true})
+        .isURL().withMessage('must be an url')
+
 ];
 
 export const getPendingListValidation = [

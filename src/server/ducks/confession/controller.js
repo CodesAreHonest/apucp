@@ -3,6 +3,8 @@ import {validationHandler} from "../../helpers/validation";
 
 import ConfessionStore from './store';
 
+import { verifyImageValidity } from "./util";
+
 
 export const postInsert = async (req, res) => {
 
@@ -12,10 +14,21 @@ export const postInsert = async (req, res) => {
         return res.status(422).send(validation);
     }
 
-    const { confession } = req.body;
+    const { confession, url } = req.body;
     const { files: imageFiles } = req;
 
-    let outcomes = await ConfessionStore.insert(confession, imageFiles);
+    try {
+        await verifyImageValidity(url);
+    }
+    catch (err) {
+        return res.status(500).send(err);
+    }
+
+
+    let outcomes = await ConfessionStore.insert(confession, {
+        'images': imageFiles,
+        'url': url
+    });
 
     if (outcomes.response_code !== 200) {
         const {response_code} = outcomes;

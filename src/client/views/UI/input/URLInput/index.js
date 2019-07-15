@@ -8,7 +8,7 @@ class URLInput extends Component {
 
     render() {
 
-        const { placeholder, ariaLabel, ariaDescribedBy, className, style, value, onChange } = this.props;
+        const { placeholder, ariaLabel, ariaDescribedBy, className, style, value, onChange, name } = this.props;
 
         return (
             <div className="input-group">
@@ -18,6 +18,7 @@ class URLInput extends Component {
                     </span>
                 </div>
                 <input type="text"
+                       name={name}
                        className={`form-control form-control-sm ${className}`}
                        placeholder={placeholder}
                        aria-label={ariaLabel}
@@ -46,6 +47,7 @@ URLInput.propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
 
+    name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 };

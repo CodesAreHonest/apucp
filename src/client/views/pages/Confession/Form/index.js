@@ -6,7 +6,9 @@ import {confirmation, error, loading, success} from "../../../UI/sweetalert2";
 import { connect } from 'react-redux';
 
 import {postSubmitConfession} from "../../../../state/ducks/confession/actions";
-import {imageDivisionStatusSelector} from "../../../../state/ducks/image/selectors";
+import { resetImageUploaded } from "../../../../state/ducks/image/actions";
+
+import axios from 'axios';
 
 class ConfessionForm extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ class ConfessionForm extends Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this._verifyImageUrlValidity = this._verifyImageUrlValidity.bind(this);
 
     }
 
@@ -28,6 +31,8 @@ class ConfessionForm extends Component {
 
     async onSubmit(e) {
         e.preventDefault();
+
+        this._verifyImageUrlValidity();
 
         let form = document.getElementById('confession-form');
 
@@ -41,13 +46,31 @@ class ConfessionForm extends Component {
 
         if (!confirmSubmit) { return false; }
 
-        const { confession } = this.state;
-        this.props.postSubmitConfession (confession);
+        let formData = new FormData(form);
+
+        this.props.postSubmitConfession (formData);
 
         let confessionDOM = document.getElementById("confession");
         confessionDOM.focus();
 
         loading('Submitting ... ')
+
+    }
+
+    _verifyImageUrlValidity() {
+
+        axios({
+            method: 'GET',
+            url: this.state.url,
+            dataType: 'text',
+            config: {
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            }
+        }).then (response => {
+            console.log (response);
+        })
 
     }
 
@@ -62,9 +85,10 @@ class ConfessionForm extends Component {
             }
             else {
                 success('Success', 'Your confession submitted successfully.');
+                this.props.resetImageUploaded();
+                this.setState({confession: ''});
             }
 
-            this.setState({confession: ''});
 
         }
     }
@@ -81,6 +105,7 @@ class ConfessionForm extends Component {
                     <div className={displayImageDiv ? "col-md-9" : "col-md-12" }>
                         <textarea
                             id="confession"
+                            name="confession"
                             className="form-control text-area"
                             placeholder="Confess Here ..."
                             onChange={this.onChange}
@@ -100,6 +125,7 @@ class ConfessionForm extends Component {
                 <div className="mt-1">
                     {displayURLInput &&
                     <URLInput
+                        name="url"
                         placeholder="https://sample.image.com"
                         className="button-upload"
                         value={url}
@@ -133,13 +159,14 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    postSubmitConfession
+    postSubmitConfession, resetImageUploaded
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfessionForm);
 
 ConfessionForm.propTypes = {
     postSubmitConfession: PropTypes.func.isRequired,
+    resetImageUploaded  : PropTypes.func.isRequired,
     response            : PropTypes.object.isRequired,
 
     displayImageDiv     : PropTypes.bool.isRequired,

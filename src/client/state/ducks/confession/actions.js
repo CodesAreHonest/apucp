@@ -2,10 +2,17 @@ import * as type from './types';
 import axios from 'axios';
 import { paramEncoding } from "../../util/encoding";
 
-export const postSubmitConfession = confession => dispatch => {
+export const postSubmitConfession = formData => dispatch => {
 
-    axios.post('/api/confession/postInsert', {
-        'confession': confession
+    axios({
+        method: 'POST',
+        url: '/api/confession/postInsert',
+        data: formData,
+        config: {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
     }).then (response => {
         dispatch ({
             type: type.POST_SUBMIT_CONFESSION,
@@ -16,7 +23,8 @@ export const postSubmitConfession = confession => dispatch => {
             type: type.POST_SUBMIT_CONFESSION,
             payload: err.response.data
         })
-    })
+    });
+
 };
 
 export const getPendingConfession = (page, limit)  => dispatch => {
