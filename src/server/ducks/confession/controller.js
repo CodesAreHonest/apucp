@@ -17,7 +17,6 @@ export const postInsert = async (req, res) => {
 
     let outcomes = await ConfessionStore.insert(confession, {
         'images': imageFiles,
-        'url': url
     });
 
     if (outcomes.response_code !== 200) {

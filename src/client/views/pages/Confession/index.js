@@ -48,7 +48,8 @@ class Confession extends Component {
 
     render() {
 
-        const { displayImageDiv} = this.state;
+        const { displayImageDiv } = this.state;
+        const { uploadedImages } = this.props;
 
         return (
             <div>
@@ -74,6 +75,7 @@ class Confession extends Component {
                                     <div className="col-md-6">
                                         <div className="text-right">
 
+                                            { uploadedImages &&
                                             <div className="button-upload" style={{
                                                 minWidth: 'auto', display: 'inline-block'
                                             }}>
@@ -84,6 +86,7 @@ class Confession extends Component {
                                                     <i className="fa fa-image" />
                                                 </button>
                                             </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
