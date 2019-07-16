@@ -3,8 +3,6 @@ import {validationHandler} from "../../helpers/validation";
 
 import ConfessionStore from './store';
 
-import { verifyImageValidity } from "./util";
-
 
 export const postInsert = async (req, res) => {
 
@@ -14,18 +12,8 @@ export const postInsert = async (req, res) => {
         return res.status(422).send(validation);
     }
 
-    const { confession, url } = req.body;
+    const { confession } = req.body;
     const { files: imageFiles } = req;
-
-    if (url) {
-        try {
-            await verifyImageValidity(url);
-        }
-        catch (err) {
-            return res.status(500).send(err);
-        }
-    }
-
 
     let outcomes = await ConfessionStore.insert(confession, {
         'images': imageFiles,

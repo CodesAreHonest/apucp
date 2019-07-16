@@ -1,4 +1,4 @@
-import React, { Component, Fragment} from 'react';
+import React, { Component } from 'react';
 import ImageUploadWithPreview from "../ImageUploadWithPreview";
 
 class BatchImageUpload extends Component {
@@ -10,11 +10,20 @@ class BatchImageUpload extends Component {
 
         return (
 
-            <Fragment>
-                <ImageUploadWithPreview id="first-image"/>
-                <ImageUploadWithPreview id="second-image"/>
-                <ImageUploadWithPreview id="third-image"/>
-            </Fragment>
+            <div className="row no-gutters">
+                <div className="col-4 col-sm-3">
+                    <ImageUploadWithPreview id="first-image"/>
+                </div>
+
+                <div className="col-4 col-sm-3">
+                    <ImageUploadWithPreview id="second-image"/>
+                </div>
+
+                <div className="col-4 col-sm-3">
+                    <ImageUploadWithPreview id="third-image" />
+                </div>
+
+            </div>
         )
     }
 }

@@ -18,10 +18,6 @@ class ConfessionStore {
             params['images'] = mediaContent.images;
         }
 
-        if (mediaContent.url) {
-            params['url'] = mediaContent.url
-        }
-
         let confession = new Confession(params);
 
         return new Promise ((resolve, reject) => {

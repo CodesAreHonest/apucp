@@ -18,7 +18,9 @@ small {
 .text-area {
     color: black !important;
     font-weight: 500;
-    border: 1px solid lightblue !important;
+    border-top: 1px solid lightblue !important;
+    border-left: 1px solid lightblue !important;
+    border-right: 1px solid lightblue !important;
     font-size: 13px !important;
     box-sizing: border-box !important;
     min-height: 35vh !important;
@@ -29,9 +31,11 @@ small {
 }
 
 .image-area {
-    border: 1px solid lightblue;
-    max-height: 35vh;
-    min-height: 35vh;
+    border-bottom: 1px solid lightblue;
+    border-left: 1px solid lightblue;
+    border-right: 1px solid lightblue;
+    max-height: 15vh;
+    min-height: 15vh;
     overflow: auto;
     padding: 0 15px;
 }

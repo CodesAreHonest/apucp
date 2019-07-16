@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BatchImageUpload from "../../../UI/BatchImageUpload";
-import URLInput from "../../../UI/input/URLInput";
 import {confirmation, error, loading, success} from "../../../UI/sweetalert2";
 import { connect } from 'react-redux';
 
-import {postSubmitConfession} from "../../../../state/ducks/confession/actions";
+import { postSubmitConfession } from "../../../../state/ducks/confession/actions";
 import { resetImageUploaded } from "../../../../state/ducks/image/actions";
-
-import axios from 'axios';
 
 class ConfessionForm extends Component {
     constructor(props) {
@@ -16,13 +13,10 @@ class ConfessionForm extends Component {
 
         this.state = {
             confession: '',
-            url: ''
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
-        this._verifyImageUrlValidity = this._verifyImageUrlValidity.bind(this);
-
     }
 
     onChange(e) {
@@ -31,8 +25,6 @@ class ConfessionForm extends Component {
 
     async onSubmit(e) {
         e.preventDefault();
-
-        this._verifyImageUrlValidity();
 
         let form = document.getElementById('confession-form');
 
@@ -57,23 +49,6 @@ class ConfessionForm extends Component {
 
     }
 
-    _verifyImageUrlValidity() {
-
-        axios({
-            method: 'GET',
-            url: this.state.url,
-            dataType: 'text',
-            config: {
-                headers: {
-                    "Access-Control-Allow-Origin": "*"
-                }
-            }
-        }).then (response => {
-            console.log (response);
-        })
-
-    }
-
     componentWillReceiveProps (nextProps) {
 
         if (this.props.response !== nextProps.response) {
@@ -88,21 +63,19 @@ class ConfessionForm extends Component {
                 this.props.resetImageUploaded();
                 this.setState({confession: ''});
             }
-
-
         }
     }
 
     render() {
 
-        const { displayURLInput, displayImageDiv } = this.props;
-        const { confession, url } = this.state;
+        const { displayImageDiv } = this.props;
+        const { confession } = this.state;
 
         return (
             <form id="confession-form" onSubmit={this.onSubmit}>
 
                 <div className="row">
-                    <div className={displayImageDiv ? "col-md-9" : "col-md-12" }>
+                    <div className="col-12">
                         <textarea
                             id="confession"
                             name="confession"
@@ -115,23 +88,11 @@ class ConfessionForm extends Component {
                         />
                     </div>
 
-                    <div className={displayImageDiv ? "col-md-3" : "d-none"}>
+                    <div className={displayImageDiv ? "col-12" : "d-none"}>
                         <div className="image-area">
                             <BatchImageUpload />
                         </div>
                     </div>
-                </div>
-
-                <div className="mt-1">
-                    {displayURLInput &&
-                    <URLInput
-                        name="url"
-                        placeholder="https://sample.image.com"
-                        className="button-upload"
-                        value={url}
-                        onChange={e => this.setState({url: e.target.value})}
-                    />
-                    }
                 </div>
 
                 <div className="row">
@@ -169,6 +130,5 @@ ConfessionForm.propTypes = {
     resetImageUploaded  : PropTypes.func.isRequired,
     response            : PropTypes.object.isRequired,
 
-    displayImageDiv     : PropTypes.bool.isRequired,
-    displayURLInput     : PropTypes.bool.isRequired
+    displayImageDiv     : PropTypes.bool.isRequired
 };

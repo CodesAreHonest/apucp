@@ -48,18 +48,20 @@ class ImageUploadWithPreview extends Component {
                 { fileUrl !== null &&
                 <div className="text-center" style={{
                     position: 'relative',
-                    width: 'inherit', height: '20vh',
+                    width: 'inherit', height: '13vh',
                 }}>
                     <i className="fa fa-times del" onClick={this._removeImage}/>
                     <div style={{
                         backgroundImage: `url(${fileUrl})`,
                         backgroundPosition: '50% 50%',
                         backgroundRepeat: 'no-repeat',
-                        maxHeight: '80%',
-                        minHeight: '100%',
+                        maxHeight: '13vh',
+                        minHeight: '13vh',
                         backgroundSize: 'cover',
                         transform: 'rotate(0deg)',
-                        borderRadius: '10px'
+                        borderRadius: '10px',
+                        boxShadow: '0 0 9px #ccc',
+                        border: '1px solid white'
                     }} />
                 </div> }
                 <input type="file"

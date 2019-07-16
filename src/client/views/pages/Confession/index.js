@@ -19,12 +19,10 @@ class Confession extends Component {
         super (props);
 
         this.state = {
-            displayURLInput: false,
             displayImageDiv: false
         };
 
         this._uploadImage = this._uploadImage.bind(this);
-        this._displayURLInput = this._displayURLInput.bind(this);
     }
 
     _uploadImage() {
@@ -42,17 +40,6 @@ class Confession extends Component {
         document.getElementById(uploadedImages).click();
     }
 
-    _displayURLInput() {
-
-        this.props.resetImageUploaded();
-
-        this.setState({
-            displayURLInput: !this.state.displayURLInput,
-            displayImageDiv: false
-        })
-
-    }
-
     componentDidUpdate (prevProps) {
         if (prevProps.displayImageDiv !== this.props.displayImageDiv) {
             this.setState({displayImageDiv: this.props.displayImageDiv})
@@ -61,7 +48,7 @@ class Confession extends Component {
 
     render() {
 
-        const { displayURLInput, displayImageDiv} = this.state;
+        const { displayImageDiv} = this.state;
 
         return (
             <div>
@@ -92,19 +79,9 @@ class Confession extends Component {
                                             }}>
                                                 <button type="button"
                                                         className="btn btn-sm button-utility"
-                                                        style={{
-                                                            borderRight: '1px solid lightblue',
-                                                        }}
                                                         onClick={this._uploadImage}
                                                 >
                                                     <i className="fa fa-image" />
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-sm button-utility"
-                                                    onClick={this._displayURLInput}
-                                                >
-                                                    <i className="fa fa-link" />
                                                 </button>
                                             </div>
                                         </div>
@@ -112,7 +89,6 @@ class Confession extends Component {
                                 </div>
 
                                 <ConfessionForm
-                                    displayURLInput={displayURLInput}
                                     displayImageDiv={displayImageDiv}
                                 />
 
