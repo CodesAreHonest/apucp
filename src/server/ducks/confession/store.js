@@ -129,12 +129,7 @@ class ConfessionStore {
 
         let query = Confession.findOneAndUpdate({'_id': id}, params);
 
-        return new Promise ((resolve, reject) => {
-            query.exec((err, confession) => {
-                if (err) return reject(confession);
-                return resolve(true);
-            })
-        });
+        return query.exec();
     }
 
     static rejectConfession (pendingConfessions, name) {
