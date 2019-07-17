@@ -64,7 +64,7 @@ class Pending extends Component {
 
             const { response_code } = this.props.approveConfessionResponse;
 
-            if (response_code === 200) {
+            if (parseInt(response_code) === 200) {
                 this._getPendingConfession();
                 return toastSuccess()
             }

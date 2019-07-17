@@ -104,9 +104,7 @@ class AdminStore {
 
         const facebook = new Facebook();
 
-        let asyncActions = [];
-
-        await pending_confessions.forEach(  async confession => {
+        let pendingConfession = pending_confessions.map( async confession => {
             const { _id, tags, content, images } = confession;
             const message = formatMessage(tags, content);
 
@@ -118,20 +116,25 @@ class AdminStore {
             });
 
             let fbImageIdArray = await Promise.all(uploadImageActions);
-            let fbImageId = fbImageIdArray.map(imageId => ({ media_fbid: imageId}));
+            let fbImageId = fbImageIdArray.map(imageId => ({ media_fbid: imageId }));
 
-            asyncActions.push(facebook.submitConfession(page_access_token, message, fbImageId)
-                .then (postId => ConfessionStore.approveConfession(_id, postId, name))
+            return facebook.submitConfession(page_access_token, message, fbImageId)
+                .then (postId => ConfessionStore.approveConfession(_id, postId, name)
+                    .then (response => response)
+                )
                 .catch (err => {
                     return {
                         response_code: 500,
                         response_msg: err
                     }
-                }));
+                });
+
         });
 
-        return await Promise.all(asyncActions);
 
+        return Promise.all(pendingConfession).then (value => {
+            return value;
+        })
     }
 }
 
