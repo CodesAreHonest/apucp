@@ -91,6 +91,21 @@ export const toastError = () => {
     })
 };
 
+export const customToastError = (title) => {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 2000
+    });
+
+    Toast.fire({
+        title: title,
+        type: 'error'
+    })
+};
+
 export const confirmation = (title = '', text = '') => {
 
     return new Promise ((resolve) => {

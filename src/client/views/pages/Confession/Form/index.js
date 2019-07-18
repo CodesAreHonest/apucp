@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import { postSubmitConfession } from "../../../../state/ducks/confession/actions";
 import { resetImageUploaded } from "../../../../state/ducks/image/actions";
+import TextArea from "../../../UI/input/TextArea";
 
 class ConfessionForm extends Component {
     constructor(props) {
@@ -17,6 +18,8 @@ class ConfessionForm extends Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+
+        this.minimumWords = 10;
     }
 
     onChange(e) {
@@ -76,15 +79,15 @@ class ConfessionForm extends Component {
 
                 <div className="row">
                     <div className="col-12">
-                        <textarea
+                        <TextArea
                             id="confession"
                             name="confession"
                             className="form-control text-area"
-                            placeholder="Confess Here ..."
+                            placeholder="Confess Here"
                             onChange={this.onChange}
                             value={confession}
-                            spellCheck
-                            required
+                            spellCheck={true}
+                            required={true}
                         />
                     </div>
 
@@ -93,13 +96,22 @@ class ConfessionForm extends Component {
                             <BatchImageUpload />
                         </div>
                     </div>
+
+                    <div className="col-12 text-right">
+                        {confession.length <= this.minimumWords &&
+                            <small className="pr-2">
+                                <b>{`${this.minimumWords - confession.length} `} word(s) </b>
+                                remaining
+                            </small>
+                        }
+                    </div>
                 </div>
 
                 <div className="row">
                     <div className="col-md-4 offset-md-4 text-left mt-3">
                         <button className="btn button btn-primary btn-block pointer-cursor"
                                 type="submit"
-                                disabled={confession.length <= 10}
+                                disabled={confession.length <= this.minimumWords}
                         >
                             Submit
                         </button>

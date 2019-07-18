@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import "./style.css";
 import { connect } from 'react-redux';
 import { setImageUploaded, unsetImageUploaded } from "../../../state/ducks/image/actions";
-import PropTypes from 'prop-types';
 import { displayImageDivisionSelector } from "../../../state/ducks/image/selectors";
+import {validateFileSize5MB, validateFileType} from "../../util/validation";
+
+import { customToastError } from "../sweetalert2";
 
 class ImageUploadWithPreview extends Component {
     constructor(props) {
@@ -20,6 +24,24 @@ class ImageUploadWithPreview extends Component {
     }
 
     handleChange(e) {
+
+        const FILE_SIZE = e.target.files[0].size;
+        const validateFileSizeOutcome = validateFileSize5MB(FILE_SIZE);
+
+        if (validateFileSizeOutcome.response_code === 422) {
+            const {response_msg} = validateFileSizeOutcome;
+            customToastError(response_msg);
+            return false;
+        }
+
+        const FILE_TYPE = e.target.files[0].type;
+        const validateFileTypeOutcome = validateFileType(FILE_TYPE);
+
+        if (validateFileTypeOutcome.response_code === 422) {
+            const {response_msg} = validateFileTypeOutcome;
+            customToastError(response_msg);
+            return false;
+        }
         this.setState({fileUrl: URL.createObjectURL(e.target.files[0])});
         this.props.setImageUploaded(this.props.id);
     }
