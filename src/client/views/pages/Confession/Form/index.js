@@ -100,7 +100,7 @@ class ConfessionForm extends Component {
                     <div className="col-12 text-right">
                         {confession.length <= this.minimumWords &&
                             <small className="pr-2">
-                                <b>{`${this.minimumWords - confession.length} `} word(s) </b>
+                                <b>{`${this.minimumWords - confession.trim().length} `} word(s) </b>
                                 remaining
                             </small>
                         }
@@ -111,7 +111,7 @@ class ConfessionForm extends Component {
                     <div className="col-md-4 offset-md-4 text-left mt-3">
                         <button className="btn button btn-primary btn-block pointer-cursor"
                                 type="submit"
-                                disabled={confession.length <= this.minimumWords}
+                                disabled={confession.trim().length <= this.minimumWords}
                         >
                             Submit
                         </button>
