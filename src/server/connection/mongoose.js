@@ -11,9 +11,6 @@ class MongoConnection {
         let connection = '';
 
         try {
-            // const connectionString = `mongodb://yinghua:123@${dbHost}:${dbPort}/${dbName}?authSource=admin`;
-            // const connectionString = `mongodb+srv://yinghua:123@cluster0-j9hhr.gcp.mongodb.net/${dbName}?authSource=admin;`;
-
             connection = mongoose.createConnection(mongoConnectionString, {
                 useNewUrlParser : true,
                 useFindAndModify: false,

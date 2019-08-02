@@ -16,6 +16,21 @@ class AdminLogin extends Component {
                     <div className="row text-center justify-content-center">
                         <div className="col-md-6 mt-5">
                             <FacebookLogin />
+
+                            <div style={{
+                                fontSize: '12px', marginTop: '10px'
+                            }}>
+                                By clicking Login, you allow this app to use your information in accordance
+                                with their respective <br />
+                                <a href="/auth/admin/policy" target="_blank" className="mr-1">
+                                    <b>Term of Service</b>
+                                </a>
+                                    and
+                                <a href="/auth/admin/policy" target="_blank" className="ml-1">
+                                    <b>Privacy Policies</b>
+                                </a>.
+                            </div>
+
                         </div>
                     </div>
                 </div>
