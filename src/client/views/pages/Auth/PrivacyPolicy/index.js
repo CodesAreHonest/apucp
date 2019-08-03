@@ -7,6 +7,8 @@ class PrivacyPolicy extends Component {
         this.contentStyle = {
             padding: '10px', marginBottom: '10px'
         };
+
+        document.title = "Privacy Policy";
     }
 
     render() {
@@ -156,10 +158,8 @@ class PrivacyPolicy extends Component {
                     <p>If you have any questions about this Privacy Policy, please contact us:</p>
                     <ul>
                         <li>By visiting this page on our Facebook Page: https://www.facebook.com/APUConfessionsPage/</li>
-
                     </ul>
                 </div>
-
             </div>
         )
     }

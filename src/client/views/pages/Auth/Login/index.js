@@ -7,6 +7,9 @@ import "./index.css";
 class AdminLogin extends Component {
     constructor(props) {
         super(props);
+
+        this.tncURL = "/auth/admin/terms-and-conditions";
+        this.policyURL = "/auth/admin/policy";
     }
 
     render() {
@@ -22,11 +25,19 @@ class AdminLogin extends Component {
                             }}>
                                 By clicking Login, you allow this app to use your information in accordance
                                 with their respective <br />
-                                <a href="/auth/admin/policy" target="_blank" className="mr-1">
+                                <a href={this.tncURL}
+                                   rel="noopener noreferrer"
+                                   target="_blank"
+                                   className="mr-1"
+                                >
                                     <b>Term of Service</b>
                                 </a>
                                     and
-                                <a href="/auth/admin/policy" target="_blank" className="ml-1">
+                                <a href={this.policyURL}
+                                   rel="noopener noreferrer"
+                                   target="_blank"
+                                   className="ml-1"
+                                >
                                     <b>Privacy Policies</b>
                                 </a>.
                             </div>
