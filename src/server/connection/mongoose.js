@@ -19,8 +19,6 @@ class MongoConnection {
                 useUnifiedTopology: true
             });
 
-            console.log(connection);
-
             return connection;
         } catch (err) {
             console.log(`error connection to mongodb ${err}`);
