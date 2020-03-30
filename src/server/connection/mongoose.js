@@ -7,23 +7,25 @@ class MongoConnection {
 
         const configuration = new Configuration();
         const config = configuration.loadConfiguration();
-        const { mongoConnectionString } = config;
-        let connection = '';
+        const {
+            mongoConnectionString
+        } = config;
 
         try {
-            connection = mongoose.createConnection(mongoConnectionString, {
-                useNewUrlParser : true,
+            let connection = mongoose.createConnection(mongoConnectionString, {
+                useNewUrlParser: true,
                 useFindAndModify: false,
                 useCreateIndex: true,
                 useUnifiedTopology: true
             });
-        }
-        catch (err) {
-            console.log (`error connection to mongodb ${err}`);
+
+            console.log(connection);
+
+            return connection;
+        } catch (err) {
+            console.log(`error connection to mongodb ${err}`);
             process.exit(1);
         }
-
-        return connection;
 
     }
 }
