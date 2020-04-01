@@ -21,13 +21,13 @@ export default class Configuration {
         this.mongoConnectionString = `mongodb://${this.dbUsername}:${this.dbPassword}@${this.dbHost}:${this.dbPort}/${this.dbName}?authSource=admin`;
 
         return {
-            serverPort              : this.serverPort,
-            dbHost                  : this.dbHost,
-            dbPort                  : this.dbPort,
-            dbName                  : this.dbName,
-            dbUsername              : this.dbUsername,
-            dbPassword              : this.dbPassword,
-            mongoConnectionString   : this.mongoConnectionString
+            serverPort: this.serverPort,
+            dbHost: this.dbHost,
+            dbPort: this.dbPort,
+            dbName: this.dbName,
+            dbUsername: this.dbUsername,
+            dbPassword: this.dbPassword,
+            mongoConnectionString: this.mongoConnectionString
         }
     }
 
@@ -41,13 +41,13 @@ export default class Configuration {
         this.mongoConnectionString = `mongodb+srv://${this.dbUsername}:${this.dbPassword}@${this.dbHost}/${this.dbName}?authSource=admin;`;
 
         return {
-            serverPort              : this.serverPort,
-            dbHost                  : this.dbHost,
-            dbPort                  : this.dbPort,
-            dbName                  : this.dbName,
-            dbUsername              : this.dbUsername,
-            dbPassword              : this.dbPassword,
-            mongoConnectionString   : this.mongoConnectionString
+            serverPort: this.serverPort,
+            dbHost: this.dbHost,
+            dbPort: this.dbPort,
+            dbName: this.dbName,
+            dbUsername: this.dbUsername,
+            dbPassword: this.dbPassword,
+            mongoConnectionString: this.mongoConnectionString
 
         }
     }

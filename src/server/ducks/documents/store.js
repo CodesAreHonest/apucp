@@ -2,7 +2,7 @@ import Document from './model';
 
 class DocumentStore {
 
-    static async getHashTag (document_type) {
+    static async getHashTag(document_type) {
 
         const params = {
             document_type
@@ -10,26 +10,34 @@ class DocumentStore {
 
         let document = await Document.findOne(params);
 
-        const { number, prefix, document_length } = document;
+        const {
+            number,
+            prefix,
+            document_length
+        } = document;
 
-        const numberString      = number.toString();
-        const documentPrefix    = prefix.toUpperCase();
-        const documentNumber    = numberString.padStart(document_length, '0');
-        const tag               = `#${documentPrefix}${documentNumber}`;
+        const numberString = number.toString();
+        const documentPrefix = prefix.toUpperCase();
+        const documentNumber = numberString.padStart(document_length, '0');
+        const tag = `#${documentPrefix}${documentNumber}`;
 
         return tag;
 
     }
 
-    static async updateTag (document_type) {
+    static async updateTag(document_type) {
 
         const params = {
             document_type
         };
 
-        return await Document.findOneAndUpdate(params, { $inc: {
-            number: 1
-        }}, { new: true })
+        return await Document.findOneAndUpdate(params, {
+            $inc: {
+                number: 1
+            }
+        }, {
+            new: true
+        })
     }
 
 }

@@ -4,7 +4,7 @@ import MongoConnection from '../../connection/mongoose';
 let schema = mongoose.Schema;
 const mongoConnection = MongoConnection.createConnection();
 
-const documentSchema = schema ({
+const documentSchema = schema({
     document_type: {
         type: String,
         required: true,

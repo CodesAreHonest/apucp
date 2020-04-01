@@ -7,7 +7,7 @@ const mongo_connection = MongoConnection.createConnection();
 
 const dateMalaysia = moment.tz(Date.now(), "Asia/Kuala_Lumpur");
 
-const adminSchema = schema ({
+const adminSchema = schema({
     user_id: {
         type: String,
         required: true,

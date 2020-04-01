@@ -9,7 +9,7 @@ const mongo_connection = MongoConnection.createConnection();
 
 const dateMalaysia = moment.tz(Date.now(), "Asia/Kuala_Lumpur");
 
-const confessionSchema = schema ({
+const confessionSchema = schema({
     tags: {
         type: String,
         required: true
