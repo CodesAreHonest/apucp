@@ -6,12 +6,22 @@ Revision: 0.0.1
 Last Updated: 4 Apr 2020
 ==================================
 
-1. Create new database user with "dbOwner"
+1. Create a user with any permissions
+--------------------------------------
+use admin; 
+db.createUser({user:"admin", pwd: <password>, roles:[{role: "readWriteAnyDatabase", db: "admin"}]});
+
+2. Create new database user with "dbOwner"
 -------------------------------------------
 use admin;
-db.createUser({user:"yinghua", pwd: "soulSTEALER123!", roles:[{role: "dbOwner", db: "apucp"}]});
+db.createUser({user:"yinghua", pwd: <password>, roles:[{role: "readWrite", db: "apucp"}]});
 
-2. Create new database and manual seed for application
+3. Create new database and manual seed for application
 ------------------------------------------------------
 use apucp; 
-db.collection.insert({document_type: "confession", number: 4, prefix: "APUCP", description: "APU Confession Page Document Number", document_length: 5});
+db.collection.insert({document_type: "confession", number: 4, prefix: "APUCP", description: "APU Confession Page Document Number", document_length: 5
+
+4. Start mongodb with authentication
+------------------------------------
+a. enabled authentication in /etc/mongo.conf
+b. sudo systemctl restart mongod
