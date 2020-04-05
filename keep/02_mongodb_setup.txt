@@ -1,0 +1,27 @@
+==================================
+MongoDB database setup for APUCP
+--------------------------------
+Author: YingHua 
+Revision: 0.0.1
+Last Updated: 4 Apr 2020
+==================================
+
+1. Create a user with any permissions
+--------------------------------------
+use admin; 
+db.createUser({user:"admin", pwd: <password>, roles: ["readWriteAnyDatabase", "userAdminAnyDatabase"]});
+
+2. Create new database user with "readWrite" on new database "apucp"
+--------------------------------------------------------------------
+use apucp;
+db.createUser({user:"yinghua", pwd: <password>, roles:["readWrite"]});
+
+3. Create new database and manual seed for application
+------------------------------------------------------
+use apucp; 
+db.collection.insert({document_type: "confession", number: 4, prefix: "APUCP", description: "APU Confession Page Document Number", document_length: 5
+
+4. Start mongodb with authentication
+------------------------------------
+a. enabled authentication in /etc/mongo.conf
+b. sudo systemctl restart mongod
