@@ -20,7 +20,7 @@ db.createUser({user:"yinghua", pwd: <password>, roles:["readWrite"]});
 3. Create new database and manual seed for application
 ------------------------------------------------------
 use apucp; 
-db.collection.insert({document_type: "confession", number: 28022, prefix: "APUCP", description: "APU Confession Page Document Number", document_length: 5});
+db.documents.insert({document_type: "confession", number: 28022, prefix: "APUCP", description: "APU Confession Page Document Number", document_length: 5});
 
 4. Start mongodb with authentication
 ------------------------------------
