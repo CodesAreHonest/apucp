@@ -9,12 +9,12 @@ Last Updated: 4 Apr 2020
 1. Create a user with any permissions
 --------------------------------------
 use admin; 
-db.createUser({user:"admin", pwd: <password>, roles: "readWriteAnyDatabase"});
+db.createUser({user:"admin", pwd: <password>, roles: ["readWriteAnyDatabase", "userAdminAnyDatabase"]});
 
-2. Create new database user with "dbOwner"
--------------------------------------------
-use admin;
-db.createUser({user:"yinghua", pwd: <password>, roles:[{role: "readWrite", db: "apucp"}]});
+2. Create new database user with "readWrite" on new database "apucp"
+--------------------------------------------------------------------
+use apucp;
+db.createUser({user:"yinghua", pwd: <password>, roles:["readWrite"]});
 
 3. Create new database and manual seed for application
 ------------------------------------------------------
