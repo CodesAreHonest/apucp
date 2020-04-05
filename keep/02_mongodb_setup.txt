@@ -9,7 +9,7 @@ Last Updated: 4 Apr 2020
 1. Create a user with any permissions
 --------------------------------------
 use admin; 
-db.createUser({user:"admin", pwd: <password>, roles:[{role: "readWriteAnyDatabase", db: "admin"}]});
+db.createUser({user:"admin", pwd: <password>, roles: "readWriteAnyDatabase"});
 
 2. Create new database user with "dbOwner"
 -------------------------------------------
