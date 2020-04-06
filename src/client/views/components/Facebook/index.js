@@ -23,7 +23,7 @@ export default class Facebook extends Component {
             client_id: '295582987871326',
             redirect_uri: url,
             version: 'v3.3',
-            scope: 'manage_pages,publish_pages',
+            scope: '',
         };
 
         const queryString = paramEncoding(params);
