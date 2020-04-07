@@ -47,6 +47,7 @@ class Facebook {
             }).then (response => {
                 return resolve (response.data.id);
             }).catch (err => {
+                console.log (err);
                 return reject (err.response.data);
             })
         });
