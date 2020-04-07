@@ -134,7 +134,10 @@ class AdminStore {
 
         return Promise.all(pendingConfession).then (value => {
             return value;
-        })
+        }).catch (err => ({
+            response_code: 500,
+            response_msg: err
+        }))
     }
 }
 

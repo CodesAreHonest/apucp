@@ -45,12 +45,8 @@ class Facebook {
                 access_token: page_access_token,
                 attached_media: attached_media
             }).then (response => {
-                console.log ('success');
-                console.log (response);
                 return resolve (response.data.id);
             }).catch (err => {
-                console.log ('error');
-                console.log (err);
                 return reject (err.response.data);
             })
         });
