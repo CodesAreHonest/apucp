@@ -72,6 +72,82 @@ src/
 |   ├── helpers/        => helper function for entire server side
 |   ├── util/           => utility function for entire server side
 └── index.js            => entry point to start nodejs server
+```
+
+Motivation
+==========
+In a traditional facebook confession page, the admin is required to copy every single confession from a row in the Google Sheets and paste into the Facebook page by creating a post. The process is task and time consuming and require automation to update and review the content with a website. 
+
+The project attempt to increase the efficiency of confession's content update by automate the page update and review action. The admin of the page can post the content gather from the website and post onto the Facebook page with single click.
+
+***
 
 
+Technical Discussion
+====================
 
+The project chose MERN (MongoDB, Express, React-Redux, NodeJS) stacks to utilize the benefits of asynchronous programming from JavaScript ES6 features as it involves major event-driven features on the server side. 
+
+ReactJS is chosen to build the user interface with minimum rendering on page updates. It is hosted with Express server and compile with Node.js server environment. Babel is used to compile React and Express codes written with ES5+ Javascript into compatible version understand by browser and Node server. Webpack is use transpile JavaScript assets into  static assets bundle to be serve by the servers and accessible by the browser with loaders. 
+
+The global state management of application, Redux and Express's API directory is designed with Duck patterns to be *feature-first folder structure* in order to improve abstraction, scalability and maintainability. The approach extract states from presentation layers in React and coherent to SOLID principle in Express. 
+
+***
+
+Limitation
+==========
+* [ ] Does not possess test case for both React and Express.
+* [ ] Monolitic Architecture with large codebase and less scalable.
+* [ ] Required more optimization on Webpack (Reduce bundle size, splitting, minification)
+* [ ] Not Strong Typing, consider using Typescript for future development. 
+
+***
+
+Getting Started
+===============
+
+Installation
+------------
+
+### Running In Development
+
+1. Compile and transpile both front-end and back-end assets and run the application with hot reload.
+```bash
+$ npm run dev
+```
+
+### Running in Production
+1. Compile and transpile both front-end and back-end assets 
+```bash
+$ npm run build
+```
+
+2. Run with PM2
+```bash
+$ pm2 run ecosystem.config.js --env production
+```
+
+***
+
+Tools and Technologies
+======================
+1. React v16.8.6
+2. Redux v4.0.1
+3. MongoDB v4.2.6
+4. Express v4.16.4
+5. NodeJS v10.19.0
+6. Babel v7.4.3
+7. Webpack v4.30.0
+8. PM2 v4.2.3
+
+***
+
+About
+=====
+Author
+------
+- Yinghua Chai
+
+License
+-------
+This project does not contain any license.
